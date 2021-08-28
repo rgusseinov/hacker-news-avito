@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Typography } from '@material-ui/core';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   newsFooter: {
     display: 'flex',
     flexBasis: '100px',
@@ -33,9 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 function NewsItem(){
   const classes = useStyles();
-
   return(
-    
     <Grid item xs={12} className={classes.newsItem}>
     <Box>                
       <Typography variant="h5">
@@ -58,8 +56,7 @@ function NewsItem(){
       </Box>            
     </Box>
     </Grid>
-
-  )
+  );
 }
 
 export default NewsItem;
