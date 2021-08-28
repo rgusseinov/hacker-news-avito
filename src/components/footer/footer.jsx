@@ -25,7 +25,7 @@ function Footer(){
       </Typography>
     </Container>
   </footer>
-  )
+  );
 }
 
 export default Footer;

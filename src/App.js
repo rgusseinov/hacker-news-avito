@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -23,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-
   return (
     <div className="App">
         <Container maxWidth="md">
