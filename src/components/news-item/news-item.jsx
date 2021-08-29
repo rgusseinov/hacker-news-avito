@@ -1,6 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Grid, Typography } from '@material-ui/core';
+import { useEffect } from 'react';
+import { getItemById } from '../../api/api';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles(() => ({
@@ -30,31 +34,45 @@ const useStyles = makeStyles(() => ({
 }));
 
 
+function NewsItem({ storyId }){
 
-function NewsItem(){
+  const [story, setStory] = useState({});
+
+  useEffect(() => {
+    const requestGetStory = async() => {
+      const data = await getItemById(storyId);
+      setStory(data);
+    };
+    requestGetStory();
+
+  }, [storyId]);
+
   const classes = useStyles();
+  const postDate = new Date(story.time * 1000);
+
   return(
     <Grid item xs={12} className={classes.newsItem}>
-    <Box>                
-      <Typography variant="h5">
-        Apple agrees to settle potential class action suit by U.S. developers
-      </Typography>
+    <Box>
+      <Link to={`/article/${story.id}`}>
+        <Typography variant="h5">{story.title}</Typography>
+      </Link>
     </Box>
    
     <Box className={classes.newsFooter}>
-      <Box> 
-        <Typography component="body1"> Author </Typography>
-        <Typography component="body1"> Akre </Typography>
+      <Box>
+        <Typography variant="body1"> Author </Typography>
+        <Typography variant="body1"> {story.by} </Typography>
       </Box>
       <Box> 
-        <Typography component="body1"> Rating </Typography>
-        <Typography component="body1"> 5 points </Typography>                  
+        <Typography variant="body1"> Rating </Typography>
+        <Typography variant="body1"> {story.score} </Typography>                  
       </Box>
       <Box> 
-        <Typography component="body1"> Published date </Typography>
-        <Typography component="body1"> 55 minutes ago </Typography>                  
+        <Typography variant="body1"> Published date </Typography>
+        <Typography variant="body1"> { postDate.toLocaleString() } </Typography>                  
       </Box>            
     </Box>
+    
     </Grid>
   );
 }

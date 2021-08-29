@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -6,23 +6,30 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import NewsList from './components/news-list/news-list';
-import Footer from './components/footer/footer';
+import { getNewStories } from './api/api';
+import { Route, Switch } from 'react-router-dom';
+import Article from './components/article/article';
+import Main from './components/main-page/main-page';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
-  },
-  title: {
-    marginTop: '20px'
-  },
-  action: {
-    marginTop: '20px'
-  },
+  }
 }));
 
-
-
 function App() {
+
+  const [newStories, setNewStories] = useState([]);
+
+  useEffect(() => {
+    const requestNewStoryList = async () => {
+      const data = await getNewStories();
+      setNewStories(data);
+    };
+    requestNewStoryList();
+  
+  }, []);
+
   const classes = useStyles();
   return (
     <div className="App">
@@ -34,20 +41,15 @@ function App() {
             </Toolbar>
           </AppBar>
 
-          <Grid container spacing={3}>
-            <Grid item xs={10} className={classes.title}>
-              <Typography variant="h4"> Latest news </Typography>
-            </Grid>
-            <Grid item xs={2} className={classes.action}>
-              <Button variant="contained" color="primary"> Refresh </Button>
-            </Grid>
-          </Grid>
+          <Switch>
+            <Route path="/" exact>
+              <Main stories={newStories} />
+            </Route>
+            <Route path="/article/:id" component={Article} />
+          </Switch>
 
-          <NewsList />
         </Container>
-
-        <Footer />
-
+        {/* <Footer /> */}
     </div>
   );
 }

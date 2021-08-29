@@ -1,6 +1,13 @@
-/* "eslint": "^7.31.0",
-"eslint-config-airbnb-typescript": "^12.3.1",
-"eslint-plugin-import": "^2.23.4",
-"eslint-plugin-jsx-a11y": "^6.4.1",
-"eslint-plugin-react": "^7.24.0",
-"eslint-plugin-react-hooks": "^4.2.0", */
+const URL = 'https://hacker-news.firebaseio.com/v0';
+
+export async function getNewStories(){
+  const result = await fetch(`${URL}/newstories.json`);
+  if (!result.ok) return Promise.reject(`Что то пошло не так ${result}`);
+  return result.json();  
+}
+
+export async function getItemById(id){
+  const result = await fetch(`${URL}/item/${id}.json?print=pretty`);
+  if (!result.ok) return Promise.reject(`Что то пошло не так ${result}`);
+  return result.json();
+}
