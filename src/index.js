@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
-import './index.css';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import store from './store/index';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <BrowserRouter>
+    <Provider store={store}>
       <App />
-    </BrowserRouter>
-  </React.StrictMode>,
+    </Provider>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
@@ -22,5 +23,5 @@ reportWebVitals();
 /**
   Thing to be cleared with mentor
     1. Eslint. How to setup properly ? did i sertup config properly ?
-    
+   
  */

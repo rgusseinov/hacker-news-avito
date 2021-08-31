@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 import { getItemById } from '../../api/api';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loadStoryById } from '../../features/items/actions';
+import { getLocalDateFormat } from '../../utils/utils';
 
 
 const useStyles = makeStyles(() => ({
@@ -44,11 +47,11 @@ function NewsItem({ storyId }){
       setStory(data);
     };
     requestGetStory();
-
   }, [storyId]);
 
+  console.log(`time`, story);
   const classes = useStyles();
-  const postDate = new Date(story.time * 1000);
+  const storyDate = getLocalDateFormat(story.time);
 
   return(
     <Grid item xs={12} className={classes.newsItem}>
@@ -69,7 +72,7 @@ function NewsItem({ storyId }){
       </Box>
       <Box> 
         <Typography variant="body1"> Published date </Typography>
-        <Typography variant="body1"> { postDate.toLocaleString() } </Typography>                  
+        <Typography variant="body1"> { storyDate } </Typography>                  
       </Box>            
     </Box>
     

@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-function Main({ stories }) {
+function Main({ handleRefreshStories }) {
   const classes = useStyles();
   return(
     <div>
@@ -19,11 +19,11 @@ function Main({ stories }) {
             <Typography variant="h4"> Lastest News </Typography>
           </Grid>
           <Grid item xs={2} className={classes.mt}>
-            <Button variant="contained" color="primary"> Refresh </Button>
+            <Button variant="contained" color="primary" onClick={handleRefreshStories}> Refresh </Button>
           </Grid>
         </Grid>
       </Grid>
-      <NewsList stories={stories} />
+      <NewsList />
     </div>
   );
 }
