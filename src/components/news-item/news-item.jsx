@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadStoryById } from '../../features/items/actions';
 import { getLocalDateFormat } from '../../utils/utils';
-
+import StarIcon from '@material-ui/icons/Star';
+import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles((theme) => ({
   newsFooter: {
@@ -38,9 +39,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: 345,
   },
+  title: {
+    textDecoration: 'none'
+  },
   media: {
     height: 0,
-    // paddingTop: '56.25%', // 16:9
   },
 
 }));
@@ -58,58 +61,41 @@ function NewsItem({ storyId }){
     requestGetStory();
   }, [storyId]);
 
-  console.log(`time`, story);
+  console.log(`story`, story);
   const classes = useStyles();
   const storyDate = getLocalDateFormat(story.time);
 
   return(
     <Grid item xs={12} className={classes.newsItem}>
-    <Card className={classes.root}>
-      <CardHeader
-        title={story.title}
-        subheader={storyDate}
-      />
-      <CardMedia
-        className={classes.media}
-        image=""
-        title="Paella dish"
-      />
+      <Card className={classes.root}>
+        <CardHeader
+          title={<Link to={`/article/${story.id}`} className={classes.title}> { story.title } </Link>}
+          subheader={storyDate}
+        />
+        <CardMedia
+          className={classes.media}
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            <Button href={`/article/${story.id}`} variant="contained"> Read more </Button>
+          </Typography>
+        </CardContent>
 
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          <Link> Read more </Link>
-        </Typography>
-      </CardContent>
+        <CardActions>
+          <IconButton>
+            <StarIcon />
+            <Typography color="textSecondary" component="p"> &nbsp; {story.score} </Typography>     
+          </IconButton>
 
-      <CardActions>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+          <IconButton>
+            <PersonIcon />
+            <Typography color="textSecondary" component="p"> &nbsp; {story.by} </Typography>     
+          </IconButton>
+
+        </CardActions>
+      </Card>
     </Grid>
   );
 }
 
 export default NewsItem;
-
-
-{/* <Box>
-<Link to={`/article/${story.id}`}>
-  <Typography variant="h5">{story.title}</Typography>
-</Link>
-</Box>    
-<Box className={classes.newsFooter}>
-<Box>
-  <Typography variant="body1"> Author </Typography>
-  <Typography variant="body1"> {story.by} </Typography>
-</Box>
-<Box> 
-  <Typography variant="body1"> Rating </Typography>
-  <Typography variant="body1"> {story.score} </Typography>                  
-</Box>
-<Box> 
-  <Typography variant="body1"> Published date </Typography>
-  <Typography variant="body1"> { storyDate } </Typography>                  
-</Box>            
-</Box> */}

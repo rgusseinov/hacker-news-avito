@@ -12,16 +12,20 @@ function NewsList(){
 
   return(
     <Grid container spacing={3}>
-      {  !isStoriesLoaded ? <Loader /> : null }
-
-      {
-        storyList && storyList.splice(0, 50).map(storyId => {
-          return (<NewsItem
-                    storyId={storyId}
-                    key={storyId}
-                  />);
-        })
+      {  
+        !isStoriesLoaded ? <Loader /> : (
+          
+            storyList && storyList.splice(0, 100).map(storyId => {
+              return (<NewsItem
+                        storyId={storyId}
+                        key={storyId}
+                      />);
+            })
+          
+        )
       }
+
+
       
     </Grid>
   );

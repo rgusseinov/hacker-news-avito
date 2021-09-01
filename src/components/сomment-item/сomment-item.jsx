@@ -63,9 +63,17 @@ function CommentItem({ commentId }){
             { doc.body.textContent }
             </p>
             <p style={{ textAlign: "left", color: "gray" }}> { commentPostDate } </p>
+            
+            { 
+              comment.kids ? (
+              <Grid item>
+                <a href="#" onClick={() => handleShowMoreComment(comment.kids)}>Show more </a> {comment.kids.length}
+              </Grid>
+              ) : ''
+            }
+
           </Grid>
         </Grid>        
-        { comment.kids ? (<Grid item><a href="#" onClick={() => handleShowMoreComment(comment.kids)}>Show more </a> {comment.kids.length}</Grid>) : ''}
         
         {
           subComments && subComments ? (subComments) : null

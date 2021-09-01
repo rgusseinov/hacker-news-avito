@@ -4,7 +4,8 @@ import NewsList from '../news-list/news-list';
 
 const useStyles = makeStyles(() => ({
   mt: {
-    marginTop: '20px'
+    marginTop: '30px',
+    marginBottom: '20px'
   }
 }));
 
@@ -23,6 +24,7 @@ function Main({ handleRefreshStories }) {
           </Grid>
         </Grid>
       </Grid>
+
       <NewsList />
     </div>
   );
