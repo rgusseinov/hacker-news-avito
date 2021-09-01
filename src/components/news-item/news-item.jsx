@@ -1,13 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Avatar, Box, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 import { getItemById } from '../../api/api';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loadStoryById } from '../../features/items/actions';
+import { getLocalDateFormat } from '../../utils/utils';
+import StarIcon from '@material-ui/icons/Star';
+import PersonIcon from '@material-ui/icons/Person';
 
-
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   newsFooter: {
     display: 'flex',
     flexBasis: '100px',
@@ -29,8 +33,19 @@ const useStyles = makeStyles(() => ({
     },
     '& > div:nth-child(3)': {
       paddingLeft: '10px'
-    }    
-  }
+    }
+  },
+
+  root: {
+    // maxWidth: 345,
+  },
+  title: {
+    textDecoration: 'none'
+  },
+  media: {
+    height: 0,
+  },
+
 }));
 
 
@@ -44,38 +59,43 @@ function NewsItem({ storyId }){
       setStory(data);
     };
     requestGetStory();
-
   }, [storyId]);
 
+  console.log(`story`, story);
   const classes = useStyles();
-  const postDate = new Date(story.time * 1000);
+  const storyDate = getLocalDateFormat(story.time);
 
   return(
     <Grid item xs={12} className={classes.newsItem}>
-    <Box>
-      <Link to={`/article/${story.id}`}>
-        <Typography variant="h5">{story.title}</Typography>
-      </Link>
-    </Box>
-   
-    <Box className={classes.newsFooter}>
-      <Box>
-        <Typography variant="body1"> Author </Typography>
-        <Typography variant="body1"> {story.by} </Typography>
-      </Box>
-      <Box> 
-        <Typography variant="body1"> Rating </Typography>
-        <Typography variant="body1"> {story.score} </Typography>                  
-      </Box>
-      <Box> 
-        <Typography variant="body1"> Published date </Typography>
-        <Typography variant="body1"> { postDate.toLocaleString() } </Typography>                  
-      </Box>            
-    </Box>
-    
+      <Card className={classes.root}>
+        <CardHeader
+          title={<Link to={`/article/${story.id}`} className={classes.title}> { story.title } </Link>}
+          subheader={storyDate}
+        />
+        <CardMedia
+          className={classes.media}
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            <Button href={`/article/${story.id}`} variant="contained"> Read more </Button>
+          </Typography>
+        </CardContent>
+
+        <CardActions>
+          <IconButton>
+            <StarIcon />
+            <Typography color="textSecondary" component="p"> &nbsp; {story.score} </Typography>     
+          </IconButton>
+
+          <IconButton>
+            <PersonIcon />
+            <Typography color="textSecondary" component="p"> &nbsp; {story.by} </Typography>     
+          </IconButton>
+
+        </CardActions>
+      </Card>
     </Grid>
   );
 }
 
 export default NewsItem;
-
