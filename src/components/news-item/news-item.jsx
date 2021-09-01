@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Grid, Typography } from '@material-ui/core';
+import { Avatar, Box, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 import { getItemById } from '../../api/api';
 import { useState } from 'react';
@@ -10,7 +10,7 @@ import { loadStoryById } from '../../features/items/actions';
 import { getLocalDateFormat } from '../../utils/utils';
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   newsFooter: {
     display: 'flex',
     flexBasis: '100px',
@@ -32,8 +32,17 @@ const useStyles = makeStyles(() => ({
     },
     '& > div:nth-child(3)': {
       paddingLeft: '10px'
-    }    
-  }
+    }
+  },
+
+  root: {
+    // maxWidth: 345,
+  },
+  media: {
+    height: 0,
+    // paddingTop: '56.25%', // 16:9
+  },
+
 }));
 
 
@@ -55,30 +64,52 @@ function NewsItem({ storyId }){
 
   return(
     <Grid item xs={12} className={classes.newsItem}>
-    <Box>
-      <Link to={`/article/${story.id}`}>
-        <Typography variant="h5">{story.title}</Typography>
-      </Link>
-    </Box>
-   
-    <Box className={classes.newsFooter}>
-      <Box>
-        <Typography variant="body1"> Author </Typography>
-        <Typography variant="body1"> {story.by} </Typography>
-      </Box>
-      <Box> 
-        <Typography variant="body1"> Rating </Typography>
-        <Typography variant="body1"> {story.score} </Typography>                  
-      </Box>
-      <Box> 
-        <Typography variant="body1"> Published date </Typography>
-        <Typography variant="body1"> { storyDate } </Typography>                  
-      </Box>            
-    </Box>
-    
+    <Card className={classes.root}>
+      <CardHeader
+        title={story.title}
+        subheader={storyDate}
+      />
+      <CardMedia
+        className={classes.media}
+        image=""
+        title="Paella dish"
+      />
+
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          <Link> Read more </Link>
+        </Typography>
+      </CardContent>
+
+      <CardActions>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
+      </CardActions>
+    </Card>
     </Grid>
   );
 }
 
 export default NewsItem;
 
+
+{/* <Box>
+<Link to={`/article/${story.id}`}>
+  <Typography variant="h5">{story.title}</Typography>
+</Link>
+</Box>    
+<Box className={classes.newsFooter}>
+<Box>
+  <Typography variant="body1"> Author </Typography>
+  <Typography variant="body1"> {story.by} </Typography>
+</Box>
+<Box> 
+  <Typography variant="body1"> Rating </Typography>
+  <Typography variant="body1"> {story.score} </Typography>                  
+</Box>
+<Box> 
+  <Typography variant="body1"> Published date </Typography>
+  <Typography variant="body1"> { storyDate } </Typography>                  
+</Box>            
+</Box> */}

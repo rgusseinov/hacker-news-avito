@@ -1,6 +1,7 @@
 import { Avatar, Divider, Grid, makeStyles, Paper } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { getItemById } from '../../api/api';
+import { getLocalDateFormat } from '../../utils/utils';
 import CommentList from '../сomment-list/сomment-list';
 
 const useStyles = makeStyles(() => ({
@@ -27,49 +28,50 @@ function CommentItem({ commentId }){
 
   }, [commentId]);
 
-  const handleShowMoreComment = () => {
-    const subCommentsMarkup = (
-      <CommentList comments={comment.kids} />
-    );
+
+  const handleShowMoreComment = async (kids) => {
+    // const data = await getItemById(storyId);
+
+    const subCommentsMarkup = kids.map((item, key) => {
+      return (
+        <Grid justifyContent="flex-end" key={key} container spacing={2}>
+          <Grid item xs={10} spacing={2}>
+            <Paper style={{ padding: "20px 20px" }}>
+              <p> { item }  </p>
+            </Paper>
+          </Grid>
+        </Grid>
+      );
+    });
     setSubComments(subCommentsMarkup);
   };
 
   // const commentDate = new Date(comment.time * 1000);
   let doc = new DOMParser().parseFromString(comment.text, 'text/html');
+  const commentPostDate = getLocalDateFormat(comment.time);
 
   return (
-    <div style={{ padding: 14 }} className="App">
-      <Paper style={{ padding: "40px 20px" }}>
+    <div>
+      <Paper style={{ padding: "20px 20px" }}>
         <Grid container wrap="nowrap" spacing={2}>
           <Grid item>
-            <Avatar alt="Remy Sharp" src={""} />
+            <Avatar alt="User Avatar" src={""} />
           </Grid>
           <Grid justifyContent="left" item xs zeroMinWidth>
             <h4 style={{ margin: 0, textAlign: "left" }}> {comment.by} </h4>
             <p style={{ textAlign: "left" }}>
             { doc.body.textContent }
             </p>
-            <p style={{ textAlign: "left", color: "gray" }}>
-              posted 1 minute ago
-            </p>
+            <p style={{ textAlign: "left", color: "gray" }}> { commentPostDate } </p>
           </Grid>
+        </Grid>        
+        { comment.kids ? (<Grid item><a href="#" onClick={() => handleShowMoreComment(comment.kids)}>Show more </a> {comment.kids.length}</Grid>) : ''}
+        
+        {
+          subComments && subComments ? (subComments) : null
+        }
 
-      {
-        comment.kids ? (<p><a href="#" onClick={handleShowMoreComment}>Show more </a> {comment.kids.length}</p>) : ''
-      }
-      {
-      subComments ? 
-        <div className={classes.mmleft}>
-            {
-              subComments
-            }
-        </div>
-        : null
-      }
-
-
-        </Grid>
-        <Divider variant="fullWidth" style={{ margin: "30px 0" }} />
+        <Divider variant="fullWidth" style={{ margin: "10px 0" }} />
       </Paper>
     </div>
   );
@@ -96,6 +98,26 @@ function CommentItem({ commentId }){
       <hr />
     </div>
   ); */
+
+
+/*   {
+    comment.kids ? (<p><a href="#" onClick={handleShowMoreComment}>Show more </a> {comment.kids.length}</p>) : ''
+  }
+ */
+
+/* 
+  {
+    comment.kids ? (
+     <Paper style={{ border: '1px solid red', padding: "20px 20px" }}>
+       <Grid item xs="12">
+           <Grid container wrap="nowrap" spacing={2}>
+             <h3> Sub comments </h3>
+             <p> Text of sub comment here </p>
+           </Grid>
+       </Grid>
+      </Paper>
+    ): null 
+} */
 
 
 }

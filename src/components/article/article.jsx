@@ -88,6 +88,17 @@ function Article() {
         </Grid>
       </Grid>
 
+
+
+      <Grid container spacing={3}>
+        <Grid item xs={10} className={classes.mt}>
+          <Typography variant="h6"> Comments  </Typography>
+        </Grid>
+        <Grid item xs={2} className={classes.mt}>
+          <Button variant="contained" color="primary"> Refresh </Button>
+        </Grid>
+      </Grid>
+
       <CommentList />
     </div>
   );
