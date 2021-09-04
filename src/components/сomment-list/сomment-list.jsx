@@ -15,7 +15,7 @@ function CommentList(){
     dispatch(loadCommentByItemId(id));
   }, []);
 
-  console.log(`id`, id);
+  // console.log(`id`, id);
  
   const { comments } = useSelector(({ comments }) => comments);
   return (

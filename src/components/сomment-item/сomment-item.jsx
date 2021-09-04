@@ -1,8 +1,7 @@
 import { Avatar, Divider, Grid, makeStyles, Paper } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { getItemById } from '../../api/api';
-import { getLocalDateFormat } from '../../utils/utils';
-import CommentList from '../сomment-list/сomment-list';
+import { getItemById, getSubCommentsById } from '../../api/api';
+import { getLocalDateFormat, textParser } from '../../utils/utils';
 
 const useStyles = makeStyles(() => ({
   mmleft: {
@@ -17,6 +16,7 @@ function CommentItem({ commentId }){
   const classes = useStyles();
   
   const [comment, setComment] = useState({});
+  const [commentToggle, setCommentToggle] = useState([]);
   const [subComments, setSubComments] = useState(null);
 
   useEffect(() => {
@@ -29,25 +29,41 @@ function CommentItem({ commentId }){
   }, [commentId]);
 
 
-  const handleShowMoreComment = async (kids) => {
-    // const data = await getItemById(storyId);
-
-    const subCommentsMarkup = kids.map((item, key) => {
+  const handleShowMoreComment = async (id, kids) => {
+    const commentList = await getSubCommentsById(kids);
+    const subCommentsMarkup = commentList.map(item => {
       return (
-        <Grid justifyContent="flex-end" key={key} container spacing={2}>
+        <Grid justifyContent="flex-end" key={item.id} container spacing={2}>
           <Grid item xs={10} spacing={2}>
             <Paper style={{ padding: "20px 20px" }}>
-              <p> { item }  </p>
+              <p> { textParser(item.text) }  </p>
             </Paper>
           </Grid>
         </Grid>
       );
     });
     setSubComments(subCommentsMarkup);
+/* 
+    const toggleState = commentToggle;
+    if (!toggleState[id]) toggleState.push(id);
+    setCommentToggle(); */
   };
 
-  // const commentDate = new Date(comment.time * 1000);
-  let doc = new DOMParser().parseFromString(comment.text, 'text/html');
+  /*
+
+    [
+      {1: false},
+      {2: true},
+      {3: true},
+      {4: false}
+    ]
+
+
+  */
+
+
+
+  const parseText = textParser(comment.text);
   const commentPostDate = getLocalDateFormat(comment.time);
 
   return (
@@ -57,17 +73,17 @@ function CommentItem({ commentId }){
           <Grid item>
             <Avatar alt="User Avatar" src={""} />
           </Grid>
-          <Grid justifyContent="left" item xs zeroMinWidth>
+          <Grid  item xs zeroMinWidth>
             <h4 style={{ margin: 0, textAlign: "left" }}> {comment.by} </h4>
             <p style={{ textAlign: "left" }}>
-            { doc.body.textContent }
+            { parseText}
             </p>
             <p style={{ textAlign: "left", color: "gray" }}> { commentPostDate } </p>
             
-            { 
+            {
               comment.kids ? (
               <Grid item>
-                <a href="#" onClick={() => handleShowMoreComment(comment.kids)}>Show more </a> {comment.kids.length}
+                <a href="#" onClick={() => handleShowMoreComment(comment.id, comment.kids)}>Show more </a> {comment.kids.length}
               </Grid>
               ) : ''
             }

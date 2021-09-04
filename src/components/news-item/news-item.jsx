@@ -56,12 +56,13 @@ function NewsItem({ storyId }){
   useEffect(() => {
     const requestGetStory = async() => {
       const data = await getItemById(storyId);
-      setStory(data);
+       if (data) {
+         setStory(data);
+       }
     };
     requestGetStory();
   }, [storyId]);
 
-  console.log(`story`, story);
   const classes = useStyles();
   const storyDate = getLocalDateFormat(story.time);
 

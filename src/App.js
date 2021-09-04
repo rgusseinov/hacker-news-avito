@@ -10,6 +10,7 @@ import Main from './components/main-page/main-page';
 import { useDispatch } from 'react-redux';
 import { loadStories } from './features/items/actions';
 import { TIME_INTERVAL } from './utils/utils';
+import Footer from './components/footer/footer';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -17,6 +18,14 @@ const useStyles = makeStyles((theme) => ({
       color: '#fff',
       textDecoration: 'none'
     },
+  },
+  mainContainer: {
+    display: 'flex',
+    minHeight: '96vh',
+    flexDirection: 'column'
+  },
+  content: {
+    flex: '1 1 auto'
   }
   
 }));
@@ -39,15 +48,14 @@ function App() {
   
   const classes = useStyles();
   return (
-    <div className="App">
-        <Container maxWidth="md">
+    // eslint-disable-next-line react/jsx-no-duplicate-props
+    <div className="App" className={classes.mainContainer}>
+        <Container maxWidth="md" className={classes.content}>
 
-          <AppBar position="static">
-            
-              <IconButton edge="start" className={classes.menuButton} color="primary" aria-label="menu"> 
-                <Link to="/"> Hacker News </Link>
-              </IconButton>
-            
+          <AppBar position="static">            
+            <IconButton edge="start" className={classes.menuButton} color="primary" aria-label="menu"> 
+              <Link to="/"> Hacker News </Link>
+            </IconButton>            
           </AppBar>
 
           <Switch>
@@ -58,8 +66,7 @@ function App() {
           </Switch>
 
         </Container>
-        
-        {/* <Footer /> */}
+        <Footer />
     </div>
   );
 }
