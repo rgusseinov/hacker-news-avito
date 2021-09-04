@@ -9,7 +9,6 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-
 function Main({ handleRefreshStories }) {
   const classes = useStyles();
   return(

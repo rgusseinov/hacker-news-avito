@@ -23,5 +23,7 @@ reportWebVitals();
 /**
   Thing to be cleared with mentor
     1. Eslint. How to setup properly ? did i sertup config properly ?
+    2. Add try catch to each async component
+    3. Checked deleted attribute and others also. Maybe i missed some important condition
    
  */

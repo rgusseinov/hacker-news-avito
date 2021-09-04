@@ -3,7 +3,7 @@ import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    textAlign: 'center'    
+    textAlign: 'center'
   }
 }));
 
@@ -18,7 +18,7 @@ function Footer(){
           Applications are open for YC Winter 2022
         </Typography>
       </Container>
-  </footer>
+    </footer>
   );
 }
 

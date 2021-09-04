@@ -1,0 +1,17 @@
+
+import { getNews } from '../../api/api';
+import { LOAD_NEWS, LOAD_NEWS_SUCCESS } from './actionTypes';
+
+export const loadNews = () => async (dispatch) => {
+  dispatch({
+    type: LOAD_NEWS
+  });
+
+  const news = await getNews();
+
+  dispatch({
+    type: LOAD_NEWS_SUCCESS,
+    payload: news
+  });
+
+};

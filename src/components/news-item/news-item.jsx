@@ -1,15 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Avatar, Box, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography } from '@material-ui/core';
-import { useEffect } from 'react';
-import { getItemById } from '../../api/api';
-import { useState } from 'react';
+import {  Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { loadStoryById } from '../../features/items/actions';
 import { getLocalDateFormat } from '../../utils/utils';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
+import useNewsItem from './useNewsItem';
 
 const useStyles = makeStyles((theme) => ({
   newsFooter: {
@@ -49,20 +45,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function NewsItem({ storyId }){
+function NewsItem({ newsItemId }){
 
-  const [story, setStory] = useState({});
-
-  useEffect(() => {
-    const requestGetStory = async() => {
-      const data = await getItemById(storyId);
-       if (data) {
-         setStory(data);
-       }
-    };
-    requestGetStory();
-  }, [storyId]);
-
+  const { story, loading } = useNewsItem(newsItemId);
   const classes = useStyles();
   const storyDate = getLocalDateFormat(story.time);
 
@@ -70,7 +55,7 @@ function NewsItem({ storyId }){
     <Grid item xs={12} className={classes.newsItem}>
       <Card className={classes.root}>
         <CardHeader
-          title={<Link to={`/article/${story.id}`} className={classes.title}> { story.title } </Link>}
+          title={<Link to={`/news/${story.id}`} className={classes.title}> { story.title } </Link>}
           subheader={storyDate}
         />
         <CardMedia
@@ -78,7 +63,7 @@ function NewsItem({ storyId }){
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            <Button href={`/article/${story.id}`} variant="contained"> Read more </Button>
+            <Button href={`/news/${story.id}`} variant="contained"> Read more </Button>
           </Typography>
         </CardContent>
 
