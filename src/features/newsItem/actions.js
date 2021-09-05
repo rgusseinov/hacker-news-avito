@@ -2,7 +2,10 @@
 import { getNews } from '../../api/api';
 import { LOAD_NEWS_ITEM, LOAD_NEWS_ITEM_SUCCESS } from './actionTypes';
 
-export const loadNewsItem = () => async (dispatch) => {
+export const loadNewsItems = () => async (dispatch) => {
+
+  // Here we need to load news by ID
+
   dispatch({
     type: LOAD_NEWS_ITEM
   });
@@ -12,7 +15,7 @@ export const loadNewsItem = () => async (dispatch) => {
 
   news.forEach(newsId => {
     newsItemArr.push({
-      [newsId]: {}
+      [newsId]: {'a': 54, 'b': 32}
     });
   });
 

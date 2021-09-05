@@ -23,7 +23,6 @@ function Main({ handleRefreshStories }) {
           </Grid>
         </Grid>
       </Grid>
-
       <NewsList />
     </div>
   );

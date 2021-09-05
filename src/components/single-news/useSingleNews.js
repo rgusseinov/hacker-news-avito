@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getItemById } from "../../api/api";
+import { loadNewsItems } from "../../features/newsItem/actions";
 
 export default () => {
 
@@ -10,10 +11,15 @@ export default () => {
   const newsParams = useParams();
   const dispatch = useDispatch();
 
-  dispatch();
+  /*   dispatch(loadNewsItems(newsParams.id));
 
 
-  useEffect(() => {
+  const newsItems = useSelector(({ newsItems }) => newsItems);
+
+  console.log(newsItems);
+ */
+
+  /*   useEffect(() => {
     const requestGetStory = async() => {
       try {
         setLoading(true);
@@ -26,7 +32,7 @@ export default () => {
     };
     requestGetStory();
   }, []);
-
+ */
   //  console.log(`in single news`);
 
   return { news, loading };

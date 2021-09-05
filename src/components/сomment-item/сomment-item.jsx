@@ -24,10 +24,9 @@ function CommentItem({ commentId }){
           <Grid item>
             <h4 style={{ margin: 0, textAlign: "left" }}> {comment.by} </h4>
             <p style={{ textAlign: "left" }}>
-            { parseText}
+              { parseText}
             </p>
             <p style={{ textAlign: "left", color: "gray" }}> { commentPostDate } </p>
-            
             {
               comment.kids && !kidsShowed ? (
                 <Grid item>
@@ -37,10 +36,8 @@ function CommentItem({ commentId }){
                 <CommentList commentIds={comment.kids} />
               )
             }
-
           </Grid>
-        </Grid>        
-        
+        </Grid>
       </Paper>
     </div>
   );

@@ -6,36 +6,18 @@ import { TIME_INTERVAL } from './utils/utils';
 import Footer from './components/footer/footer';
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
-import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
 import Main from './components/pages/main-page';
 import PageNotFound from './components/pages/page-404';
 import SingleNews from './components/single-news/single-news';
-import { loadNewsItem } from './features/newsItem/actions';
-
-const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    '& a': {
-      color: '#fff',
-      textDecoration: 'none'
-    },
-  },
-  mainContainer: {
-    display: 'flex',
-    minHeight: '96vh',
-    flexDirection: 'column'
-  },
-  content: {
-    flex: '1 1 auto'
-  },  
-}));
+import { loadNewsItems } from './features/newsItem/actions';
+// import './App.module.css';
 
 function App() {
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadNews());
-    dispatch(loadNewsItem());
+    dispatch(loadNewsItems());
 
     const timer = setInterval(() => {
       dispatch(loadNews());
@@ -51,14 +33,13 @@ function App() {
     dispatch(loadNews());
   };
   
-  const classes = useStyles();
   return (
     // eslint-disable-next-line react/jsx-no-duplicate-props
-    <div className="App" className={classes.mainContainer}>
-      <Container maxWidth="md" className={classes.content}>
+    <div className="App">
+      <Container maxWidth="md">
 
         <AppBar position="static">            
-          <IconButton edge="start" className={classes.menuButton} color="primary" aria-label="menu"> 
+          <IconButton edge="start" color="primary" aria-label="menu"> 
             <Link to="/"> Hacker News </Link>
           </IconButton>            
         </AppBar>

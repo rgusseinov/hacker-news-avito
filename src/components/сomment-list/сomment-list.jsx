@@ -6,11 +6,12 @@ function CommentList({ commentIds }){
   return (
     <div>
       { commentIds && commentIds.map((commentId, key) => {
-        return (<CommentItem
-          key={key}
-          commentId={commentId}
+        return (
+          <CommentItem
+            key={key}
+            commentId={commentId}
           />);
-        })
+      })
       }
     </div>
   );  

@@ -10,10 +10,10 @@ export default (newsItemId) => {
     const requestGetStory = async() => {
       setLoading(true);
       const data = await getItemById(newsItemId);
-       if (data) {
-         setStory(data);
-       }
-       setLoading(false);
+      if (data) {
+        setStory(data);
+      }
+      setLoading(false);
     };
     requestGetStory();
   }, [newsItemId]);

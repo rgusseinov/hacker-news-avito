@@ -60,10 +60,10 @@ function Comments(){
             }
           </Box>
         ) : (
-            <Grid item xs={10} className={classes.mt}>
-              <Typography variant="h6" color="textPrimary"> Sorry! For now no comments.  </Typography>
-            </Grid>
-           )
+          <Grid item xs={10} className={classes.mt}>
+            <Typography variant="h6" color="textPrimary"> Sorry! For now no comments.  </Typography>
+          </Grid>
+        )
       }
 
     </Grid>

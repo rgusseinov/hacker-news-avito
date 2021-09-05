@@ -42,12 +42,12 @@ const useStyles = makeStyles(() => ({
 function SingleNews() {
 
   const classes = useStyles();
-  const { news, newsLoading } = useSingleNews();
+  const { news, loading } = useSingleNews();
   const storyDate = getLocalDateFormat(news.time);
   
 
   return(
-    newsLoading ? <Loader /> : (
+    loading ? <Loader /> : (
       <Grid container>
         <Grid item xs={12} className={classes.mt}>
           <Grid container>
@@ -89,8 +89,8 @@ function SingleNews() {
             </CardActions>
           </Card>
         </Grid>
-      <Comments />      
-    </Grid>
+        <Comments />      
+      </Grid>
     )
   );
 }
