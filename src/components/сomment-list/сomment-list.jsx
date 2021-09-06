@@ -3,6 +3,7 @@ import CommentItem from '../сomment-item/сomment-item';
 
 // Массив ID'ков
 function CommentList({ commentIds }){
+
   return (
     <div>
       { commentIds && commentIds.map((commentId, key) => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { useParams } from "react-router";
 import { getItemById } from "../../api/api";
 import { loadNewsItems } from "../../features/newsItem/actions";
@@ -8,33 +8,19 @@ export default () => {
 
   const [news, setNews] = useState({});
   const [loading, setLoading] = useState(false);
-  const newsParams = useParams();
+  const {id} = useParams();
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    const requestNewsInfo = async () => {
+      const data = await getItemById(id);
 
-  /*   dispatch(loadNewsItems(newsParams.id));
-
-
-  const newsItems = useSelector(({ newsItems }) => newsItems);
-
-  console.log(newsItems);
- */
-
-  /*   useEffect(() => {
-    const requestGetStory = async() => {
-      try {
-        setLoading(true);
-        const data = await getItemById(newsParams.id);
-        setNews(data);
-        setLoading(false);
-      } catch(error) {
-        console.log(`Что то пошло не так:`, error);
-      }
+      setNews(data);
+      dispatch(loadNewsItems(id, data));
+      
     };
-    requestGetStory();
+    requestNewsInfo();
   }, []);
- */
-  //  console.log(`in single news`);
-
+  
   return { news, loading };
-
 };

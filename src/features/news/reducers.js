@@ -2,7 +2,7 @@ import { LOAD_NEWS, LOAD_NEWS_SUCCESS } from "./actionTypes";
 
 const initialState = {
   news: [],
-  isNewsLoaded: false,
+  isLoaded: false,
 };
 
 export const news = (state = initialState, action) => {
@@ -11,13 +11,13 @@ export const news = (state = initialState, action) => {
   case LOAD_NEWS:
     return {
       ...state,
-      isNewsLoaded: false
+      isLoaded: false
     };
   case LOAD_NEWS_SUCCESS:
     return {
       ...state,
       news: action.payload,
-      isNewsLoaded: true
+      isLoaded: true
     };
   default: return state;
   }

@@ -17,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadNews());
-    dispatch(loadNewsItems());
+    // dispatch(loadNewsItems());
 
     const timer = setInterval(() => {
       dispatch(loadNews());

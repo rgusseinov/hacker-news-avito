@@ -4,6 +4,8 @@ import { useParams } from 'react-router';
 import CommentList from '../сomment-list/сomment-list';
 import { getItemById } from '../../api/api';
 import Loader from '../loader/loader';
+import { useSelector } from 'react-redux';
+import useComments from './useComments';
 
 const useStyles = makeStyles(() => ({
   mt: {
@@ -14,9 +16,12 @@ const useStyles = makeStyles(() => ({
 
 function Comments(){
 
-  const { id } = useParams();
+  // const { id } = useParams();
   const classes = useStyles();
-  const [comments, setComments] = useState([]);
+  const { findNewsItem } = useComments();
+  const isLoading = false;
+
+  /* const [comments, setComments] = useState([]);
   const [commentsLoading, setCommentsLoading] = useState(false);
 
   const fetchComments = useCallback(() => {
@@ -32,19 +37,25 @@ function Comments(){
   useEffect(() => {
     fetchComments();    
 
-  }, []);
+  }, []); */
 
   const handleRefreshComment = () => {
-    fetchComments();
+    // fetchComments();
   };
-  
+
+  // const kids =  [28347527, 28348533, 28348705, 28349286, 28346618 ];
+
+
+  console.log(`commentIds`, findNewsItem);
+
+
   return(
     <Grid container>
       {
-        comments.kids ? (
+        findNewsItem.data.kids ? (
           <Box>
             <Grid item xs={3} className={classes.mt}>
-              <Typography variant="h6" color="textSecondary"> Comments { comments.descendants ? comments.descendants : 1 }   </Typography>
+              <Typography variant="h6" color="textSecondary"> Comments { }   </Typography>
             </Grid>
     
             <Grid item xs={2} className={classes.mt}>
@@ -52,9 +63,9 @@ function Comments(){
             </Grid>
 
             {
-              commentsLoading ? <Loader /> : (
+              isLoading ? <Loader /> : (
                 <Grid item xs={12} className={classes.mt}>
-                  <CommentList comments={comments} />
+                  <CommentList commentIds={findNewsItem.data.kids} />
                 </Grid>
               )
             }

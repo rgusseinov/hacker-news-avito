@@ -7,6 +7,8 @@ export default (commentId) => {
   const [kidsShowed, setKidsShowed] = useState();
   // Loading
 
+  // console.log(`here`);
+
   useEffect(() => {
     const getComment = async() => {
       const data = await getItemById(commentId);

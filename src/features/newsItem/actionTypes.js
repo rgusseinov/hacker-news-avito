@@ -1,2 +1,4 @@
 export const LOAD_NEWS_ITEM = 'LOAD_NEWS_ITEM';
 export const LOAD_NEWS_ITEM_SUCCESS = 'LOAD_NEWS_ITEM_SUCCESS';
+
+export const SET_NEWS_ITEM = 'SET_NEWS_ITEM';

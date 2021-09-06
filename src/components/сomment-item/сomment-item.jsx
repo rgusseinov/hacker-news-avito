@@ -9,8 +9,6 @@ function CommentItem({ commentId }){
 
   const { comment, kidsShowed, handleShowSubComments } = useCommentItem(commentId);
 
-  console.log({comment});
-
   const parseText = textParser(comment.text);
   const commentPostDate = getLocalDateFormat(comment.time);
 
