@@ -1,35 +1,31 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { ITEM_LIMIT } from '../../utils/utils';
 import Loader from '../loader/loader';
 import NewsItem from '../news-item/news-item';
-import useItems from './useItems';
+import useNewsList from './useNewsList';
 
 function NewsList(){
 
-  const storyList = useItems();
-  const { isStoriesLoaded } = useSelector(({ stories }) => stories);
+  const { news } = useNewsList();
 
   return(
     <Grid container spacing={3}>
-      {  
-        !isStoriesLoaded ? <Loader /> : (
-          
-            storyList && storyList.splice(0, 100).map(storyId => {
-              return (<NewsItem
-                        storyId={storyId}
-                        key={storyId}
-                      />);
-            })
-          
+      {
+        // eslint-disable-next-line no-constant-condition
+        false ? <Loader /> : (
+          news && news.splice(0, ITEM_LIMIT).map(newsItemId => {
+            return (
+              <NewsItem
+                newsItemId={newsItemId}
+                key={newsItemId}
+              />
+            );
+          })
         )
       }
-
-
-      
     </Grid>
   );
 }
 
 export default NewsList;
-

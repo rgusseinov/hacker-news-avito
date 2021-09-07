@@ -9,7 +9,6 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-
 function Main({ handleRefreshStories }) {
   const classes = useStyles();
   return(
@@ -24,7 +23,6 @@ function Main({ handleRefreshStories }) {
           </Grid>
         </Grid>
       </Grid>
-
       <NewsList />
     </div>
   );

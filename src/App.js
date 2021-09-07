@@ -1,65 +1,60 @@
 import React, { useEffect } from 'react';
-import { Container } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import { Link, Route, Switch } from 'react-router-dom';
-import Article from './components/article/article';
-import Main from './components/main-page/main-page';
 import { useDispatch } from 'react-redux';
-import { loadStories } from './features/items/actions';
+import { Link, Route, Switch } from 'react-router-dom';
+import { loadNews } from './features/news/actions';
 import { TIME_INTERVAL } from './utils/utils';
-
-const useStyles = makeStyles((theme) => ({
-  menuButton: {
-    '& a': {
-      color: '#fff',
-      textDecoration: 'none'
-    },
-  }
-  
-}));
+import Footer from './components/footer/footer';
+import AppBar from '@material-ui/core/AppBar';
+import IconButton from '@material-ui/core/IconButton';
+import { Container } from '@material-ui/core';
+import Main from './components/pages/main-page';
+import PageNotFound from './components/pages/page-404';
+import SingleNews from './components/single-news/single-news';
+import { loadNewsIds } from './features/newsItem/actions';
+// import './App.module.css';
 
 function App() {
-
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadStories());
+    dispatch(loadNews());
 
-    window.setInterval(() => {
-      dispatch(loadStories());
+    // dispatch(loadNewsIds());
+
+    /* const timer = setInterval(() => {
+      dispatch(loadNews());
     }, TIME_INTERVAL);
+    
+    return () => {
+      clearInterval(timer);
+    }; */
     
   }, []);
 
   const handleRefreshStories = () => {
-    dispatch(loadStories());
+    dispatch(loadNews());
   };
   
-  const classes = useStyles();
   return (
+    // eslint-disable-next-line react/jsx-no-duplicate-props
     <div className="App">
-        <Container maxWidth="md">
+      <Container maxWidth="md">
 
-          <AppBar position="static">
-            
-              <IconButton edge="start" className={classes.menuButton} color="primary" aria-label="menu"> 
-                <Link to="/"> Hacker News </Link>
-              </IconButton>
-            
-          </AppBar>
+        <AppBar position="static">            
+          <IconButton edge="start" color="primary" aria-label="menu"> 
+            <Link to="/"> Hacker News </Link>
+          </IconButton>            
+        </AppBar>
 
-          <Switch>
-            <Route path="/" exact>
-              <Main handleRefreshStories={handleRefreshStories} />
-            </Route>
-            <Route path="/article/:id" component={Article} />
-          </Switch>
+        <Switch>
+          <Route path="/" exact>
+            <Main handleRefreshStories={handleRefreshStories} />
+          </Route>
+          <Route path="/news/:id" component={SingleNews} />
+          <Route component={PageNotFound} />
+        </Switch>
 
-        </Container>
-        
-        {/* <Footer /> */}
+      </Container>
+      <Footer />
     </div>
   );
 }
