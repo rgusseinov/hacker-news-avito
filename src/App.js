@@ -10,22 +10,23 @@ import { Container } from '@material-ui/core';
 import Main from './components/pages/main-page';
 import PageNotFound from './components/pages/page-404';
 import SingleNews from './components/single-news/single-news';
-import { loadNewsItems } from './features/newsItem/actions';
+import { loadNewsIds } from './features/newsItem/actions';
 // import './App.module.css';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadNews());
-    // dispatch(loadNewsItems());
 
-    const timer = setInterval(() => {
+    // dispatch(loadNewsIds());
+
+    /* const timer = setInterval(() => {
       dispatch(loadNews());
     }, TIME_INTERVAL);
     
     return () => {
       clearInterval(timer);
-    };
+    }; */
     
   }, []);
 

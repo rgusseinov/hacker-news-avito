@@ -58,9 +58,11 @@ function NewsItem({ newsItemId }){
           title={<Link to={`/news/${story.id}`} className={classes.title}> { story.title } </Link>}
           subheader={storyDate}
         />
-        <CardMedia
+        {/*         <CardMedia
           className={classes.media}
-        />
+          title=""
+          src={''}
+        /> */}
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             <Button href={`/news/${story.id}`} variant="contained"> Read more </Button>

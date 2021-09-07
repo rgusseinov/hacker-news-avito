@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 
 export default () => {
 
-  const { news } = useSelector(({ news }) => news);
-  const { isLoaded } = useSelector(({ news }) => news);
+  const { news, isLoaded } = useSelector(({ news }) => news);
+ 
   // use news list hook либо через пропсы
 
 

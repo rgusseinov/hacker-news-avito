@@ -15,7 +15,6 @@ export const news = (state = initialState, action) => {
     };
   case LOAD_NEWS_SUCCESS:
     return {
-      ...state,
       news: action.payload,
       isLoaded: true
     };

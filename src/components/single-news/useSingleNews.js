@@ -1,26 +1,47 @@
 import { useEffect, useState } from "react";
-import { useDispatch, } from "react-redux";
+import { useDispatch, useSelector, } from "react-redux";
 import { useParams } from "react-router";
 import { getItemById } from "../../api/api";
-import { loadNewsItems } from "../../features/newsItem/actions";
+import { requestSingleNews } from "../../features/newsItem/actions";
 
 export default () => {
 
-  const [news, setNews] = useState({});
+  const [newsItem, setNewsItem] = useState({});
   const [loading, setLoading] = useState(false);
   const {id} = useParams();
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    const requestNewsInfo = async () => {
-      const data = await getItemById(id);
 
-      setNews(data);
-      dispatch(loadNewsItems(id, data));
-      
-    };
-    requestNewsInfo();
-  }, []);
   
-  return { news, loading };
+  const { newsItems } = useSelector(({ newsItems }) => newsItems);
+  // console.log(`currentNewsIndex`, newsItems[id]);
+  const singleNews = newsItems[id];
+
+  console.log(`newsItems`, newsItems);
+  
+  // singleNews: [id]: underfined
+  // singleNews: [id]: {item: {}, isLoaded}
+
+  useEffect(() => {
+  /*     const requestNewsInfo = async () => {
+      const data = await getItemById(id);
+      setNewsItem(data);
+    }; */
+    if (singleNews) return;
+    dispatch(requestSingleNews(id));
+ 
+    
+    
+
+    /*  if (!currentNewsIndex[1]){
+      requestNewsInfo();
+    } else {
+      setNewsItem(currentNewsIndex[1]);
+    } */
+    
+
+  }, [singleNews]); // loading
+  
+  
+
+  return singleNews;
 };

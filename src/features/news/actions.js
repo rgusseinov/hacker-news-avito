@@ -15,23 +15,4 @@ export const loadNews = () => async (dispatch) => {
     payload: news
   });
 
-
-  /*   // News items
-  dispatch({
-    type: LOAD_NEWS_ITEM
-  });
-  const newsItemArr = [];
-
-  news.forEach(newsId => {
-    newsItemArr.push({
-      [newsId]: {}
-    });
-  });
-
-  dispatch({
-    type: LOAD_NEWS_ITEM_SUCCESS,
-    payload: newsItemArr
-  });
- */
-
 };
