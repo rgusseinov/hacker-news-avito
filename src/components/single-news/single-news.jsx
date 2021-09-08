@@ -21,8 +21,7 @@ function SingleNews() {
   console.log(singleNews);
   const {item, isLoaded} = singleNews;
   const storyDate = getLocalDateFormat(item.time);
-
-  
+ 
   
   return(
     !isLoaded ? <Loader /> : (
