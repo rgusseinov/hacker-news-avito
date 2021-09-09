@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import CommentItem from '../сomment-item/сomment-item';
-import useCommentsContent from './useCommentsContent';
 
-// Массив ID'ков
 function CommentList(){
 
-  const commentList = useCommentsContent();
-  if (!commentList) return null;
-  
+  const { id } = useParams();
+  const {commentIds } = useSelector(({ commentIds }) => commentIds);
+  const comments = commentIds[id];
 
+  useEffect(() => {
+  }, []);
   return (
     <div>
-      { commentList.items && commentList.items.map((commentItem, key) => {
+      { comments?.item && comments?.item.map((commentId, key) => {
         return (
           <CommentItem
             key={key}
-            commentItem={commentItem}
+            commentId={commentId}
           />);
       })
       }

@@ -1,15 +1,15 @@
-import { AppBar, Container, IconButton, makeStyles, Typography } from '@material-ui/core';
+import { AppBar, IconButton } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import classes from './header.module.css';
 
 function Header(){
-
   return(
-    <header>
-      <AppBar position="static">            
-        <IconButton edge="start" color="primary" aria-label="menu"> 
+    <header className={classes.header}>
+      <AppBar position="static">
+        <IconButton edge="start" aria-label="menu">
           <Link to="/"> Hacker News </Link>
-        </IconButton>            
+        </IconButton>
       </AppBar>
     </header>
   );

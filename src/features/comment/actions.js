@@ -2,20 +2,21 @@ import { URL } from "../../api/api";
 
 export const requestCommentIds = (id) => async (dispatch) => {
   dispatch({
-    type: 'SET_LOADED',
+    type: 'SET_LOADED_COMMENT', // Перекликается с ждругим loading'ом в news Item. Нужно исправить.
     payload: false
   });
 
   const result = fetch(`${URL}/item/${id}.json?print=pretty`);
   result.then(data => data.json()).then(item => {
+    // console.log(`item`, item);
     dispatch(setCommentIds(item));
   });
 
 };
 
-export const setCommentIds = (newsItemComments) => ({
+export const setCommentIds = (newsCommentIds) => ({
   type: 'SET_COMMENT_IDS',
-  payload: newsItemComments
+  payload: newsCommentIds
 });
 
 

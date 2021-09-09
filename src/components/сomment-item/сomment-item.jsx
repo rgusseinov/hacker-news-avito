@@ -1,15 +1,30 @@
 import { Avatar, Grid, Paper } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { getLocalDateFormat, textParser } from '../../utils/utils';
-import CommentList from '../сomment-list/сomment-list';
-import useCommentItem from './useCommentItem';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { requestCommentsContent } from '../../features/comment-content/actions';
+// import { getLocalDateFormat, textParser } from '../../utils/utils';
 
-function CommentItem({ commentItem }){
+
+function CommentItem({ commentId }){
 
   // const { comment} = useCommentItem(commentId);
-  const parseText = textParser(commentItem.text);
-  const commentPostDate = getLocalDateFormat(commentItem.time);
+  // const parseText = '';
+  // const commentPostDate = '';  
+  // const commentItem = {};
+  // console.log(`commentId`, commentId);
+
+  const dispatch = useDispatch();
+  const {commentsContent } = useSelector(({ commentsContent }) => commentsContent);
+  const comments = commentsContent[commentId];
+  // const { item } = comments?.item;
+
+  // console.log(`commentsContent`, comments);
   
+  useEffect(() => {
+    if (comments) return;
+    dispatch(requestCommentsContent(commentId));
+  }, [commentId]);
+
 
   return (
     <div>
@@ -19,11 +34,19 @@ function CommentItem({ commentItem }){
             <Avatar alt="User Avatar" src={""} />
           </Grid>
           <Grid item>
-            <h4 style={{ margin: 0, textAlign: "left" }}> {commentItem.by} </h4>
+            <h4 style={{ margin: 0, textAlign: "left" }}> {comments?.item.by} </h4>
             <p style={{ textAlign: "left" }}>
-              { parseText}
+              { comments?.item.text }
             </p>
-            <p style={{ textAlign: "left", color: "gray" }}>  </p>
+            <p style={{ textAlign: "left", color: "gray" }}>   </p>
+
+            {
+              comments?.item.kids ? (
+                <Grid item>
+                  <a href="#">Show more </a> {comments?.item.kids.length}
+                </Grid>
+              ) : null
+            }
             
           </Grid>
         </Grid>

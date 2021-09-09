@@ -7,7 +7,7 @@ import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
 import useNewsItem from './useNewsItem';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   newsFooter: {
     display: 'flex',
     flexBasis: '100px',

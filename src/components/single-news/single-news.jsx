@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -8,13 +8,10 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router";
 import { requestSingleNews } from '../../features/newsItem/actions';
-import { Comments } from '../сomments/сomments';
-
-const useStyles = makeStyles(() => ({}));
-
+import Comments from '../сomments/сomments';
+import classes from './single-news.module.css';
 
 function SingleNews() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useParams();
   const {newsItems, isLoaded} = useSelector(({ newsItems }) => newsItems);
@@ -25,11 +22,12 @@ function SingleNews() {
     dispatch(requestSingleNews(id));
   }, []);
 
-  // console.log( newsItem?.item );
+
   return(
     !isLoaded ? <Loader /> : (
       <Grid container>
-        <Grid item xs={12} className={classes.mt}>
+
+        <Grid item xs={12} className={classes.singleNewsRow}>
           <Grid container>
             <Grid item>
               <ArrowBackIcon />
@@ -41,6 +39,7 @@ function SingleNews() {
             </Grid>
           </Grid>       
         </Grid>
+
         <Grid item xs={12}>
           <Card className={classes.root}>
             <CardHeader
@@ -67,6 +66,7 @@ function SingleNews() {
             </CardActions>
           </Card>
         </Grid>
+
         <Comments />
       </Grid>
     )

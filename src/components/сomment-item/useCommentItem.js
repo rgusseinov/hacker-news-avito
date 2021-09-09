@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react";
 import { getItemById } from "../../api/api";
 
 export default (commentId) => {
@@ -17,5 +17,5 @@ export default (commentId) => {
 
  
 
-  return { comment };
-};
+// return { comment };
+// };

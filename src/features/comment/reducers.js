@@ -6,18 +6,20 @@ const initialState = {
 export const commentIds = (state = initialState, action) => {
 
   switch (action.type){
+    
   case 'SET_COMMENT_IDS':
+    // console.log(`payload`, action.payload);
     return {
       commentIds: {
         ...state.commentIds,
         [action.payload.id]: {
-          item: action.payload,
+          item: action.payload.kids,
         },
       },
       isLoaded: true
     };
     
-  case 'SET_LOADED': 
+  case 'SET_LOADED_COMMENT': 
     return {
       ...state,
       isLoaded: action.payload
