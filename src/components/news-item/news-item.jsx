@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {  Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid, IconButton, Typography } from '@material-ui/core';
+import {  Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { getLocalDateFormat } from '../../utils/utils';
 import StarIcon from '@material-ui/icons/Star';

@@ -11,21 +11,17 @@ export default () => {
   const {id} = useParams();
   const dispatch = useDispatch();
   
-  const {newsItems} = useSelector(({ newsItems }) => newsItems);
+  const {newsItems, loading} = useSelector(({ newsItems }) => newsItems);
   const singleNews = newsItems[id]; 
- 
 
   useEffect(() => {
     if (singleNews) return;
     dispatch(requestSingleNews(id));
-
+    
   }, [singleNews]); // loading
-
-
   
   
-  return singleNews;
+  // console.log(`loading`, loading);
+  
+  return {singleNews, loading};
 };
-
-// singleNews: [id]: underfined
-// singleNews: [id]: {item: {}, isLoaded}

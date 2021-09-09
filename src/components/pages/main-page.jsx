@@ -11,6 +11,7 @@ const useStyles = makeStyles(() => ({
 
 function Main({ handleRefreshStories }) {
   const classes = useStyles();
+
   return(
     <div>
       <Grid item xs={12}>

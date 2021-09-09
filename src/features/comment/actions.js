@@ -1,16 +1,40 @@
+import { URL } from "../../api/api";
 
-import { getItemById } from '../../api/api';
-import { LOAD_COMMENT_START, LOAD_COMMENT_SUCCESS } from './actionTypes';
-
-export const loadCommentIds = (id) => async (dispatch) => {
+export const requestCommentIds = (id) => async (dispatch) => {
   dispatch({
-    type: LOAD_COMMENT_START
+    type: 'SET_LOADED',
+    payload: false
   });
 
-  const newsItem = await getItemById(id);
-  dispatch({
-    type: LOAD_COMMENT_SUCCESS,
-    payload: newsItem
+  const result = fetch(`${URL}/item/${id}.json?print=pretty`);
+  result.then(data => data.json()).then(item => {
+    dispatch(setCommentIds(item));
   });
 
 };
+
+export const setCommentIds = (newsItemComments) => ({
+  type: 'SET_COMMENT_IDS',
+  payload: newsItemComments
+});
+
+
+
+/* export const fetchPizzas = (sortBy, category) => (dispatch) => {
+  dispatch({
+      type: 'SET_LOADED',
+      payload: false
+  })
+
+  axios.get(`/pizzas?${
+      category !== null ? `category=${category}` : '' 
+  }&_sort=${sortBy.type}&_order=${sortBy.order}`
+  ).then(({ data }) => {
+      dispatch(setPizzas(data))
+  }) 
+}
+
+export const setPizzas = (items) => ({
+  type: 'SET_PIZZAS',
+  payload: items
+}) */

@@ -1,5 +1,8 @@
 import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import { requestCommentIds } from '../../features/comment/actions';
 import CommentList from '../сomment-list/сomment-list';
 import useComments from './useComments';
 
@@ -11,15 +14,26 @@ const useStyles = makeStyles(() => ({
 
 
 function Comments(){
-
   const classes = useStyles();
-  const newsItemComment = useComments();
-  if (!newsItemComment) return null;
+
+
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const {commentdIds, isLoaded} = useSelector(({ commentdIds }) => commentdIds);
+  // const newsItem = newsItems[id];
+  
+  useEffect(() => {
+    // if (newsItem) return;
+    dispatch(requestCommentIds(id));
+  }, []);
+
+  console.log(commentdIds);
   
   return(
     <Grid container>
       {
-        newsItemComment.items ? (
+        // eslint-disable-next-line no-constant-condition
+        true ? (
           <Box>
             <Grid item xs={3} className={classes.mt}>
               <Typography variant="h6" color="textSecondary"> Comments (#)  </Typography>

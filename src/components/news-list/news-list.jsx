@@ -6,12 +6,12 @@ import NewsItem from '../news-item/news-item';
 import useNewsList from './useNewsList';
 
 function NewsList(){
-  const { news, loading } = useNewsList();
+  const { newsIds, loading } = useNewsList();
   return(
     <Grid container spacing={3}>
       {
         loading ? <Loader /> : (
-          news && news.splice(0, ITEM_LIMIT).map(newsItemId => {
+          newsIds && newsIds.splice(0, ITEM_LIMIT).map(newsItemId => {
             return (
               <NewsItem
                 newsItemId={newsItemId}

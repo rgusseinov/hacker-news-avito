@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { loadNewsIds } from './features/news/actions';
 import Footer from './components/footer/footer';
 import { Container } from '@material-ui/core';
@@ -12,6 +12,7 @@ import Header from './components/header/header';
 
 function App() {
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(loadNewsIds());
   }, []);
@@ -23,9 +24,7 @@ function App() {
   return (
     <div className="App">
       <Container maxWidth="md">
-
         <Header />
-
         <Switch>
           <Route path="/" exact>
             <Main handleRefreshStories={handleRefreshStories} />
@@ -33,7 +32,6 @@ function App() {
           <Route path="/news/:id" component={SingleNews} />
           <Route component={PageNotFound} />
         </Switch>
-
       </Container>
       <Footer />
     </div>
