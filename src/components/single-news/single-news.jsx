@@ -18,10 +18,11 @@ function SingleNews() {
   const singleNews = useSingleNews();
   if (!singleNews) return null;
 
-  console.log(singleNews);
-  const {item, isLoaded} = singleNews;
+  // console.log(singleNews);
+
+  const { item, isLoaded } = singleNews;
   const storyDate = getLocalDateFormat(item.time);
- 
+
   
   return(
     !isLoaded ? <Loader /> : (
@@ -68,7 +69,7 @@ function SingleNews() {
             </CardActions>
           </Card>
         </Grid>
-        {/* <Comments />     */}
+        {/* <Comments /> */}
       </Grid>
     )
   );

@@ -1,6 +1,6 @@
 const URL = 'https://hacker-news.firebaseio.com/v0';
 
-export async function getNews(){
+export async function getNewsIds(){
   const result = await fetch(`${URL}/newstories.json`);
   if (!result.ok) return Promise.reject(`Что то пошло не так ${result}`);
   return result.json();

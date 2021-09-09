@@ -1,16 +1,21 @@
 import React from 'react';
 import CommentItem from '../сomment-item/сomment-item';
+import useCommentsContent from './useCommentsContent';
 
 // Массив ID'ков
-function CommentList({ commentIds }){
+function CommentList(){
+
+  const commentList = useCommentsContent();
+  if (!commentList) return null;
+  
 
   return (
     <div>
-      { commentIds && commentIds.map((commentId, key) => {
+      { commentList.items && commentList.items.map((commentItem, key) => {
         return (
           <CommentItem
             key={key}
-            commentId={commentId}
+            commentItem={commentItem}
           />);
       })
       }

@@ -47,37 +47,32 @@ const useStyles = makeStyles((theme) => ({
 
 function NewsItem({ newsItemId }){
 
-  const { story, loading } = useNewsItem(newsItemId);
+  const newsItem = useNewsItem(newsItemId);
   const classes = useStyles();
-  const storyDate = getLocalDateFormat(story.time);
+  const storyDate = getLocalDateFormat(newsItem.time);
 
   return(
     <Grid item xs={12} className={classes.newsItem}>
       <Card className={classes.root}>
         <CardHeader
-          title={<Link to={`/news/${story.id}`} className={classes.title}> { story.title } </Link>}
+          title={<Link to={`/news/${newsItem.id}`} className={classes.title}> { newsItem.title } </Link>}
           subheader={storyDate}
         />
-        {/*         <CardMedia
-          className={classes.media}
-          title=""
-          src={''}
-        /> */}
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            <Button href={`/news/${story.id}`} variant="contained"> Read more </Button>
+            <Button href={`/news/${newsItem.id}`} variant="contained"> Read more </Button>
           </Typography>
         </CardContent>
 
         <CardActions>
           <IconButton>
             <StarIcon />
-            <Typography color="textSecondary" component="p"> &nbsp; {story.score} </Typography>     
+            <Typography color="textSecondary" component="p"> &nbsp; {newsItem.score} </Typography>     
           </IconButton>
 
           <IconButton>
             <PersonIcon />
-            <Typography color="textSecondary" component="p"> &nbsp; {story.by} </Typography>     
+            <Typography color="textSecondary" component="p"> &nbsp; {newsItem.by} </Typography>     
           </IconButton>
 
         </CardActions>

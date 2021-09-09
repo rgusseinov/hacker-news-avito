@@ -1,18 +1,24 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { loadCommentsContent } from "../../features/comment-content/actions";
+import { loadCommentIds } from '../../features/comment/actions';
 
 export default () => {
 
-  const dispatch = useDispatch();  
   const { id } = useParams();
-  const {newsItems} = useSelector(({ newsItems }) => newsItems);
+  const dispatch = useDispatch();
+  const { commentIds } = useSelector(({ commentIds }) => commentIds);
+  const commentItem = commentIds[id];
 
-  const findNewsItem = newsItems.find(item => item.id == id);
-  // console.log(`findIndex`, findNewsItem);
+  useEffect(() => {
+    if (commentItem) return;
     
-  /*   newsItems.forEach(element => {
-    console.log(element);
-  }); */
+    dispatch(loadCommentIds(id));
+    dispatch(loadCommentsContent(id));
+    
+  }, [commentItem]); // singleNews in state change
 
-  return { findNewsItem };
+
+  return commentItem;
 };

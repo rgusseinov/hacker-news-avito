@@ -13,7 +13,6 @@ export const requestSingleNews = (id) => async (dispatch) => {
 
   const singleNews = await getItemById(id);
   const action = setNewsItem(singleNews);
-
   dispatch(action);
 
 };
