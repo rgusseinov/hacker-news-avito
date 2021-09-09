@@ -1,4 +1,54 @@
 const initialState = {
+  commentIds: {},
+  isLoaded: false
+};
+
+export const commentIds = (state = initialState, action) => {
+
+  switch (action.type){
+    
+  case 'SET_COMMENT_IDS':
+    // console.log(`payload`, action.payload);
+    return {
+      commentIds: {
+        ...state.commentIds,
+        [action.payload.id]: {
+          item: action.payload.kids,
+        },
+      },
+      isLoaded: true
+    };
+    
+  case 'SET_LOADED_COMMENT': 
+    return {
+      ...state,
+      isLoaded: action.payload
+    };
+
+  default: return state;
+  }
+
+
+  /*   if (action.type === LOAD_COMMENT_SUCCESS){
+    return {
+      commentIds: {
+        ...state.commentIds,
+        [action.payload.id]: {
+          items: action.payload.kids,
+        },
+      },
+    };
+  }  
+  return state; */
+
+
+};
+
+
+/*
+
+
+const initialState = {
   newsItems: {},
   isLoaded: false
 };
@@ -56,4 +106,5 @@ const pizzas = (state = initialState, action) => {
 }
 
 export default pizzas
- */
+
+*/

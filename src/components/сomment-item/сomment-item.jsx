@@ -1,16 +1,30 @@
 import { Avatar, Grid, Paper } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
-import { getItemById } from '../../api/api';
-import { getLocalDateFormat, textParser } from '../../utils/utils';
-import CommentList from '../сomment-list/сomment-list';
-import useCommentItem from './useCommentItem';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { requestCommentsContent } from '../../features/comment-content/actions';
+// import { getLocalDateFormat, textParser } from '../../utils/utils';
+
 
 function CommentItem({ commentId }){
 
-  const { comment, kidsShowed, handleShowSubComments } = useCommentItem(commentId);
+  // const { comment} = useCommentItem(commentId);
+  // const parseText = '';
+  // const commentPostDate = '';  
+  // const commentItem = {};
+  // console.log(`commentId`, commentId);
 
-  const parseText = textParser(comment.text);
-  const commentPostDate = getLocalDateFormat(comment.time);
+  const dispatch = useDispatch();
+  const {commentsContent } = useSelector(({ commentsContent }) => commentsContent);
+  const comments = commentsContent[commentId];
+  // const { item } = comments?.item;
+
+  // console.log(`commentsContent`, comments);
+  
+  useEffect(() => {
+    if (comments) return;
+    dispatch(requestCommentsContent(commentId));
+  }, [commentId]);
+
 
   return (
     <div>
@@ -20,20 +34,20 @@ function CommentItem({ commentId }){
             <Avatar alt="User Avatar" src={""} />
           </Grid>
           <Grid item>
-            <h4 style={{ margin: 0, textAlign: "left" }}> {comment.by} </h4>
+            <h4 style={{ margin: 0, textAlign: "left" }}> {comments?.item.by} </h4>
             <p style={{ textAlign: "left" }}>
-              { parseText}
+              { comments?.item.text }
             </p>
-            <p style={{ textAlign: "left", color: "gray" }}> { commentPostDate } </p>
+            <p style={{ textAlign: "left", color: "gray" }}>   </p>
+
             {
-              comment.kids && !kidsShowed ? (
+              comments?.item.kids ? (
                 <Grid item>
-                  <a href="#" onClick={handleShowSubComments}>Show more </a> {comment.kids.length}
+                  <a href="#">Show more </a> {comments?.item.kids.length}
                 </Grid>
-              ) : (
-                <CommentList commentIds={comment.kids} />
-              )
+              ) : null
             }
+            
           </Grid>
         </Grid>
       </Paper>

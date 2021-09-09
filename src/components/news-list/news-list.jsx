@@ -6,15 +6,12 @@ import NewsItem from '../news-item/news-item';
 import useNewsList from './useNewsList';
 
 function NewsList(){
-
-  const { news } = useNewsList();
-
+  const { newsIds, loading } = useNewsList();
   return(
     <Grid container spacing={3}>
       {
-        // eslint-disable-next-line no-constant-condition
-        false ? <Loader /> : (
-          news && news.splice(0, ITEM_LIMIT).map(newsItemId => {
+        loading ? <Loader /> : (
+          newsIds && newsIds.splice(0, ITEM_LIMIT).map(newsItemId => {
             return (
               <NewsItem
                 newsItemId={newsItemId}

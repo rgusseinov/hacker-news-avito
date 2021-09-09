@@ -1,18 +1,17 @@
 
-import { getNews } from '../../api/api';
-// import { LOAD_NEWS_ITEM, LOAD_NEWS_ITEM_SUCCESS } from '../newsItem/actionTypes';
-import { LOAD_NEWS, LOAD_NEWS_SUCCESS } from './actionTypes';
+import { getNewsIds } from '../../api/api';
+import { LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from './actionTypes';
 
-export const loadNews = () => async (dispatch) => {
+export const loadNewsIds = () => async (dispatch) => {
   dispatch({
-    type: LOAD_NEWS
+    type: LOAD_NEWS_START
   });
 
-  const news = await getNews();
+  const newsIds = await getNewsIds();
 
   dispatch({
     type: LOAD_NEWS_SUCCESS,
-    payload: news
+    payload: newsIds
   });
 
 };

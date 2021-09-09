@@ -3,22 +3,15 @@ import { getItemById } from "../../api/api";
 
 export default (newsItemId) => {
 
-  const [story, setStory] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [newsItem, setNewsItem] = useState({});
 
   useEffect(() => {
-    const requestGetStory = async() => {
-      setLoading(true);
+    const requestGetNewsItem = async() => {
       const data = await getItemById(newsItemId);
-      if (data) {
-        setStory(data);
-      }
-      setLoading(false);
+      if (data) setNewsItem(data);
     };
-    requestGetStory();
+    requestGetNewsItem();
   }, [newsItemId]);
-
  
-  return {story, loading};
-
+  return newsItem;
 };
