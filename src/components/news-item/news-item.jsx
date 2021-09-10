@@ -5,6 +5,7 @@ import { getLocalDateFormat } from '../../utils/utils';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
 import useNewsItem from './useNewsItem';
+import classes from './news-item.module.css';
 
 function NewsItem({ newsItemId }){
 
@@ -15,7 +16,7 @@ function NewsItem({ newsItemId }){
     <Grid item xs={12}>
       <Card>
         <CardHeader
-          title={<Link to={`/news/${newsItem.id}`}> { newsItem.title } </Link>}
+          title={<Link to={`/news/${newsItem.id}`} className={classes.titleLink}> { newsItem.title } </Link>}
           subheader={storyDate}
         />
         <CardContent>
