@@ -34,7 +34,7 @@
 * Фреймворк React Material-UI 
 * После запуска приложения все переходы по ссылкам не перезагружают страницу
 
-## Источник с тестовам заданием: [Здесь](https://github.com/avito-tech/sx-frontend-trainee-assignment)
+## Источник с тестовым заданием: [Здесь](https://github.com/avito-tech/sx-frontend-trainee-assignment)
 
 
 ## Демо
