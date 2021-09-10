@@ -1,3 +1,5 @@
+import { SET_COMMENTS_CONTENT, SET_LOADED_COMMENT_CONTENT } from "./actionTypes";
+
 const initialState = {
   commentsContent: {}
 };
@@ -6,8 +8,7 @@ export const commentsContent = (state = initialState, action) => {
 
   switch (action.type){
     
-  case 'SET_COMMENTS_CONTENT':
-    // console.log(`payload`, action.payload);
+  case SET_COMMENTS_CONTENT:
     return {
       commentsContent: {
         ...state.commentsContent,
@@ -18,7 +19,7 @@ export const commentsContent = (state = initialState, action) => {
       isLoaded: true
     };
     
-  case 'SET_LOADED_COMMENT_CONTENT': 
+  case SET_LOADED_COMMENT_CONTENT: 
     return {
       ...state,
       isLoaded: action.payload
@@ -27,25 +28,3 @@ export const commentsContent = (state = initialState, action) => {
   default: return state;
   }
 };
-
-
-//import { LOAD_COMMENT_CONTENT_SUCCESS } from "../comment-content/actionTypes";
-
-/*
-const initialState = {
-  commentsContent:{}
-};
-
-export const commentsContent = (state = initialState, action) => {
-  if (action.type === LOAD_COMMENT_CONTENT_SUCCESS){
-    return {
-      commentsContent: {
-        ...state.commentsContent,
-        [action.payload.itemData.id]: {
-          items: action.payload.commentsContent,
-        },
-      },
-    };
-  }
-  return state;
-}; */

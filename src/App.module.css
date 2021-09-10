@@ -1,16 +1,4 @@
-menuButton: {
-  '& a': {
-    color: '#fff',
-    textDecoration: 'none'
-  },
-},
-
-mainContainer: {
-  display: 'flex',
-  minHeight: '96vh',
-  flexDirection: 'column'
-},
-
-content: {
-  flex: '1 1 auto'
-},
+.wrapper {
+  min-height: 90vh;
+  flex-direction: column;
+}
