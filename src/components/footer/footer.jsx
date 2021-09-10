@@ -1,15 +1,8 @@
-import { Container, makeStyles, Typography } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import React from 'react';
-
-const useStyles = makeStyles(() => ({
-  footer: {
-    textAlign: 'center'
-  }
-}));
+import classes from './footer.module.css';
 
 function Footer(){
-  const classes = useStyles();
-
   return(
     <footer className={classes.footer}>
       <Container maxWidth="md">

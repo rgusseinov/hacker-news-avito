@@ -12,12 +12,3 @@ export async function getItemById(id){
   if (!result.ok) return Promise.reject(`Что то пошло не так ${result}`);
   return result.json();
 }
-
-export async function getSubCommentsById(commentIds){
-  const commentList = [];
-  for (let commentId of commentIds){
-    const data = await getItemById(commentId);
-    commentList.push(data);
-  }
-  return commentList;
-}

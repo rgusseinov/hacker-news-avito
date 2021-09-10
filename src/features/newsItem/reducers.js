@@ -1,3 +1,5 @@
+import { SET_LOADED, SET_NEWS_ITEMS } from "./actionTypes";
+
 const initialState = {
   newsItems: {},
   isLoaded: false
@@ -6,7 +8,7 @@ const initialState = {
 export const newsItems = (state = initialState, action) => {
 
   switch (action.type){
-  case 'SET_NEWS_ITEMS':
+  case SET_NEWS_ITEMS:
     return {
       newsItems: {
         ...state.newsItems,
@@ -17,7 +19,7 @@ export const newsItems = (state = initialState, action) => {
       isLoaded: true
     };
     
-  case 'SET_LOADED': 
+  case SET_LOADED: 
     return {
       ...state,
       isLoaded: action.payload
@@ -27,33 +29,3 @@ export const newsItems = (state = initialState, action) => {
   }
 
 };
-
-
-/* 
-const initialState = {
-  items: [],
-  isLoaded: false
-}
-
-const pizzas = (state = initialState, action) => {
-
-  switch (action.type){
-      case 'SET_PIZZAS' : 
-      return {
-          ...state,
-          items: action.payload,
-          isLoaded: true
-      }
-      
-      case 'SET_LOADED' : 
-      return {
-          ...state,
-          isLoaded: action.payload
-      }
-      default: return state
-
-  }
-}
-
-export default pizzas
- */

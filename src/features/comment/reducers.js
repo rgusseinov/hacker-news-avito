@@ -1,3 +1,5 @@
+import { SET_COMMENT_IDS, SET_LOADED_COMMENT } from "./actionTypes";
+
 const initialState = {
   commentIds: {},
   isLoaded: false
@@ -7,8 +9,7 @@ export const commentIds = (state = initialState, action) => {
 
   switch (action.type){
     
-  case 'SET_COMMENT_IDS':
-    // console.log(`payload`, action.payload);
+  case SET_COMMENT_IDS:
     return {
       commentIds: {
         ...state.commentIds,
@@ -19,55 +20,7 @@ export const commentIds = (state = initialState, action) => {
       isLoaded: true
     };
     
-  case 'SET_LOADED_COMMENT': 
-    return {
-      ...state,
-      isLoaded: action.payload
-    };
-
-  default: return state;
-  }
-
-
-  /*   if (action.type === LOAD_COMMENT_SUCCESS){
-    return {
-      commentIds: {
-        ...state.commentIds,
-        [action.payload.id]: {
-          items: action.payload.kids,
-        },
-      },
-    };
-  }  
-  return state; */
-
-
-};
-
-
-/*
-
-
-const initialState = {
-  newsItems: {},
-  isLoaded: false
-};
-
-export const newsItems = (state = initialState, action) => {
-
-  switch (action.type){
-  case 'SET_NEWS_ITEMS':
-    return {
-      newsItems: {
-        ...state.newsItems,
-        [action.payload.id]: {
-          item: action.payload,
-        },
-      },
-      isLoaded: true
-    };
-    
-  case 'SET_LOADED': 
+  case SET_LOADED_COMMENT: 
     return {
       ...state,
       isLoaded: action.payload
@@ -77,34 +30,3 @@ export const newsItems = (state = initialState, action) => {
   }
 
 };
-
-
-/* 
-const initialState = {
-  items: [],
-  isLoaded: false
-}
-
-const pizzas = (state = initialState, action) => {
-
-  switch (action.type){
-      case 'SET_PIZZAS' : 
-      return {
-          ...state,
-          items: action.payload,
-          isLoaded: true
-      }
-      
-      case 'SET_LOADED' : 
-      return {
-          ...state,
-          isLoaded: action.payload
-      }
-      default: return state
-
-  }
-}
-
-export default pizzas
-
-*/
