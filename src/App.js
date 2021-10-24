@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Container } from '@material-ui/core';
-import Main from './components/pages/main-page';
+import ItemList from './components/item-list/item-list';
 import Header from './components/header/header';
-import Footer from './components/footer/footer';
 import classes from './App.module.css';
+import SingleItem from './components/single-item/single-item';
 
 function App() {
 
@@ -14,11 +14,11 @@ function App() {
         <Header />
         <Switch>
           <Route path="/" exact>
-            <Main />
+            <ItemList />
           </Route>
+          <Route path="/item/:id" component={SingleItem} />
         </Switch>
       </div>
-      <Footer />
     </Container>
   );
 }

@@ -1,17 +1,18 @@
 import React from 'react';
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
-import StarIcon from '@material-ui/icons/Star';
-import PersonIcon from '@material-ui/icons/Person';
+import {  Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
-import Comments from '../сomments/сomments';
-import classes from './single-news.module.css';
+import StarIcon from '@material-ui/icons/Star';
+import PersonIcon from '@material-ui/icons/Person';
+// import classes from './news-item.module.css';
 
-function SingleNews() {
+function SingleItem(){
+
   
+
   return(
     <Grid container>
-      <Grid item xs={12} className={classes.singleNewsRow}>
+      <Grid item xs={12} className={""}>
         <Grid container>
           <Grid item>
             <ArrowBackIcon />
@@ -25,35 +26,33 @@ function SingleNews() {
       </Grid>
 
       <Grid item xs={12}>
-        <Card className={classes.root}>
+        <Card className={""}>
           <CardHeader
-            title={"Test title"}
-            subheader={""}
+            title={"Post title here"}
+            subheader={"sub heading here"}
           />
           <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
-              <Button href={"#"} variant="outlined" color="primary"> Read more </Button>
+              <Button href={""} variant="outlined" color="primary"> Read more </Button>
             </Typography>
           </CardContent>
 
           <CardActions>
             <IconButton>
               <StarIcon />
-              <Typography color="textSecondary" component="p"> 10 </Typography>     
+              <Typography color="textSecondary" component="p"> &nbsp;  </Typography>     
             </IconButton>
 
             <IconButton>
               <PersonIcon />
-              <Typography color="textSecondary" component="p"> &nbsp; Ruslan0688 </Typography>     
+              <Typography color="textSecondary" component="p"> &nbsp;  </Typography>     
             </IconButton>
 
           </CardActions>
         </Card>
       </Grid>
-
-      <Comments />
     </Grid>
   );
 }
 
-export default SingleNews;
+export default SingleItem;
