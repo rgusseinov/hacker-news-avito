@@ -1,15 +1,22 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import {  Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
+import { useSelector } from 'react-redux';
 // import classes from './news-item.module.css';
 
 function SingleItem(){
-
+  const { id } = useParams();
   
+  const items = useSelector((state) => {
+    return state.itemReducer;
+  });
 
+  console.log(`items`, items);
+  
   return(
     <Grid container>
       <Grid item xs={12} className={""}>
@@ -19,7 +26,7 @@ function SingleItem(){
           </Grid>
           <Grid item xs={2}>
             <Typography>
-              <Link to={"/"}> Back to list </Link>
+              <Link to={"/"}> Back to list {id} </Link>
             </Typography>
           </Grid>
         </Grid>       
