@@ -1,4 +1,4 @@
-import { ITEM_ADD } from "./actionTypes";
+import { ITEM_ADD, ITEM_LOADER_ON, ITEM_LOADER_OFF } from "./actionTypes";
 
 
 /*
@@ -13,25 +13,37 @@ import { ITEM_ADD } from "./actionTypes";
   } 
 */
 
+
 const initialState = {
-  items: {}
+  loading: false
 };
 
 const itemReducer = (state = initialState, action) => {
 
-  if (action.type == ITEM_ADD) {    
-    const { items } = state;
-    const itemNew = items.push(action.payload);
-
+  if (action.type === ITEM_ADD) {
     return {
       ...state,
-      items: itemNew
+      [action.data.id]:{
+        ...action.data
+      }
+    };
+  }
+
+  if (action.type === ITEM_LOADER_ON){
+    return {
+      ...state,
+      loading: true
+    };
+  }
+
+  if (action.type === ITEM_LOADER_OFF){
+    return {
+      ...state,
+      loading: false
     };
   }
 
   return state;
-  
-
 };
 
 export default itemReducer;

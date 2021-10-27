@@ -13,8 +13,7 @@ function ItemList(){
     };
     
     getTopStories().then(data => {
-      const limitItemIds = data.slice(0, 3);
-      // console.log(limitItemIds);
+      const limitItemIds = data.slice(0, 10);
       setItemIds(limitItemIds);
     });
 
