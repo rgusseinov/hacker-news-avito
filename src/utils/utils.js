@@ -1,5 +1,5 @@
 export const TIME_INTERVAL = 60000;
-export const ITEM_LIMIT = 100;
+export const ITEMS_LIMIT = 10;
 
 export function getLocalDateFormat(time){
   if (time){

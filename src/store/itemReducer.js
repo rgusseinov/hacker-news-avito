@@ -1,19 +1,5 @@
 import { ITEM_ADD, ITEM_LOADER_ON, ITEM_LOADER_OFF } from "./actionTypes";
 
-
-/*
-  [id]:{
-    title: 'News title',
-    score: 15,
-    kids: [1, 5, 6]
-  },
-  [id]:{
-    title: 'News title 2',
-    score: 4,
-  } 
-*/
-
-
 const initialState = {
   loading: false
 };

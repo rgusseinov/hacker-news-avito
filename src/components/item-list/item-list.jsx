@@ -1,15 +1,18 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Item from '../item/item';
 
-function ItemList({ itemIds }){
+function ItemList(){
+  const {items} = useSelector((state) => state.itemsReducer);
+
   return(
     <Grid container spacing={3}>
       {
-        itemIds && itemIds.map(id => 
+        items && items.map(item => 
           <Item 
-            key={id} 
-            id={id}
+            key={item.id}
+            item={item}
           />)
       }
     </Grid>
