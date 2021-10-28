@@ -1,6 +1,8 @@
-import { LOAD_COMMENTS } from "./actionTypes";
+import { COMMENTS_LOADER_OFF, COMMENTS_LOADER_ON, LOAD_COMMENTS } from "./actionTypes";
 
-const initialState = {};
+const initialState = {
+  loading: false
+};
 
 const commentsReducer = (state = initialState, action) => {
 
@@ -10,6 +12,20 @@ const commentsReducer = (state = initialState, action) => {
       [action.payload.id]: {
         items:[...action.payload.data]
       }
+    };
+  }
+
+  if (action.type === COMMENTS_LOADER_ON){
+    return {
+      ...state,
+      loading: true
+    };
+  }
+
+  if (action.type === COMMENTS_LOADER_OFF){
+    return {
+      ...state,
+      loading: false
     };
   }
 

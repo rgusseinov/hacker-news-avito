@@ -1,4 +1,4 @@
-import { ITEM_ADD, ITEM_LOADER_OFF, ITEM_LOADER_ON, LOAD_COMMENTS } from "./actionTypes";
+import { COMMENTS_LOADER_OFF, COMMENTS_LOADER_ON, ITEM_ADD, ITEM_LOADER_OFF, ITEM_LOADER_ON, LOAD_COMMENTS } from "./actionTypes";
 
 export function loadItem(id){
 
@@ -40,6 +40,8 @@ export function loadComments(id, kids){
 export function updateComments(id){
   return async dispatch => {
 
+    dispatch({ type: COMMENTS_LOADER_ON });
+    
     const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
     const jsonData = await response.json();
 
@@ -56,6 +58,8 @@ export function updateComments(id){
         data: finalData
       };      
       dispatch({ type: LOAD_COMMENTS, payload });
+    }).finally(() => {
+      dispatch({ type: COMMENTS_LOADER_OFF });
     });
 
   };

@@ -17,9 +17,7 @@ function Item({ id }){
     getStoryItem().then(data => {
       setItem(data);
     });
-  }, [id]);
-  
-  // console.log(`item`, item);
+  }, [id]);  
 
   return(
     <Grid item xs={12}>
@@ -30,7 +28,7 @@ function Item({ id }){
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            <Button href={`/news/${"0"}`} variant="contained"> Read more </Button>
+            <Button href={`/news/${id}`} variant="contained"> Read more </Button>
           </Typography>
         </CardContent>
 
