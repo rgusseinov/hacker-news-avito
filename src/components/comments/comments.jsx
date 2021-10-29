@@ -1,5 +1,5 @@
 import { Button, Grid, Typography } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import classes from './comments.module.css';
 import { useSelector } from 'react-redux';
@@ -17,27 +17,23 @@ function Comments(){
   
   const items = useSelector((state) => state.itemReducer);
   const { loading } = useSelector((state) => state.commentsReducer);
-  const [commentsCount, setCommentsCount] = useState(0);
+ 
 
   useEffect(() => {
     if (!items[id]) return;
-    setCommentsCount(items[id].kids.length);
     dispatch(loadComments(id, items[id].kids));
   }, []);
 
   const handleReloadComments = () => {
-    dispatch(updateComments(id));
-    setCommentsCount(items[id].kids.length);
-    
+    dispatch(updateComments(id));  
   };
   
-  console.log(`loading`, loading);
   return(
     <Grid item xs={12}>
       { loading ? <Loader /> : (
         <Grid container className={classes.boxWrapper}>
           <Grid item xs={10}>
-            <Typography variant="h5"> Comments {commentsCount} </Typography>
+            <Typography variant="h5"> Comments {items[id]?.descendants} </Typography>
           </Grid>
           <Grid item xs={2}>
             <Button

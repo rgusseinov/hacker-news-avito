@@ -4,19 +4,16 @@ import { Link } from 'react-router-dom';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
 import classes from './news-item.module.css';
-// import useItem from './useItem';
 
 function Item({ item }){  
-  // const item = useItem(id);
-  // console.log(`item`, item);
-
   return(
     <Grid item xs={12}>
       <Card>
+
         <CardHeader
           title={<Link to={`/item/${item.id}`} className={classes.titleLink}>  { item.title } </Link>}
-          subheader={"date"}
-        />
+          subheader={"date"}/>
+
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             <Button href={`/news/${item.id}`} variant="contained"> Read more </Button>
@@ -33,8 +30,8 @@ function Item({ item }){
             <PersonIcon />
             <Typography color="textSecondary" component="p"> &nbsp; { item.by } </Typography>     
           </IconButton>
-
         </CardActions>
+
       </Card>
     </Grid>
   );

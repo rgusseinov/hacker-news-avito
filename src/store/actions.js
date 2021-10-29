@@ -24,13 +24,15 @@ export function loadItem(id){
   return async dispatch => {
 
     dispatch({ type: ITEM_LOADER_ON });
-    const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`);
+
+    const response = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
     const jsonData = await response.json();
 
     dispatch({
       type: ITEM_ADD,
       data: jsonData
     });
+    
     dispatch({ type: ITEM_LOADER_OFF });
 
   };

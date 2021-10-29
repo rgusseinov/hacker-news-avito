@@ -5,12 +5,27 @@ const initialState = {
   loading: false
 };
 
+/*
+  10: {
+    item: {}
+  },
+  20: {
+    items: {}
+  }
+*/
+
 const itemsReducer = (state = initialState, action) => {
 
   if (action.type === LOAD_ITEMS) {
+
+    const itemsObject = {};
+    for (let i = 0; i < action.data.length; i++) {
+      itemsObject[action.data[i].id.toString()] = action.data[i];
+    }
+
     return {
       ...state,
-      items: action.data
+      ...itemsObject
     };
   }
 

@@ -1,27 +1,29 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {  Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
-import { useSelector } from 'react-redux';
 import { loadItem } from '../../store/actions';
 import { useDispatch } from 'react-redux';
 import Loader from '../loader/loader';
 import Comments from '../comments/comments';
+import useSingleItem from './useSingleItem';
 
 function SingleItem(){
   const { id } = useParams();
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.itemReducer);
-  const loading = useSelector((state) => state.itemReducer.loading);
-
+  
+  const {items, loading} = useSingleItem();
   const item = items[id];
+  
   useEffect(() => {
     if (item) return;
     dispatch(loadItem(id));
-  }, []);    
+  }, []);
+
+  console.log(`item`, item);
   
   return(
     loading ? <Loader /> : (
