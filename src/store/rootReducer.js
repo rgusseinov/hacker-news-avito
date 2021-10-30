@@ -1,13 +1,12 @@
 import { combineReducers } from "redux";
-import commentsReducer from "./commentReducer";
-import itemReducer from "./itemReducer";
-import itemsReducer from "./itemsReducer";
+/* import commentsReducer from "./commentReducer"; */
+import newsItemReducer from "./newsItemReducer";
+import newsReducer from "./newsReducer";
 
 
 const rootReducer = combineReducers({
-  itemsReducer,
-  itemReducer,
-  commentsReducer
+  newsReducer,
+  newsItemReducer
 });
 
 export default rootReducer;

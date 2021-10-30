@@ -6,38 +6,29 @@ import ItemList from './components/item-list/item-list';
 import Header from './components/header/header';
 import classes from './App.module.css';
 import SingleItem from './components/single-item/single-item';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getTopStories } from './api/api';
-import { ITEMS_LIMIT, TIME_INTERVAL } from './utils/utils';
-import { loadItems } from './store/actions';
+import { ITEMS_LIMIT } from './utils/utils';
+import { loadNews } from './store/actions';
 import Loader from './components/loader/loader';
+import useNews from './useNews';
 
 function App() {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.itemsReducer);
+  const { news, loading} = useNews();
 
   const requestStories = async() => {
     const result = await getTopStories();
-    const itemIds = result.slice(0, ITEMS_LIMIT) || [];
-    dispatch(loadItems(itemIds));
+    const newsIds = result.slice(0, ITEMS_LIMIT) || [];
+    dispatch(loadNews(newsIds));
   };
 
   useEffect(() => {
-    requestStories();
-
-    const timer = setInterval(() => {
-      requestStories();
-    }, TIME_INTERVAL);
-    
-    return () => {
-      clearInterval(timer);
-    };
-
+    if (news) return;
+    requestStories();    
   }, []);
 
-  const handleRefreshStories = () => {
-    requestStories();
-  };
+  console.log(`loading`, loading);
 
   return (
     <Container maxWidth="md">
@@ -53,13 +44,13 @@ function App() {
               variant="contained"
               color="primary"
               startIcon={<RefreshIcon />}
-              onClick={handleRefreshStories}
+              onClick={() => {}}
             > Refresh </Button>
           </Grid>
         </Grid>
 
         {
-          loading ? <Loader /> : (
+          !loading ? <Loader /> : (
             <Switch>
               <Route path="/" exact>
                 <ItemList />

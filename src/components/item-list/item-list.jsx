@@ -4,12 +4,11 @@ import useItemList from './useItemList';
 import Item from '../item/item';
 
 function ItemList(){
-  const { itemsArray } = useItemList();
-    
+  const { newsArray } = useItemList();
   return (
     <Grid container spacing={3}>
       {
-        itemsArray && itemsArray.map((item, index) => 
+        newsArray && newsArray.map((item, index) => 
           <Item
             key={index}
             item={item}

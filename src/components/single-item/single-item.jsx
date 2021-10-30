@@ -1,29 +1,17 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 import { Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
-import { loadItem } from '../../store/actions';
-import { useDispatch } from 'react-redux';
 import Loader from '../loader/loader';
-import Comments from '../comments/comments';
-import useSingleItem from './useSingleItem';
-
+import useSingleNewsItem from './useSingleNewsItem';
+ 
 function SingleItem(){
-  const { id } = useParams();
-  const dispatch = useDispatch();
+  const { singleNews, loading } = useSingleNewsItem();
+  if (!singleNews) return null;
   
-  const {items, loading} = useSingleItem();
-  const item = items[id];
-  
-  useEffect(() => {
-    if (item) return;
-    dispatch(loadItem(id));
-  }, []);
-
-  console.log(`item`, item);
+  // console.log(`singleNews`, singleNews);
   
   return(
     loading ? <Loader /> : (
@@ -44,31 +32,31 @@ function SingleItem(){
         <Grid item xs={12}>
           <Card className={""}>
             <CardHeader
-              title={item?.title}
-              subheader={item?.type}
+              title={singleNews?.title}
+              subheader={singleNews?.type}
             />
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
-                <Button href={item?.url} variant="outlined" color="primary"> Read more </Button>
+                <Button href={singleNews?.url} variant="outlined" color="primary"> Read more </Button>
               </Typography>
             </CardContent>
 
             <CardActions>
               <IconButton>
                 <StarIcon />
-                <Typography color="textSecondary" component="p"> &nbsp; {item?.by}  </Typography>     
+                <Typography color="textSecondary" component="p"> &nbsp; {singleNews?.by}  </Typography>     
               </IconButton>
 
               <IconButton>
                 <PersonIcon />
-                <Typography color="textSecondary" component="p"> &nbsp; {item?.score}  </Typography>     
+                <Typography color="textSecondary" component="p"> &nbsp; {singleNews?.score}  </Typography>     
               </IconButton>
 
             </CardActions>
           </Card>
         </Grid>
 
-        <Comments />
+        {/* <Comments /> */}
 
       </Grid>
     )

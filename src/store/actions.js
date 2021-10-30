@@ -1,26 +1,41 @@
-import { COMMENTS_LOADER_OFF, COMMENTS_LOADER_ON, ITEMS_LOADER_OFF, ITEMS_LOADER_ON, ITEM_ADD, ITEM_LOADER_OFF, ITEM_LOADER_ON, LOAD_COMMENTS, LOAD_ITEMS } from "./actionTypes";
+import { LOAD_NEWS_ITEM_SUCCESS, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "./actionTypes";
+import {getItemById} from '../api/api';
 
-export function loadItems(storyIds){
+export function loadNews(newsItemsIds){
   return async dispatch => {
 
-    dispatch({ type: ITEMS_LOADER_ON });
     const promises = [];
-    for (let i=0; i < storyIds.length; i++){
-      promises.push( fetch(`https://hacker-news.firebaseio.com/v0/item/${storyIds[i]}.json`) );
+    for (let i=0; i < newsItemsIds.length; i++){
+      promises.push(fetch(`https://hacker-news.firebaseio.com/v0/item/${newsItemsIds[i]}.json`));
     }
 
     Promise.all(promises).then(data => {
       return Promise.all(data.map(result => result.json()));
     }).then(data => {
-      dispatch({ type: LOAD_ITEMS, data });
+      // console.log(`data`, data);
+      dispatch({ type: LOAD_NEWS_SUCCESS, payload: data });
     }).finally(() => {
-      dispatch({ type: ITEMS_LOADER_OFF });
+      dispatch({ type: LOAD_NEWS_START });
     });
 
   };
 }
 
-export function loadItem(id){
+export const setNewsItem = (newsItem) => ({
+  type: LOAD_NEWS_ITEM_SUCCESS,
+  payload: newsItem
+});
+
+export const requestSignleNewsItem = (id) => async (dispatch) => {
+  const singleNewsItem = await getItemById(id);
+  const action = setNewsItem(singleNewsItem);
+
+  dispatch(action);
+};
+
+
+
+/* export function loadItem(id){
   return async dispatch => {
 
     dispatch({ type: ITEM_LOADER_ON });
@@ -84,5 +99,5 @@ export function updateComments(id){
     });
 
   };
-}
+} */
 

@@ -4,7 +4,7 @@ export async function getTopStories(){
   return await request.json();
 }
 
-export async function getStoryItemById(id){
+export async function getItemById(id){
   const request = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
   if (!request.ok) return Promise.reject(`Что то пошло не так ${request}`);
   return await request.json();
