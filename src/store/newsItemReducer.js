@@ -1,8 +1,7 @@
-import { LOAD_NEWS_ITEM_START, LOAD_NEWS_ITEM_SUCCESS } from "./actionTypes";
+import { LOAD_NEWS_ITEM_START, LOAD_NEWS_ITEM_SUCCESS, SETUP_NEWS_ITEMS_ID } from "./actionTypes";
 
 const initialState = {
   newsItems: {},
-  loading: false
 };
 
 const newsItemReducer = (state = initialState, action) => {
@@ -10,18 +9,39 @@ const newsItemReducer = (state = initialState, action) => {
   if (action.type === LOAD_NEWS_ITEM_START){
     return {
       ...state,
-      loading: true
     };
   }
 
   if (action.type === LOAD_NEWS_ITEM_SUCCESS) {
     return {
-      ...state.newsItems,
-      [action.payload.id]:{
-        item: action.payload,
-        loading: false
-      }
+      newsItems:{
+        ...state.newsItems,
+        [action.payload.id]: {
+          item: action.payload, isLoaded: true
+        },
+      },
     };
+  }
+
+
+  if (action.type === SETUP_NEWS_ITEMS_ID){
+    
+    const itemsObject = {};
+    for (let i = 0; i < action.payload.length; i++) {
+      const id = action.payload[i].id.toString();
+      itemsObject[id] = { item: null, isLoaded: false };
+    }
+
+    // console.log(`itemsObject`, itemsObject);
+    /* {
+        [1]: {item: null, isLoaded: false},
+        [2]: {item: null, isLoaded: false}
+       }
+    */
+    return {
+      ...state,
+      newsItems: itemsObject
+    };    
   }
 
 

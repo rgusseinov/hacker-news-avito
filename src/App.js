@@ -21,6 +21,7 @@ function App() {
     const result = await getTopStories();
     const newsIds = result.slice(0, ITEMS_LIMIT) || [];
     dispatch(loadNews(newsIds));
+    
   };
 
   useEffect(() => {
@@ -28,7 +29,7 @@ function App() {
     requestStories();    
   }, []);
 
-  console.log(`loading`, loading);
+  // console.log(loading);
 
   return (
     <Container maxWidth="md">
@@ -50,7 +51,7 @@ function App() {
         </Grid>
 
         {
-          !loading ? <Loader /> : (
+          loading ? <Loader /> : (
             <Switch>
               <Route path="/" exact>
                 <ItemList />

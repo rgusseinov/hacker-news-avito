@@ -4,17 +4,20 @@ import { useParams } from "react-router";
 import { requestSignleNewsItem } from "../../store/actions";
 
 export default () => {
+
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { newsItems, loading } = useSelector((state) => state.newsItemReducer);
+  const { newsItems } = useSelector((state) => state.newsItemReducer);
   const singleNews = newsItems[id];
 
+  // console.log(`singleNews`, singleNews);
+  
   useEffect(() => {
-    if (singleNews) return;
-    dispatch(requestSignleNewsItem(id));    
+    if (singleNews?.item) return;
+    dispatch(requestSignleNewsItem(id));
+    
+  }, [singleNews]);
+  
 
-  }, singleNews);
-
-
-  return { singleNews, loading };
+  return { singleNews };
 };

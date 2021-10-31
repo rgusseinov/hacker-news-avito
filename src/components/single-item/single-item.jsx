@@ -6,15 +6,18 @@ import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
 import Loader from '../loader/loader';
 import useSingleNewsItem from './useSingleNewsItem';
+// import Comments from '../comments/comments';
  
 function SingleItem(){
-  const { singleNews, loading } = useSingleNewsItem();
+  
+  const { singleNews } = useSingleNewsItem();
   if (!singleNews) return null;
-  
-  // console.log(`singleNews`, singleNews);
-  
-  return(
-    loading ? <Loader /> : (
+  const { item, isLoaded } = singleNews;
+
+  // console.log(`isLoaded`, isLoaded);
+
+  return (
+    !isLoaded ? <Loader /> : (
       <Grid container>
         <Grid item xs={12} className={""}>
           <Grid container>
@@ -32,24 +35,24 @@ function SingleItem(){
         <Grid item xs={12}>
           <Card className={""}>
             <CardHeader
-              title={singleNews?.title}
-              subheader={singleNews?.type}
+              title={item?.title}
+              subheader={item?.type}
             />
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
-                <Button href={singleNews?.url} variant="outlined" color="primary"> Read more </Button>
+                <Button href={item?.url} variant="outlined" color="primary"> Read more </Button>
               </Typography>
             </CardContent>
 
             <CardActions>
               <IconButton>
                 <StarIcon />
-                <Typography color="textSecondary" component="p"> &nbsp; {singleNews?.by}  </Typography>     
+                <Typography color="textSecondary" component="p"> &nbsp; {item?.by}  </Typography>     
               </IconButton>
 
               <IconButton>
                 <PersonIcon />
-                <Typography color="textSecondary" component="p"> &nbsp; {singleNews?.score}  </Typography>     
+                <Typography color="textSecondary" component="p"> &nbsp; {item?.score}  </Typography>     
               </IconButton>
 
             </CardActions>
