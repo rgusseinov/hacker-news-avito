@@ -1,17 +1,18 @@
-/* import { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-// import { requestNewsItemComments } from "../../store/actions";
 
 export default () => {
   const { id } = useParams();
   const { comments } = useSelector((state) => state.newsItemCommentReducer);
-  if (!comments[id]) return null;
-
-  const comment = comments[id];
+  if (!comments[id]?.item) return null;
+  const { item } = comments[id].item;
+  
+  console.log(`item`, item);
 
   useEffect(() => {
-  }, [comment]);
-
-  return { comment }
-}; */
+    if (!comments[id]) return;
+  }, [item]);  
+  
+  return item;
+};

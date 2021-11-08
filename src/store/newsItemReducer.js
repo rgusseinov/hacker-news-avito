@@ -24,20 +24,12 @@ const newsItemReducer = (state = initialState, action) => {
   }
 
 
-  if (action.type === SETUP_NEWS_ITEMS_ID){
-    
-    const itemsObject = {};
+  if (action.type === SETUP_NEWS_ITEMS_ID){    
+    const itemsObject = {};    
     for (let i = 0; i < action.payload.length; i++) {
       const id = action.payload[i].id.toString();
       itemsObject[id] = { item: null, isLoaded: false };
     }
-
-    // console.log(`itemsObject`, itemsObject);
-    /* {
-        [1]: {item: null, isLoaded: false},
-        [2]: {item: null, isLoaded: false}
-       }
-    */
     return {
       ...state,
       newsItems: itemsObject

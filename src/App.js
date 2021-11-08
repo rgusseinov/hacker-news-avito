@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Button, Container, Grid, Typography } from '@material-ui/core';
-import RefreshIcon from '@material-ui/icons/Refresh';
+import { Container, Grid, Typography } from '@material-ui/core';
 import ItemList from './components/item-list/item-list';
 import Header from './components/header/header';
 import classes from './App.module.css';
@@ -20,16 +19,15 @@ function App() {
   const requestStories = async() => {
     const result = await getTopStories();
     const newsIds = result.slice(0, ITEMS_LIMIT) || [];
-    dispatch(loadNews(newsIds));
-    
+    dispatch(loadNews(newsIds));    
   };
 
   useEffect(() => {
     if (news) return;
-    requestStories();    
+
+    requestStories();
   }, []);
 
-  // console.log(loading);
 
   return (
     <Container maxWidth="md">
@@ -39,14 +37,6 @@ function App() {
         <Grid container spacing={3} className={classes.header}>
           <Grid item xs={10}>
             <Typography variant="h4"> Lastest News </Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<RefreshIcon />}
-              onClick={() => {}}
-            > Refresh </Button>
           </Grid>
         </Grid>
 

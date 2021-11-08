@@ -10,14 +10,12 @@ export default () => {
   const { newsItems } = useSelector((state) => state.newsItemReducer);
   const singleNews = newsItems[id];
 
-  // console.log(`singleNews`, singleNews);
   
   useEffect(() => {
     if (singleNews?.item) return;
     dispatch(requestSignleNewsItem(id));
     
-  }, [singleNews]);
-  
+  }, [singleNews]);  
 
   return { singleNews };
 };

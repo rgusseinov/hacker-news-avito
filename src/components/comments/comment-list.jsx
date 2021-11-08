@@ -1,59 +1,89 @@
 import React from 'react';
-// import CommentItem from './comment-item';
-import { useSelector } from "react-redux";
-import { useParams } from "react-router";
-
-/* import TreeView from "@material-ui/lab/TreeView";
+import TreeView from "@material-ui/lab/TreeView";
 import TreeItem from "@material-ui/lab/TreeItem";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
- */
+import classes from './comments.module.css';
+import { useParams } from 'react-router';
+import useCommentList from './useCommentList';
 
-
-/* const buildTree = (comments, postId) => {
+const buildTree = (comments, postId) => {
   let commentsById = {};
 
   comments.forEach((comment) => {
     commentsById[comment.id] = comment;
   });
 
+  
   const rootComments = comments.filter((comment) => {
     return comment.parent?.toString() === postId;
   });
 
-
-  // console.log(`rootComments`, rootComments);
-  // debugger;
   return rootComments.map((item) => buildCommentTree(item, commentsById));
-}; */
+};
 
-
-/* const buildCommentTree = (comment, commentsById) => {
-  const res = {};
-  res.children = comment?.kids?.map((kidId) =>
+const buildCommentTree = (comment, commentsById) => {
+  const res = {
+    id: comment.id.toString(),
+    text: comment.text,
+    by: comment.by,
+  };
+  
+  res.children = comment.kids?.map((kidId) =>
     buildCommentTree(commentsById[kidId], commentsById)
   );
   return res;
-}; */
+};
+
+
+const renderComments = (nodes) => {
+  if (!nodes) return null;
+
+  return (
+    <div>
+      {nodes.map((node, index) => (
+        <TreeItem
+          key={index}
+          nodeId={String(node.id)}
+          label={
+            <div className={classes.commentWrap}>
+              <p className={classes.commentBy}>{node.by}</p>
+              <p
+                // fixme: it's not safe but come on, it's a test task for junior dev
+                dangerouslySetInnerHTML={{ __html: node.text }}
+                className={classes.comment}
+              />
+            </div>
+          }
+        >
+          {renderComments(node.children)}
+        </TreeItem>
+      ))}
+    </div>
+  );
+
+};
+
+
 
 function CommentList(){
 
   const { id } = useParams();
-  const { comments } = useSelector((state) => state.newsItemCommentReducer);
-  if (!comments[id]) return null;
-  // let { item } = comments[id].item;
+  const item = useCommentList();
+  console.log(`item`, item);
+  const tree = buildTree([], id);
 
   return (
     <div>
-      {/* <TreeView
+      <TreeView
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
         defaultExpanded={["root"]}
-        className={""}
+        className={classes.root}
         multiSelect
       >
         {renderComments(tree)}
-      </TreeView> */}
+      </TreeView>
     </div>
   );  
 }

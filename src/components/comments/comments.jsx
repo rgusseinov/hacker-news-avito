@@ -6,24 +6,31 @@ import CommentList from './comment-list';
 import useComments from './useComments';
 
 function Comments(){
-  useComments();
+
+  const {commentsCount, handleRefreshComments} = useComments();
+
   return (
     <Grid item xs={12}>
       <Grid container className={classes.boxWrapper}>
-        <Grid item xs={10}>
-          <Typography variant="h5"> Comments N </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<RefreshIcon />}
-            onClick={() => {}}
-          > Refresh </Button>
-        </Grid>        
-        <Grid item xs={12}>
-          <CommentList />
-        </Grid>          
+        { 
+          commentsCount ? (
+            <>
+              <Grid item xs={10}>
+                <Typography variant="h5"> Comments { commentsCount } </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<RefreshIcon />}
+                  onClick={handleRefreshComments}
+                > Refresh </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <CommentList />
+              </Grid>
+            </>) : null          
+        }
       </Grid>
     </Grid>
   );
