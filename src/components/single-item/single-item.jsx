@@ -1,19 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, Typography } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
 import Loader from '../loader/loader';
-import useSingleNewsItem from './useSingleNewsItem';
-// import Comments from '../comments/comments';
+import { useSelector } from 'react-redux';
+import { useParams } from "react-router";
+// import useSingleNewsItem from './useSingleNewsItem';
+import Comments from '../comments/comments';
+import { requestSignleNewsItem } from "../../store/actions";
+import { useDispatch } from 'react-redux';
+
  
 function SingleItem(){
- 
-  const { item, isLoaded } = useSingleNewsItem();
-  // if (!singleNews) return null;
-  // const { item, isLoaded } = singleNews;
 
+  const { id } = useParams();
+
+  const dispatch = useDispatch();
+  const { newsItems } = useSelector((state) => state.newsItemReducer);
+  const singleItem = newsItems[id];
+  const { item, isLoaded } = singleItem || {};
+
+  useEffect(() => {
+    dispatch(requestSignleNewsItem(id));
+  }, []);
+
+  // console.log(`item`, item);
+  
   return (
     !isLoaded ? <Loader /> : (
       <Grid container>
@@ -57,7 +71,7 @@ function SingleItem(){
           </Card>
         </Grid>
 
-        {/* <Comments /> */}
+        <Comments />
       </Grid>
     )
   );
