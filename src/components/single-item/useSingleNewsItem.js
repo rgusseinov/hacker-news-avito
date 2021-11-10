@@ -1,21 +1,32 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
-import { requestSignleNewsItem } from "../../store/actions";
+// mport { useEffect } from "react";
+import { useSelector } from "react-redux";
+// import { useParams } from "react-router";
+// import { requestSignleNewsItem } from "../../store/actions";
 
 export default () => {
 
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const { newsItems } = useSelector((state) => state.newsItemReducer);
-  const singleNews = newsItems[id];
+  const item = {};
+  const isLoaded = true;
 
-  
+  //const { id } = useParams();
+  // const dispatch = useDispatch();
+  const { newsItems } = useSelector((state) => state.newsItemReducer);
+  // const singleNews = newsItems[id];
+
+
+  /*
   useEffect(() => {
     if (singleNews?.item) return;
     dispatch(requestSignleNewsItem(id));
-    
-  }, [singleNews]);  
+     
+  }, [singleNews]); */
 
-  return { singleNews };
+  console.log(`newsItems`, newsItems);
+
+  return { item, isLoaded };
 };
+
+/*
+  1. Почему singleNews появляется 4 и более раз ?
+
+*/

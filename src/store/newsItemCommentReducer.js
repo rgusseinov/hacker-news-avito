@@ -1,18 +1,10 @@
 import {LOAD_COMMENT_SUCCESS, SETUP_COMMENT_ID } from "./actionTypes";
 
 const initialState = {
-  comments: {},
-  loading: false
+  comments: {}
 };
 
 const newsItemCommentReducer = (state = initialState, action) => {
-
-  /* if (action.type === LOAD_COMMENT_START){
-    return {
-      ...state,
-      loading: true
-    };
-  } */
 
   if (action.type === SETUP_COMMENT_ID){
     
@@ -38,7 +30,6 @@ const newsItemCommentReducer = (state = initialState, action) => {
           isLoaded: true
         },
       },
-      loading: false
     };
   }
 

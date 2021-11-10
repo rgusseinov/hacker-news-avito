@@ -11,12 +11,13 @@ const buildTree = (comments, postId) => {
   let commentsById = {};
 
   comments.forEach((comment) => {
+   
     commentsById[comment.id] = comment;
   });
 
   
   const rootComments = comments.filter((comment) => {
-    return comment.parent?.toString() === postId;
+    return comment?.parent?.toString() === postId;
   });
 
   return rootComments.map((item) => buildCommentTree(item, commentsById));
@@ -70,9 +71,13 @@ function CommentList(){
 
   const { id } = useParams();
   const item = useCommentList();
-  console.log(`item`, item);
-  const tree = buildTree([], id);
 
+  // if (!item) return null;
+
+  console.log(`item`, item);
+
+  const tree = buildTree([], id);
+  
   return (
     <div>
       <TreeView

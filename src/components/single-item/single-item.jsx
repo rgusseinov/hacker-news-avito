@@ -6,13 +6,13 @@ import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
 import Loader from '../loader/loader';
 import useSingleNewsItem from './useSingleNewsItem';
-import Comments from '../comments/comments';
+// import Comments from '../comments/comments';
  
 function SingleItem(){
-  
-  const { singleNews } = useSingleNewsItem();
-  if (!singleNews) return null;
-  const { item, isLoaded } = singleNews;
+ 
+  const { item, isLoaded } = useSingleNewsItem();
+  // if (!singleNews) return null;
+  // const { item, isLoaded } = singleNews;
 
   return (
     !isLoaded ? <Loader /> : (
@@ -57,7 +57,7 @@ function SingleItem(){
           </Card>
         </Grid>
 
-        <Comments />
+        {/* <Comments /> */}
       </Grid>
     )
   );
