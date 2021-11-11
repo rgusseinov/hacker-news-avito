@@ -1,9 +1,8 @@
 import { LOAD_COMMENT_SUCCESS, LOAD_NEWS_ITEM_SUCCESS, LOAD_NEWS_START, LOAD_NEWS_SUCCESS, SETUP_COMMENT_ID, SETUP_NEWS_ITEMS_ID } from "./actionTypes";
 import {getItemById} from '../api/api';
-// import { useDispatch } from "react-redux";
+
 
 /* News */
-
 export function loadNews(newsItemsIds){
   return async dispatch => {
 
@@ -28,27 +27,20 @@ export function loadNews(newsItemsIds){
 }
 
 
+
 /* News Item */
-
-
-
 export const requestSignleNewsItem = (id) => async (dispatch) => {
   const singleNewsItem = await getItemById(id);
-  // console.log(`singleNewsItem`, singleNewsItem);
-
   // dispatch({ type: LOAD_NEWS_ITEM_START });
-
   dispatch({
     type: LOAD_NEWS_ITEM_SUCCESS,
     payload: singleNewsItem
   });
-
 };
 
 
 
 /* Commments */
-
 export const loadComments = (id) => {
   
   return async dispatch => {
@@ -66,8 +58,7 @@ export const loadComments = (id) => {
         const payload =  {
           id,
           item: comments
-        };
-        
+        };        
         dispatch({ type: LOAD_COMMENT_SUCCESS, payload });
       });
   };
@@ -87,18 +78,12 @@ function getCommentsByIds(kids) {
       return Promise.all(allResults.map((result) => result.json()));
     })
     .then((res) => {
-
-      
       let allKidsIds = [];
-      
       res.forEach((item) => {
-        // console.log(`item`, item);
-
         allKidsIds = allKidsIds.concat(item?.kids || []);
       });
       
-      if (allKidsIds.length === 0) return res;    
-    
+      if (allKidsIds.length === 0) return res;
       return getCommentsByIds(allKidsIds).then((children) => {
         return children.concat(res);
       });

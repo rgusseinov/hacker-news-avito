@@ -7,7 +7,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import Loader from '../loader/loader';
 import { useSelector } from 'react-redux';
 import { useParams } from "react-router";
-// import useSingleNewsItem from './useSingleNewsItem';
 import Comments from '../comments/comments';
 import { requestSignleNewsItem } from "../../store/actions";
 import { useDispatch } from 'react-redux';
@@ -16,7 +15,6 @@ import { useDispatch } from 'react-redux';
 function SingleItem(){
 
   const { id } = useParams();
-
   const dispatch = useDispatch();
   const { newsItems } = useSelector((state) => state.newsItemReducer);
   const singleItem = newsItems[id];
@@ -25,9 +23,7 @@ function SingleItem(){
   useEffect(() => {
     dispatch(requestSignleNewsItem(id));
   }, []);
-
-  // console.log(`item`, item);
-  
+    
   return (
     !isLoaded ? <Loader /> : (
       <Grid container>

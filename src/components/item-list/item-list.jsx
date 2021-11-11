@@ -16,7 +16,6 @@ function ItemList(){
       }
     </Grid>
   );
-
 }
 
 export default ItemList;

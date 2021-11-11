@@ -27,18 +27,15 @@ function App() {
     requestStories();
   }, []);
 
-
   return (
     <Container maxWidth="md">
       <div className={classes.wrapper}>
         <Header />
-
         <Grid container spacing={3} className={classes.header}>
           <Grid item xs={10}>
             <Typography variant="h4"> Lastest News </Typography>
           </Grid>
         </Grid>
-
         {
           loading ? <Loader /> : (
             <Switch>
