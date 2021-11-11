@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+/* import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadComments } from "../../store/actions";
@@ -21,4 +21,4 @@ export default () => {
 
   const commentsCount = 0;
   return {commentsCount, handleRefreshComments};
-};
+}; */

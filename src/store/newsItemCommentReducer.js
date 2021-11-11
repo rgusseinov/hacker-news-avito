@@ -22,16 +22,21 @@ const newsItemCommentReducer = (state = initialState, action) => {
 
 
   if (action.type === LOAD_COMMENT_SUCCESS) {
+
+    // console.log(`payload`, action.payload);
+
     return {
       comments:{
         ...state.comments,
         [action.payload.id]: {
-          item: action.payload,
+          item: action.payload.item,
           isLoaded: true
         },
       },
     };
   }
+
+
 
   return state;
 };

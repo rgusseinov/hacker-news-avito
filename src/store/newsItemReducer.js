@@ -24,7 +24,7 @@ const newsItemReducer = (state = initialState, action) => {
   }
 
 
-  if (action.type === SETUP_NEWS_ITEMS_ID){    
+  if (action.type === SETUP_NEWS_ITEMS_ID){
     const itemsObject = {};    
     for (let i = 0; i < action.payload.length; i++) {
       const id = action.payload[i].id.toString();

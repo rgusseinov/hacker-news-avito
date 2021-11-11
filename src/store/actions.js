@@ -34,6 +34,7 @@ export function loadNews(newsItemsIds){
 
 export const requestSignleNewsItem = (id) => async (dispatch) => {
   const singleNewsItem = await getItemById(id);
+  // console.log(`singleNewsItem`, singleNewsItem);
 
   // dispatch({ type: LOAD_NEWS_ITEM_START });
 

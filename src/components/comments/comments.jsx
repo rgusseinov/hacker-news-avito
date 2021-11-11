@@ -1,21 +1,23 @@
 import { Button, Grid, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import classes from './comments.module.css';
 import TreeView from "@material-ui/lab/TreeView";
 import TreeItem from "@material-ui/lab/TreeItem";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import useComments from './useComments';
 import { useParams } from 'react-router';
-
+import { useSelector } from 'react-redux';
+import { loadComments } from '../../store/actions';
+import { useDispatch } from 'react-redux';
+import Loader from '../loader/loader';
 
 
 const buildTree = (comments, postId) => {
   let commentsById = {};
 
   comments.forEach((comment) => {
-   
+    // console.log(`comment`, comment);
     commentsById[comment.id] = comment;
   });
 
@@ -72,16 +74,27 @@ const renderComments = (nodes) => {
 
 
 function Comments(){
-
   const { id } = useParams();
-  const {commentsCount, handleRefreshComments} = useComments();
-  const tree = buildTree([], id);
+  const dispatch = useDispatch();
+  const { comments } = useSelector((state) => state.newsItemCommentReducer);
+  const singleComment = comments[id] || {};
+  const { item, isLoaded } = singleComment;
+  
+
+  useEffect(() => {
+    dispatch(loadComments(id));
+  }, []);
+
+  if (!item) return null;
+  console.log(`item`, singleComment);
+  const tree = buildTree(item, id);
+  const commentsCount = item.length;
 
   return (
     <Grid item xs={12}>
       <Grid container className={classes.boxWrapper}>
         { 
-          commentsCount ? (
+          isLoaded ? (
             <>
               <Grid item xs={10}>
                 <Typography variant="h5"> Comments { commentsCount } </Typography>
@@ -91,7 +104,7 @@ function Comments(){
                   variant="contained"
                   color="primary"
                   startIcon={<RefreshIcon />}
-                  onClick={handleRefreshComments}
+                  onClick={() => {}}
                 > Refresh </Button>
               </Grid>
               <Grid item xs={12}>
@@ -105,7 +118,7 @@ function Comments(){
                   {renderComments(tree)}
                 </TreeView>
               </Grid>
-            </>) : null          
+            </>) : <Loader />          
         }
       </Grid>
     </Grid>
