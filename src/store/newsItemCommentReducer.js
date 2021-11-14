@@ -6,7 +6,7 @@ const initialState = {
 
 const newsItemCommentReducer = (state = initialState, action) => {
 
-  if (action.type === SETUP_COMMENT_ID){    
+  if (action.type === SETUP_COMMENT_ID){
     const commentsObject = {};
     for (let i = 0; i < action.payload.length; i++) {
       const id = action.payload[i].id.toString();

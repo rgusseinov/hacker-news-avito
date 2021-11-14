@@ -9,21 +9,20 @@ import { useDispatch } from 'react-redux';
 import { getTopStories } from './api/api';
 import { ITEMS_LIMIT } from './utils/utils';
 import { loadNews } from './store/actions';
-import Loader from './components/loader/loader';
 import useNews from './useNews';
 
 function App() {
   const dispatch = useDispatch();
-  const { news, loading} = useNews();
+  const { loading} = useNews();
 
   const requestStories = async() => {
     const result = await getTopStories();
     const newsIds = result.slice(0, ITEMS_LIMIT) || [];
-    dispatch(loadNews(newsIds));    
+    dispatch(loadNews(newsIds));
   };
 
   useEffect(() => {
-    if (news) return;
+    // if (news) return;
     requestStories();
   }, []);
 
@@ -36,16 +35,14 @@ function App() {
             <Typography variant="h4"> Lastest News </Typography>
           </Grid>
         </Grid>
-        {
-          loading ? <Loader /> : (
-            <Switch>
-              <Route path="/" exact>
-                <ItemList />
-              </Route>
-              <Route path="/item/:id" component={SingleItem} />
-            </Switch>
-          )
-        }
+
+        <Switch>
+          <Route path="/" exact>
+            <ItemList loading={loading} />
+          </Route>
+          <Route path="/item/:id" component={SingleItem} />
+        </Switch>
+          
       </div>
     </Container>
   );

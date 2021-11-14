@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Button, Grid, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import RefreshIcon from '@material-ui/icons/Refresh';
@@ -11,8 +10,8 @@ import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { loadComments } from '../../store/actions';
 import { useDispatch } from 'react-redux';
-import Loader from '../loader/loader';
 import { buildTree } from '../../utils/utils';
+import Loader from '../loader/loader';
 
 const renderComments = (nodes) => {
   if (!nodes) return null;
@@ -42,11 +41,10 @@ const renderComments = (nodes) => {
 };
 
 
-
 function Comments(){
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  
   const { comments } = useSelector((state) => state.newsItemCommentReducer);
   const singleComment = comments[id] || {};
   const { item, isLoaded } = singleComment;
@@ -56,36 +54,31 @@ function Comments(){
   }, []);
 
   const handleRefreshComments = () => {
-    setLoading(true);
     dispatch(loadComments(id));
-    setLoading(false);
   };
 
-  console.log(`isLoaded`, isLoaded);
-
   if (!item) return null;
- 
   const tree = buildTree(item, id);
   const commentsCount = item.length;
  
-
+  
   return (
     <Grid item xs={12}>
-      <Grid container className={classes.boxWrapper}>    
-        <>
-          <Grid item xs={10}>
-            <Typography variant="h5"> Comments { commentsCount } </Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<RefreshIcon />}
-              onClick={handleRefreshComments}
-            > Refresh </Button>
-          </Grid>
-          {
-            !loading ? (
+      {
+        !isLoaded ? <Loader /> : (
+          <Grid container className={classes.boxWrapper}>    
+            <>
+              <Grid item xs={10}>
+                <Typography variant="h5"> Comments { commentsCount } </Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<RefreshIcon />}
+                  onClick={handleRefreshComments}
+                > Refresh </Button>
+              </Grid>
               <Grid item xs={12}>
                 <TreeView
                   defaultCollapseIcon={<ExpandMoreIcon />}
@@ -96,10 +89,10 @@ function Comments(){
                 >
                   {renderComments(tree)}
                 </TreeView>
-              </Grid>) :  <Loader />
-          }
-        </>
-      </Grid>
+              </Grid>
+            </>
+          </Grid>)
+      }
     </Grid>
   );
 }
