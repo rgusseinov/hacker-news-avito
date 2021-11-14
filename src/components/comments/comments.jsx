@@ -1,17 +1,13 @@
 import { Button, Grid, Typography } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React from 'react';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import classes from './comments.module.css';
 import TreeView from "@material-ui/lab/TreeView";
 import TreeItem from "@material-ui/lab/TreeItem";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
-import { loadComments } from '../../store/actions';
-import { useDispatch } from 'react-redux';
-import { buildTree } from '../../utils/utils';
 import Loader from '../loader/loader';
+import useComments from './useComments';
 
 const renderComments = (nodes) => {
   if (!nodes) return null;
@@ -42,26 +38,9 @@ const renderComments = (nodes) => {
 
 
 function Comments(){
-  const { id } = useParams();
-  const dispatch = useDispatch();
   
-  const { comments } = useSelector((state) => state.newsItemCommentReducer);
-  const singleComment = comments[id] || {};
-  const { item, isLoaded } = singleComment;
+  const { tree, isLoaded, commentsCount, handleRefreshComments  } = useComments();
 
-  useEffect(() => {
-    dispatch(loadComments(id));
-  }, []);
-
-  const handleRefreshComments = () => {
-    dispatch(loadComments(id));
-  };
-
-  if (!item) return null;
-  const tree = buildTree(item, id);
-  const commentsCount = item.length;
- 
-  
   return (
     <Grid item xs={12}>
       {

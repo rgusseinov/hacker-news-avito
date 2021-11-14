@@ -29,7 +29,6 @@ export function loadNews(newsItemsIds){
 /* News Item */
 export const requestSignleNewsItem = (id) => async (dispatch) => {
   const singleNewsItem = await getItemById(id);
-  // dispatch({ type: LOAD_NEWS_ITEM_START });
   dispatch({
     type: LOAD_NEWS_ITEM_SUCCESS,
     payload: singleNewsItem

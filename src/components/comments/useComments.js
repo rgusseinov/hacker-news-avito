@@ -1,24 +1,30 @@
-/* import { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadComments } from "../../store/actions";
+import { buildTree } from "../../utils/utils";
 
 export default () => {
+
   const { id } = useParams();
   const dispatch = useDispatch();
+  
   const { comments } = useSelector((state) => state.newsItemCommentReducer);
-  // const { newsItems } = useSelector((state) => state.newsItemReducer);
-  const singleItem = comments[id];
-  const { item } = singleItem || {};
-
-  useEffect(() => { 
+  const singleComment = comments[id] || {};
+  const { item, isLoaded } = singleComment;
+  
+  useEffect(() => {
+    if (item) return;
     dispatch(loadComments(id));
-  }, []);
-
-  console.log(`singleItem`, singleItem, item);
+  }, [singleComment]);
 
   const handleRefreshComments = () => dispatch(loadComments(id));
 
-  const commentsCount = 0;
-  return {commentsCount, handleRefreshComments};
-}; */
+  // if (!singleComment) return null;
+  const commentsCount = item?.length;
+  console.log(`item`, item);
+
+  const tree = buildTree(item || [], id);
+  
+  return { tree, isLoaded, commentsCount, handleRefreshComments };
+};

@@ -1,4 +1,4 @@
-import { LOAD_NEWS_ITEM_START, LOAD_NEWS_ITEM_SUCCESS, SETUP_NEWS_ITEMS_ID } from "./actionTypes";
+import { LOAD_NEWS_ITEM_SUCCESS } from "./actionTypes";
 
 const initialState = {
   newsItems: {},
@@ -6,11 +6,11 @@ const initialState = {
 
 const newsItemReducer = (state = initialState, action) => {
 
-  if (action.type === LOAD_NEWS_ITEM_START){
+  /* if (action.type === LOAD_NEWS_ITEM_START){
     return {
       ...state,
     };
-  }
+  } */
 
   if (action.type === LOAD_NEWS_ITEM_SUCCESS) {
     return {
@@ -24,7 +24,7 @@ const newsItemReducer = (state = initialState, action) => {
   }
 
 
-  if (action.type === SETUP_NEWS_ITEMS_ID){
+  /*  if (action.type === SETUP_NEWS_ITEMS_ID){
     const itemsObject = {};    
     for (let i = 0; i < action.payload.length; i++) {
       const id = action.payload[i].id.toString();
@@ -34,7 +34,7 @@ const newsItemReducer = (state = initialState, action) => {
       ...state,
       newsItems: itemsObject
     };    
-  }
+  } */
 
 
   return state;

@@ -12,8 +12,9 @@ import { loadNews } from './store/actions';
 import useNews from './useNews';
 
 function App() {
+  
   const dispatch = useDispatch();
-  const { loading} = useNews();
+  const { news, loading} = useNews();
 
   const requestStories = async() => {
     const result = await getTopStories();
@@ -22,7 +23,7 @@ function App() {
   };
 
   useEffect(() => {
-    // if (news) return;
+    if (news) return;
     requestStories();
   }, []);
 
