@@ -36,9 +36,8 @@ const renderComments = (nodes) => {
 
 };
 
-
 function Comments(){
-  
+
   const { tree, isLoaded, commentsCount, handleRefreshComments  } = useComments();
 
   return (
