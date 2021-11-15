@@ -22,7 +22,7 @@ export default () => {
 
   // if (!singleComment) return null;
   const commentsCount = item?.length;
-  console.log(`item`, item);
+  // console.log(`item`, item);
 
   const tree = buildTree(item || [], id);
   

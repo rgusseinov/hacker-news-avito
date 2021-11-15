@@ -9,12 +9,10 @@ import { useDispatch } from 'react-redux';
 import { getTopStories } from './api/api';
 import { ITEMS_LIMIT } from './utils/utils';
 import { loadNews } from './store/actions';
-import useNews from './useNews';
 
 function App() {
   
   const dispatch = useDispatch();
-  const { news, loading} = useNews();
 
   const requestStories = async() => {
     const result = await getTopStories();
@@ -23,7 +21,6 @@ function App() {
   };
 
   useEffect(() => {
-    if (news) return;
     requestStories();
   }, []);
 
@@ -39,7 +36,7 @@ function App() {
 
         <Switch>
           <Route path="/" exact>
-            <ItemList loading={loading} />
+            <ItemList />
           </Route>
           <Route path="/item/:id" component={SingleItem} />
         </Switch>

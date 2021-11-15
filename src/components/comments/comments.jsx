@@ -9,32 +9,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Loader from '../loader/loader';
 import useComments from './useComments';
 
-const renderComments = (nodes) => {
-  if (!nodes) return null;
-
-  return (
-    <div>
-      {nodes.map((node, index) => (
-        <TreeItem
-          key={index}
-          nodeId={String(node.id)}
-          label={
-            <div className={classes.commentWrap}>
-              <p className={classes.commentBy}>{node.by}</p>
-              <p
-                dangerouslySetInnerHTML={{ __html: node.text }}
-                className={classes.comment}
-              />
-            </div>
-          }
-        >
-          {renderComments(node.children)}
-        </TreeItem>
-      ))}
-    </div>
-  );
-
-};
 
 function Comments(){
 
@@ -74,5 +48,33 @@ function Comments(){
     </Grid>
   );
 }
+
+const renderComments = (nodes) => {
+  if (!nodes) return null;
+
+  return (
+    <div>
+      {nodes.map((node, index) => (
+        <TreeItem
+          key={index}
+          nodeId={String(node.id)}
+          label={
+            <div className={classes.commentWrap}>
+              <p className={classes.commentBy}>{node.by}</p>
+              <p
+                dangerouslySetInnerHTML={{ __html: node.text }}
+                className={classes.comment}
+              />
+            </div>
+          }
+        >
+          {renderComments(node.children)}
+        </TreeItem>
+      ))}
+    </div>
+  );
+
+};
+
 
 export default Comments;

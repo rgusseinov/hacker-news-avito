@@ -16,9 +16,7 @@ export function loadNews(newsItemsIds){
     Promise.all(promises).then(data => {
       return Promise.all(data.map(result => result.json()));
     }).then(data => {
-
       dispatch({ type: LOAD_NEWS_SUCCESS, payload: data });
-      
     });
 
   };
@@ -40,8 +38,7 @@ export const requestSignleNewsItem = (id) => async (dispatch) => {
 /* Commments */
 export const loadComments = (id) => {
   
-  return async dispatch => {
-    
+  return async dispatch => {    
     return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`, {
       method: "GET",
     })
