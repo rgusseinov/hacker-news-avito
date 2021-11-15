@@ -9,15 +9,12 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Loader from '../loader/loader';
 import useComments from './useComments';
 
-
 function Comments(){
-
   const { tree, isLoaded, commentsCount, handleRefreshComments  } = useComments();
-
   return (
     <Grid item xs={12}>
       {
-        !isLoaded ? <Loader /> : (
+        isLoaded ? (
           <Grid container className={classes.boxWrapper}>    
             <>
               <Grid item xs={10}>
@@ -43,7 +40,7 @@ function Comments(){
                 </TreeView>
               </Grid>
             </>
-          </Grid>)
+          </Grid>) : <Loader />
       }
     </Grid>
   );

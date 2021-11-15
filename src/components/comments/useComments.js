@@ -20,10 +20,7 @@ export default () => {
 
   const handleRefreshComments = () => dispatch(loadComments(id));
 
-  // if (!singleComment) return null;
   const commentsCount = item?.length;
-  // console.log(`item`, item);
-
   const tree = buildTree(item || [], id);
   
   return { tree, isLoaded, commentsCount, handleRefreshComments };

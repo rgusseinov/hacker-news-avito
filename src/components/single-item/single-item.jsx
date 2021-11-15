@@ -15,7 +15,7 @@ function SingleItem(){
   return (
     <Grid container>
       {
-        !isLoaded ? <Loader /> : (
+        isLoaded ? (
           <>
             <Grid item xs={12} className={""}>
               <Grid container>
@@ -57,7 +57,7 @@ function SingleItem(){
               </Card>
             </Grid>
             <Comments />
-          </>)
+          </>) : <Loader />
       }
     </Grid>
   );
