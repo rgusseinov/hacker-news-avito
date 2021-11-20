@@ -1,2 +1,0 @@
-export const SET_COMMENT_IDS = 'SET_COMMENT_IDS';
-export const SET_LOADED_COMMENT = 'SET_LOADED_COMMENT';

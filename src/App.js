@@ -1,49 +1,68 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import { loadNewsIds } from './features/news/actions';
-import { Container } from '@material-ui/core';
-import Main from './components/pages/main-page';
-import PageNotFound from './components/pages/page-404';
-import SingleNews from './components/single-news/single-news';
+import { Button, Container, Grid, Typography } from '@material-ui/core';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import ItemList from './components/item-list/item-list';
 import Header from './components/header/header';
-import Footer from './components/footer/footer';
 import classes from './App.module.css';
-import { TIME_INTERVAL } from './utils/utils';
+import SingleItem from './components/single-item/single-item';
+import { useDispatch } from 'react-redux';
+import { getTopStories } from './api/api';
+import { ITEMS_LIMIT, TIME_INTERVAL } from './utils/utils';
+import { loadNews } from './store/actions';
 
 function App() {
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(loadNewsIds());
 
+  const dispatch = useDispatch();
+  const requestStories = async() => {
+    try {
+      const result = await getTopStories();
+      const newsIds = result.slice(0, ITEMS_LIMIT) || [];
+      dispatch(loadNews(newsIds));
+    } catch (err) {
+      console.error(err);
+    }
+
+  };
+
+  useEffect(() => {
+    requestStories();
     const timer = setInterval(() => {
-      dispatch(loadNewsIds());
+      requestStories();
     }, TIME_INTERVAL);
-    
-    return () => {
-      clearInterval(timer);
-    };
-    
+
+    return () => clearTimeout(timer);    
   }, []);
 
-  const handleRefreshStories = () => {
-    dispatch(loadNewsIds());
-  };
-  
+  const handleRefreshNews = () => requestStories();
+
   return (
     <Container maxWidth="md">
       <div className={classes.wrapper}>
         <Header />
+        <Grid container spacing={3} className={classes.header}>
+          <Grid item xs={10}>
+            <Typography variant="h4"> Lastest News </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<RefreshIcon />}
+              onClick={handleRefreshNews}
+            > Refresh </Button>
+          </Grid>
+        </Grid>
+
+
         <Switch>
           <Route path="/" exact>
-            <Main handleRefreshStories={handleRefreshStories} />
+            <ItemList />
           </Route>
-          <Route path="/news/:id" component={SingleNews} />
-          <Route component={PageNotFound} />
+          <Route path="/item/:id" component={SingleItem} />
         </Switch>
+          
       </div>
-      <Footer />
     </Container>
   );
 }
