@@ -1,4 +1,4 @@
-import { LOAD_COMMENT_SUCCESS, LOAD_NEWS_ITEM_SUCCESS, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "./actionTypes";
+import { LOAD_COMMENT_SUCCESS, LOAD_NEWS_ERROR, LOAD_NEWS_ITEM_SUCCESS, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "./actionTypes";
 import {getItemById} from '../api/api';
 
 
@@ -90,3 +90,9 @@ function getCommentsByIds(kids) {
     });
 
 }
+
+export const registerError = () => {
+  return async dispatch => {
+    dispatch({ type: LOAD_NEWS_ERROR });
+  };
+};
