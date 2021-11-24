@@ -1,4 +1,4 @@
-export async function getTopStories(){
+export async function getTopNews(){
   const request = await fetch(`https://hacker-news.firebaseio.com/v0/topstories.json`);
   if (!request.ok) return Promise.reject(`Что то пошло не так ${request}`);
   return await request.json();

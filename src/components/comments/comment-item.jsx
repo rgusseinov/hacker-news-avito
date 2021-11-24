@@ -5,7 +5,7 @@ import { getLocalDateFormat, textParser } from '../../utils/utils';
 
 function CommentItem({ item }){
 
-  const parseText = textParser(item.text);
+  const parsedText = textParser(item.text);
   const commentPostTime = getLocalDateFormat(item.time);
 
   return (
@@ -17,7 +17,7 @@ function CommentItem({ item }){
         <Grid item>
           <h4 style={{ margin: 0, textAlign: "left" }}> {item.by} </h4>
           <p style={{ textAlign: "left" }}>
-            {parseText}
+            {parsedText}
           </p>
           <p style={{ textAlign: "left", color: "gray" }}> {commentPostTime}  </p>
 

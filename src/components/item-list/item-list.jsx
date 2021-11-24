@@ -11,9 +11,9 @@ function ItemList(){
     <Grid container spacing={3}>
       {
         loading ? <Loader /> : (
-          newsArray && newsArray.map((item, index) => 
+          newsArray.map(item => 
             <Item
-              key={index}
+              key={item.id}
               item={item}
             />)
         )
