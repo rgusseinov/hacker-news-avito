@@ -1,7 +1,8 @@
-import { LOAD_NEWS_ITEM_SUCCESS } from "../actions/actionTypes";
+import { LOAD_COMMENT_SUCCESS, LOAD_NEWS_ITEM_SUCCESS } from "../actions/actionTypes";
 
 const initialState = {
   newsItems: {},
+  comments: {}
 };
 
 const newsItemReducer = (state = initialState, action) => {
@@ -12,6 +13,18 @@ const newsItemReducer = (state = initialState, action) => {
         ...state.newsItems,
         [action.payload.id]: {
           item: action.payload, isLoaded: true
+        },
+      },
+    };
+  }
+
+  if (action.type === LOAD_COMMENT_SUCCESS) {
+    return {
+      comments:{
+        ...state.comments,
+        [action.payload.id]: {
+          item: action.payload.item,
+          isLoaded: true
         },
       },
     };

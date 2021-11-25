@@ -43,6 +43,9 @@ export const loadComments = (id) => {
     const response = await axios.get(`${baseURL}/item/${id}.json`);
     if (!response.data.kids) return [];
     const commentList = getCommentsByIds(response.data.kids);
+
+    console.log(`commentsData`, commentList);
+
     commentList.then(comments => {
       const payload = { id, item: comments };        
       dispatch({ type: LOAD_COMMENT_SUCCESS, payload });
