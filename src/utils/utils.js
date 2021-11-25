@@ -1,11 +1,10 @@
+export const baseURL = 'https://hacker-news.firebaseio.com/v0';
 export const TIME_INTERVAL = 60000;
-export const ITEMS_LIMIT = 50;
+export const ITEMS_LIMIT = 20;
 
 export function getLocalDateFormat(time){
-  if (time){
-    return new Date(time * 1000).toLocaleString();
-  }
-  return '';
+  if (!time) return;
+  return new Date(time * 1000).toLocaleString();
 }
 
 export function textParser(text){
@@ -15,8 +14,8 @@ export function textParser(text){
 
 
 export const buildTree = (comments, postId) => {
-  let commentsById = {};
-
+  const commentsById = {};
+  
   comments.forEach((comment) => {
     commentsById[comment.id] = comment;
   });
@@ -29,14 +28,11 @@ export const buildTree = (comments, postId) => {
 };
 
 export const buildCommentTree = (comment, commentsById) => {
-  const res = {
+  const result = {
     id: comment.id.toString(),
     text: comment.text,
     by: comment.by,
+    children: comment.kids?.map((kidId) => buildCommentTree(commentsById[kidId], commentsById))
   };
-  
-  res.children = comment.kids?.map((kidId) =>
-    buildCommentTree(commentsById[kidId], commentsById)
-  );
-  return res;
+  return result;
 };

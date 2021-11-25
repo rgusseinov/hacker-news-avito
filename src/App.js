@@ -8,6 +8,7 @@ import classes from './App.module.css';
 import SingleItem from './components/single-item/single-item';
 import useNews from './useNews';
 
+
 function App() {
 
   const handleRefreshNews = useNews();

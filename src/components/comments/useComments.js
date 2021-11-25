@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { loadComments } from "../../store/actions";
+import { newsItemCommentsSelector } from "../../store/reselectors";
 import { buildTree } from "../../utils/utils";
 
 export default () => {
@@ -9,7 +10,7 @@ export default () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   
-  const { comments } = useSelector((state) => state.newsItemCommentReducer);
+  const { comments } = useSelector(newsItemCommentsSelector);
   const singleComment = comments[id] || {};
   const { item, isLoaded } = singleComment;
   

@@ -8,9 +8,38 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Loader from '../loader/loader';
 import useComments from './useComments';
+import { textParser } from '../../utils/utils';
 
 function Comments(){
   const { tree, isLoaded, commentsCount, handleRefreshComments  } = useComments();
+
+  const renderComments = (nodes) => {
+    if (!nodes) return null;
+  
+    return (
+      <div>
+        {nodes.map((node, index) => {
+          const parsedText = textParser(node.text);
+          return (
+            <TreeItem
+              key={index}
+              nodeId={String(node.id)}
+              label={
+                <div className={classes.commentWrap}>
+                  <p className={classes.commentBy}>{node.by}</p>
+                  <p className={classes.comment}>{parsedText}</p>
+                </div>
+              }
+            >
+              {renderComments(node.children)}
+            </TreeItem>
+          );
+        })}
+      </div>
+    );
+  
+  };
+
   return (
     <Grid item xs={12}>
       {
@@ -45,33 +74,5 @@ function Comments(){
     </Grid>
   );
 }
-
-const renderComments = (nodes) => {
-  if (!nodes) return null;
-
-  return (
-    <div>
-      {nodes.map((node, index) => (
-        <TreeItem
-          key={index}
-          nodeId={String(node.id)}
-          label={
-            <div className={classes.commentWrap}>
-              <p className={classes.commentBy}>{node.by}</p>
-              <p
-                dangerouslySetInnerHTML={{ __html: node.text }}
-                className={classes.comment}
-              />
-            </div>
-          }
-        >
-          {renderComments(node.children)}
-        </TreeItem>
-      ))}
-    </div>
-  );
-
-};
-
 
 export default Comments;

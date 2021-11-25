@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { getTopNews } from "./api/api";
 import { loadNews } from "./store/actions";
-import { ITEMS_LIMIT, TIME_INTERVAL } from "./utils/utils";
+import { baseURL, ITEMS_LIMIT, TIME_INTERVAL } from "./utils/utils";
+import axios from 'axios';
 
 export default () => {
 
@@ -11,8 +11,8 @@ export default () => {
 
   const requestNews = async() => {
     try {
-      const result = await getTopNews();
-      const newsIds = result.slice(0, ITEMS_LIMIT) || [];
+      const result = await axios.get(`${baseURL}/topstories.json`);
+      const newsIds = result.data.slice(0, ITEMS_LIMIT) || [];
       dispatch(loadNews(newsIds));
     } catch (err) {
       console.error(err);

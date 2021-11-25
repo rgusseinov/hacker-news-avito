@@ -9,18 +9,15 @@ function CommentItem({ item }){
   const commentPostTime = getLocalDateFormat(item.time);
 
   return (
-    <Paper style={{ padding: "20px 20px", margin: "10px 0" }}>
+    <Paper>
       <Grid container wrap="nowrap" spacing={2}>
         <Grid item>
           <Avatar alt="User Avatar" src={""} />
         </Grid>
         <Grid item>
-          <h4 style={{ margin: 0, textAlign: "left" }}> {item.by} </h4>
-          <p style={{ textAlign: "left" }}>
-            {parsedText}
-          </p>
-          <p style={{ textAlign: "left", color: "gray" }}> {commentPostTime}  </p>
-
+          <h4>{item.by}</h4>
+          <p>{parsedText}</p>
+          <p> {commentPostTime}  </p>
         </Grid>
       </Grid>
     </Paper>

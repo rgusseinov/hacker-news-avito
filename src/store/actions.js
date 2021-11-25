@@ -1,5 +1,6 @@
 import { LOAD_COMMENT_SUCCESS, LOAD_NEWS_ERROR, LOAD_NEWS_ITEM_SUCCESS, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "./actionTypes";
-import {getItemById} from '../api/api';
+import axios from "axios";
+import { baseURL } from "../utils/utils";
 
 
 /* News */
@@ -25,11 +26,11 @@ export function loadNews(newsItemsIds){
 
 
 /* News Item */
-export const requestSignleNewsItem = (id) => async (dispatch) => {
-  const singleNewsItem = await getItemById(id);
+export const requestSignleNews = (id) => async (dispatch) => {
+  const singleNewsItem = await axios.get(`${baseURL}/item/${id}.json`);
   dispatch({
     type: LOAD_NEWS_ITEM_SUCCESS,
-    payload: singleNewsItem
+    payload: singleNewsItem.data
   });
 };
 
@@ -38,24 +39,15 @@ export const requestSignleNewsItem = (id) => async (dispatch) => {
 /* Commments */
 export const loadComments = (id) => {
   
-  return async dispatch => {    
-    return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`, {
-      method: "GET",
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        if (!res.kids) return [];
-        return getCommentsByIds(res.kids);
-      })
-      .then(comments => {
-        const payload =  {
-          id,
-          item: comments
-        };        
-        dispatch({ type: LOAD_COMMENT_SUCCESS, payload });
-      });
+  return async dispatch => {   
+    const response = await axios.get(`${baseURL}/item/${id}.json`);
+    if (!response.data.kids) return [];
+    const commentList = getCommentsByIds(response.data.kids);
+    commentList.then(comments => {
+      const payload = { id, item: comments };        
+      dispatch({ type: LOAD_COMMENT_SUCCESS, payload });
+    });
+    
   };
 };
 

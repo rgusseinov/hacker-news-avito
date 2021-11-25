@@ -11,7 +11,7 @@ function Item({ item }){
       <Card>
         <CardHeader
           title={<Link to={`/item/${item.id}`} className={classes.titleLink}>  { item.title } </Link>}
-          subheader={"date"}/>
+          subheader="date" />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             <Button href={`/news/${item.id}`} variant="contained"> Read more </Button>
