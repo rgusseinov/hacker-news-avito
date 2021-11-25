@@ -1,4 +1,4 @@
-import { LOAD_NEWS_ITEM_SUCCESS } from "./actionTypes";
+import { LOAD_NEWS_ITEM_SUCCESS } from "../actions/actionTypes";
 
 const initialState = {
   newsItems: {},

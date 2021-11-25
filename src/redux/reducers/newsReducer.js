@@ -1,11 +1,9 @@
-import { LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "./actionTypes";
-
+import { LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "../actions/actionTypes";
 
 const initialState = {
   news: {},
   loading: false
 };
-
 
 const newsReducer = (state = initialState, action) => {
 

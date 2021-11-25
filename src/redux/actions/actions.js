@@ -1,6 +1,6 @@
 import { LOAD_COMMENT_SUCCESS, LOAD_NEWS_ERROR, LOAD_NEWS_ITEM_SUCCESS, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "./actionTypes";
 import axios from "axios";
-import { baseURL } from "../utils/utils";
+import { baseURL } from "../../utils/utils";
 
 
 /* News */

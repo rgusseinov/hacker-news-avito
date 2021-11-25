@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { newsSelector } from "../../store/reselectors";
+import { newsSelector } from "../../redux/selectors/reselectors";
 
 
 export default () => {

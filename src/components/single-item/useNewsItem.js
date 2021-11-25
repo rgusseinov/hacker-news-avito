@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { requestSignleNews } from "../../store/actions";
-import { newsItemSelector } from "../../store/reselectors";
+import { requestSignleNews } from "../../redux/actions/actions";
+import { newsItemSelector } from "../../redux/selectors/reselectors";
+
 
 export default () => {
 

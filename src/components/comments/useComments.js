@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { loadComments } from "../../store/actions";
-import { newsItemCommentsSelector } from "../../store/reselectors";
+import { loadComments } from "../../redux/actions/actions";
+import { newsItemCommentsSelector } from "../../redux/selectors/reselectors";
+
 import { buildTree } from "../../utils/utils";
 
 export default () => {

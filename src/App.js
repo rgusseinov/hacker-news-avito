@@ -1,16 +1,16 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Header from './components/header/header';
+import ItemList from './components/item-list/item-list';
+import useNews from './useNews';
+import SingleItem from './components/single-item/single-item';
 import { Button, Container, Grid, Typography } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import ItemList from './components/item-list/item-list';
-import Header from './components/header/header';
 import classes from './App.module.css';
-import SingleItem from './components/single-item/single-item';
-import useNews from './useNews';
 
 
 function App() {
-
+  
   const handleRefreshNews = useNews();
   return (
     <Container maxWidth="md">

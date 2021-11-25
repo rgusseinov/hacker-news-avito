@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { loadNews } from "./store/actions";
+import { loadNews } from "./redux/actions/actions";
 import { baseURL, ITEMS_LIMIT, TIME_INTERVAL } from "./utils/utils";
 import axios from 'axios';
 

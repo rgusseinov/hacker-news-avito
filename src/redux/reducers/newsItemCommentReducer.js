@@ -1,4 +1,4 @@
-import {LOAD_COMMENT_SUCCESS } from "./actionTypes";
+import {LOAD_COMMENT_SUCCESS } from "../actions/actionTypes";
 
 const initialState = {
   comments: {}
