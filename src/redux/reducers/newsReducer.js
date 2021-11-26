@@ -1,8 +1,9 @@
-import { LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "../actions/actionTypes";
+import { LOAD_NEWS_FAIL, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "../actions/actionTypes";
 
 const initialState = {
   news: {},
-  loading: false
+  loading: false,
+  isFail: false
 };
 
 const newsReducer = (state = initialState, action) => {
@@ -10,7 +11,8 @@ const newsReducer = (state = initialState, action) => {
   if (action.type === LOAD_NEWS_START){
     return {
       ...state,
-      loading: true
+      loading: true,
+      isFail: false
     };
   }
 
@@ -22,9 +24,18 @@ const newsReducer = (state = initialState, action) => {
     }
     return {
       loading: false,
+      isFail: false,
       news: {
         ...itemsObject,
       }
+    };
+  }
+
+  if (action.type === LOAD_NEWS_FAIL){
+    return {
+      ...state,
+      loading: false,
+      isFail: true
     };
   }
 

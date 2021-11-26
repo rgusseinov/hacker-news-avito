@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { loadNews } from "./redux/actions/actions";
-import { baseURL, ITEMS_LIMIT, TIME_INTERVAL } from "./utils/utils";
 import axios from 'axios';
+import {  LOAD_NEWS_FAIL, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "../src/redux/actions/actionTypes";
+import { baseURL, ITEMS_LIMIT, TIME_INTERVAL } from "./utils/utils";
 
 export default () => {
 
@@ -13,12 +13,32 @@ export default () => {
     try {
       const result = await axios.get(`${baseURL}/topstories.json`);
       const newsIds = result.data.slice(0, ITEMS_LIMIT) || [];
-      dispatch(loadNews(newsIds));
+      loadNews(newsIds);
     } catch (err) {
-      console.error(err);
+      dispatch({ type: LOAD_NEWS_FAIL });
     }
   };
 
+  const loadNews = (newsIds) => {
+    const promises = [];
+    dispatch({ type: LOAD_NEWS_START });
+
+    newsIds.forEach(newsId => {
+      promises.push(axios.get(`${baseURL}/itemd/${newsId}.json`));
+    });
+
+    Promise.all(promises).then(data => {
+      return Promise.all(data.map( result => result.data ));
+    }).then(data => {
+
+      dispatch({ type: LOAD_NEWS_SUCCESS, payload: data });
+    }).catch(err => {
+      console.error(`Что-то пошло не так: ${err}`);
+      dispatch({ type: LOAD_NEWS_FAIL });
+    });
+  };
+
+  
   useEffect(() => {
     requestNews();
     timerRef.current = setInterval(() => requestNews(), TIME_INTERVAL);

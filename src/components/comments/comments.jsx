@@ -6,12 +6,12 @@ import TreeView from "@material-ui/lab/TreeView";
 import TreeItem from "@material-ui/lab/TreeItem";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import Loader from '../loader/loader';
 import useComments from './useComments';
 import { textParser } from '../../utils/utils';
+import Loader from '../loader/loader';
 
 function Comments(){
-  const { tree, isLoaded, commentsCount, handleRefreshComments  } = useComments();
+  const { tree, loading, commentsCount, handleRefreshComments  } = useComments();
 
   const renderComments = (nodes) => {
     if (!nodes) return null;
@@ -43,33 +43,35 @@ function Comments(){
   return (
     <Grid item xs={12}>
       {
-        isLoaded ? (
-          <Grid container className={classes.boxWrapper}>    
-            <>
-              <Grid item xs={10}>
-                <Typography variant="h5"> Comments { commentsCount } </Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  startIcon={<RefreshIcon />}
-                  onClick={handleRefreshComments}
-                > Refresh </Button>
-              </Grid>
-              <Grid item xs={12}>
-                <TreeView
-                  defaultCollapseIcon={<ExpandMoreIcon />}
-                  defaultExpandIcon={<ChevronRightIcon />}
-                  defaultExpanded={["root"]}
-                  className={classes.root}
-                  multiSelect
-                >
-                  {renderComments(tree)}
-                </TreeView>
-              </Grid>
-            </>
-          </Grid>) : <Loader />
+        loading ? <Loader /> : null
+      }
+      {
+        <Grid container className={classes.boxWrapper}>    
+          <>
+            <Grid item xs={10}>
+              <Typography variant="h5"> Comments { commentsCount } </Typography>
+            </Grid>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<RefreshIcon />}
+                onClick={handleRefreshComments}
+              > Refresh </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <TreeView
+                defaultCollapseIcon={<ExpandMoreIcon />}
+                defaultExpandIcon={<ChevronRightIcon />}
+                defaultExpanded={["root"]}
+                className={classes.root}
+                multiSelect
+              >
+                {renderComments(tree)}
+              </TreeView>
+            </Grid>
+          </>
+        </Grid>
       }
     </Grid>
   );

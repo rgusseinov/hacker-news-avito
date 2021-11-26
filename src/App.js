@@ -4,10 +4,8 @@ import Header from './components/header/header';
 import ItemList from './components/item-list/item-list';
 import useNews from './useNews';
 import SingleItem from './components/single-item/single-item';
-import { Button, Container, Grid, Typography } from '@material-ui/core';
-import RefreshIcon from '@material-ui/icons/Refresh';
+import { Container, Grid, Typography } from '@material-ui/core';
 import classes from './App.module.css';
-
 
 function App() {
   
@@ -20,18 +18,10 @@ function App() {
           <Grid item xs={10}>
             <Typography variant="h4"> Lastest News </Typography>
           </Grid>
-          <Grid item xs={2}>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<RefreshIcon />}
-              onClick={handleRefreshNews}
-            > Refresh </Button>
-          </Grid>
         </Grid>
         <Switch>
           <Route path="/" exact>
-            <ItemList />
+            <ItemList handleRefreshNews={handleRefreshNews} />
           </Route>
           <Route path="/item/:id" component={SingleItem} />
         </Switch>          
