@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { getCommentsByIds } from "../../redux/actions/actions";
-import { LOAD_COMMENT_SUCCESS } from "../../redux/actions/actionTypes";
-// import { newsItemCommentsSelector } from "../../redux/selectors/reselectors";
-
+import { LOAD_COMMENT_FAIL, LOAD_COMMENT_SUCCESS } from "../../redux/actions/actionTypes";
 import { baseURL, buildTree } from "../../utils/utils";
 
 export default () => {
@@ -14,7 +12,7 @@ export default () => {
   const dispatch = useDispatch();
   
   const [loading, setLoading] = useState(false);
-  const { comments } = useSelector(state => state.newsItemReducer);  
+  const { comments, isCommentsFailed } = useSelector(state => state.newsItemReducer);  
   const singleComment = comments[id];
   const item = singleComment || [];
   
@@ -24,18 +22,27 @@ export default () => {
   }, [singleComment]);
 
 
-  const loadComments = () => {
-    setLoading(true);
-
-    axios.get(`${baseURL}/item/${id}.json`).then(response => {
+  const loadComments = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`${baseURL}/item/${id}.json`);
       if (!response.data.kids) return [];
       const commentList = getCommentsByIds(response.data.kids);
-      return commentList;
-    }).then(comments => {
-      const payload = { id, item: comments };        
-      dispatch({ type: LOAD_COMMENT_SUCCESS, payload });
+
+      commentList.then(comments => {
+         
+        dispatch({ type: LOAD_COMMENT_SUCCESS, payload: { id, item: comments } });
+        setLoading(false);
+        
+      }).catch (() => {
+        setLoading(false);
+        dispatch({ type: LOAD_COMMENT_FAIL });
+      });
+
+    } catch {
       setLoading(false);
-    });
+      dispatch({ type: LOAD_COMMENT_FAIL });
+    }
   
   };
 
@@ -44,5 +51,5 @@ export default () => {
   const commentsCount = item?.length;
   const tree = buildTree(item, id);
   
-  return { tree, loading, commentsCount, handleRefreshComments };
+  return { tree, loading, isCommentsFailed, commentsCount, handleRefreshComments };
 };

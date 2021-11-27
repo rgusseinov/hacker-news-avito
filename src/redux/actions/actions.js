@@ -1,18 +1,3 @@
-import { LOAD_NEWS_ITEM_SUCCESS } from "./actionTypes";
-import axios from "axios";
-import { baseURL } from "../../utils/utils";
-
-
-
-/* News Item */
-export const requestSignleNews = (id) => async (dispatch) => {
-  const singleNewsItem = await axios.get(`${baseURL}/item/${id}.json`);
-  dispatch({
-    type: LOAD_NEWS_ITEM_SUCCESS, payload: singleNewsItem.data
-  });
-};
-
-
 
 /* Commments */
 export function getCommentsByIds(kids) {

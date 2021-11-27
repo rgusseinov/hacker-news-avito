@@ -4,7 +4,7 @@ import axios from 'axios';
 import {  LOAD_NEWS_FAIL, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "../src/redux/actions/actionTypes";
 import { baseURL, ITEMS_LIMIT, TIME_INTERVAL } from "./utils/utils";
 
-export default () => {
+const useNews = () => {
 
   const dispatch = useDispatch();
   const timerRef = useRef();
@@ -14,7 +14,7 @@ export default () => {
       const result = await axios.get(`${baseURL}/topstories.json`);
       const newsIds = result.data.slice(0, ITEMS_LIMIT) || [];
       loadNews(newsIds);
-    } catch (err) {
+    } catch {
       dispatch({ type: LOAD_NEWS_FAIL });
     }
   };
@@ -24,7 +24,7 @@ export default () => {
     dispatch({ type: LOAD_NEWS_START });
 
     newsIds.forEach(newsId => {
-      promises.push(axios.get(`${baseURL}/itemd/${newsId}.json`));
+      promises.push(axios.get(`${baseURL}/item/${newsId}.json`));
     });
 
     Promise.all(promises).then(data => {
@@ -32,10 +32,9 @@ export default () => {
     }).then(data => {
 
       dispatch({ type: LOAD_NEWS_SUCCESS, payload: data });
-    }).catch(err => {
-      console.error(`Что-то пошло не так: ${err}`);
-      dispatch({ type: LOAD_NEWS_FAIL });
-    });
+    }).catch (
+      // dispatch({ type: LOAD_NEWS_FAIL })
+    );
   };
 
   
@@ -50,3 +49,4 @@ export default () => {
   return handleRefreshNews;
 };
 
+export default useNews;

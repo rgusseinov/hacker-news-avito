@@ -8,16 +8,15 @@ const initialState = {
 
 const newsReducer = (state = initialState, action) => {
 
-  if (action.type === LOAD_NEWS_START){
+  switch (action.type) {
+  case LOAD_NEWS_START:
     return {
       ...state,
       loading: true,
       isFail: false
     };
-  }
 
-  if (action.type === LOAD_NEWS_SUCCESS) {
-
+  case LOAD_NEWS_SUCCESS: {
     const itemsObject = {};
     for (let i = 0; i < action.payload.length; i++) {
       itemsObject[action.payload[i].id.toString()] = action.payload[i];
@@ -30,16 +29,15 @@ const newsReducer = (state = initialState, action) => {
       }
     };
   }
-
-  if (action.type === LOAD_NEWS_FAIL){
+  
+  case LOAD_NEWS_FAIL:
     return {
       ...state,
       loading: false,
       isFail: true
     };
+  default: return state;
   }
-
-  return state;
 };
 
 export default newsReducer;

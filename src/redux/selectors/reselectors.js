@@ -11,9 +11,3 @@ export const newsItemSelector = createSelector(
   [selectNewsItem],
   (newsItem) => newsItem
 );
-
-const selectNewsItemComment = state => state.newsItemCommentReducer;
-export const newsItemCommentsSelector = createSelector(
-  [selectNewsItemComment],
-  (newsItemComments) => newsItemComments
-);
