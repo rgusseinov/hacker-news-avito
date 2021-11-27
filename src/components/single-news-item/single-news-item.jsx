@@ -46,19 +46,19 @@ function SingleNewsItem(){
                   />
                   <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
-                      <Button href={item?.url} variant="outlined" color="primary"> Read more </Button>
+                      <Button href={item?.url} variant="outlined" color="primary">Read more</Button>
                     </Typography>
                   </CardContent>
 
                   <CardActions>
                     <IconButton>
                       <StarIcon />
-                      <Typography color="textSecondary" component="p"> &nbsp; {item?.by}  </Typography>     
+                      <Typography color="textSecondary" component="p">&nbsp;{item?.by}</Typography>     
                     </IconButton>
 
                     <IconButton>
                       <PersonIcon />
-                      <Typography color="textSecondary" component="p"> &nbsp; {item?.score}  </Typography>     
+                      <Typography color="textSecondary" component="p">&nbsp;{item?.score}</Typography>     
                     </IconButton>
                   </CardActions>
                 </Card>

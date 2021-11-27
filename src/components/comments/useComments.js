@@ -2,9 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getCommentsByIds } from "../../redux/actions/actions";
 import { LOAD_COMMENT_FAIL, LOAD_COMMENT_SUCCESS } from "../../redux/actions/actionTypes";
-import { baseURL, buildTree } from "../../utils/utils";
+import { baseURL, buildTree, getCommentsByIds } from "../../utils/utils";
 
 export default () => {
 
@@ -20,7 +19,6 @@ export default () => {
     if (singleComment) return;
     loadComments();
   }, [singleComment]);
-
 
   const loadComments = async () => {
     try {

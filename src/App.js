@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import useNews from './useNews';
+import { Container } from '@material-ui/core';
 import Header from './components/header/header';
 import ItemList from './components/item-list/item-list';
-import { Container } from '@material-ui/core';
+import useNews from './useNews';
 import Title from './components/title/title';
 import SingleNewsItem from './components/single-news-item/single-news-item';
 import classes from './App.module.css';
