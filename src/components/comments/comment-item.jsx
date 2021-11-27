@@ -1,31 +1,25 @@
-import { Avatar, Grid, Paper } from '@material-ui/core';
 import React from 'react';
+import { Avatar, Grid, Paper } from '@material-ui/core';
 import { getLocalDateFormat, textParser } from '../../utils/utils';
 
-
 function CommentItem({ item }){
-
-  const parseText = textParser(item.text);
+  const parsedText = textParser(item.text);
   const commentPostTime = getLocalDateFormat(item.time);
 
   return (
-    <Paper style={{ padding: "20px 20px", margin: "10px 0" }}>
+    <Paper>
       <Grid container wrap="nowrap" spacing={2}>
         <Grid item>
-          <Avatar alt="User Avatar" src={""} />
+          <Avatar alt="User Avatar" />
         </Grid>
         <Grid item>
-          <h4 style={{ margin: 0, textAlign: "left" }}> {item.by} </h4>
-          <p style={{ textAlign: "left" }}>
-            {parseText}
-          </p>
-          <p style={{ textAlign: "left", color: "gray" }}> {commentPostTime}  </p>
-
+          <h4>{item.by}</h4>
+          <p>{parsedText}</p>
+          <p>{commentPostTime}</p>
         </Grid>
       </Grid>
     </Paper>
   );
-
 }
 
 export default CommentItem;

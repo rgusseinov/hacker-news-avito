@@ -1,15 +1,14 @@
-.root {
-  /* color: #d1d1d1; */
-};
-
+.boxWrapper {
+  margin: 30px 0 20px 0;
+}
 .commentWrap {
   margin: 20px 0 0 0;
 };
-commentTitleButtonWrap {
+.commentTitleButtonWrap {
   display: flex,
 };
 
-commentBy {
+.commentBy {
   font-size: 16px;
   font-weight: normal;
   color: #d1d1d1;
