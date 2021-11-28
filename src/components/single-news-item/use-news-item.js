@@ -4,10 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { LOAD_NEWS_ITEM_FAIL, LOAD_NEWS_ITEM_SUCCESS } from "../../redux/actions/actionTypes";
 import { newsItemSelector } from "../../redux/selectors/reselectors";
-import { baseURL } from "../../utils/utils";
 
 export default () => {
-
   const { id } = useParams();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -18,25 +16,29 @@ export default () => {
   
   useEffect(() => {
     if (singleItem) return;
-    requestSignleNews();
+    requestSingleNews();
   }, [singleItem]);
 
-  const requestSignleNews = async () => {
-
+  const requestSingleNews = () => {
     try {
-      setLoading(true);
-      const singleNewsItem = await axios.get(`${baseURL}/item/${id}.json`);
-      dispatch({
-        type: LOAD_NEWS_ITEM_SUCCESS, 
-        payload: singleNewsItem.data
-      });
-      setLoading(false);
-    } catch {
-      setLoading(false);
-      dispatch({ type: LOAD_NEWS_ITEM_FAIL });
-    }
 
-  };
+    } catch {
+
+    }
+  }
+
+/*   try {
+    setLoading(true);
+    const singleNewsItem = await axios.get(`${baseURL}/item/${id}.json`);
+    dispatch({
+      type: LOAD_NEWS_ITEM_SUCCESS, 
+      payload: singleNewsItem.data
+    });
+    setLoading(false);
+  } catch {
+    setLoading(false);
+    dispatch({ type: LOAD_NEWS_ITEM_FAIL });
+  } */
 
 
   return { item, loading, isItemsFailed };

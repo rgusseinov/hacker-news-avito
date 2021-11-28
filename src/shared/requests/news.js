@@ -6,3 +6,4 @@ export const getNews = async () => {
   const newsIds = result.data.slice(0, ITEMS_LIMIT) || [];
   return newsIds;
 };
+
