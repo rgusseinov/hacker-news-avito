@@ -1,8 +1,17 @@
 import { LOAD_COMMENT_SUCCESS, LOAD_NEWS_ITEM_FAILURE, LOAD_COMMENT_FAILURE, LOAD_NEWS_ITEM_SUCCESS } from "../actions/types";
 
+/*
+
+  newsItems: {
+    1: { item: {}, isLoaded: true }
+  }
+
+*/
+
 const initialState = {
   newsItems: {},
   comments: {},
+
   isItemsFailed: false,
   isCommentsFailed: false
 };
@@ -15,10 +24,11 @@ const newsItemReducer = (state = initialState, action) => {
     return {
       ...state,
       isItemsFailed: false,
+      isCommentsFailed: false,
       newsItems:{
         ...state.newsItems,
         [action.payload.id]: {
-          item: action.payload
+          item: action.payload, isLoaded: true
         },
       },
     };

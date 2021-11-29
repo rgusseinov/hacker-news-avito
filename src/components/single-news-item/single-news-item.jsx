@@ -11,20 +11,18 @@ import { Button,
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
-// import Comments from '../comments/comments';
+import Comments from '../comments/comments';
 import useNewsItem from './use-news-item';
 import Loader from '../loader/loader';
 import Error from '../error/error';
  
 function SingleNewsItem(){
-  const { item, loading, isItemsFailed } = useNewsItem();
-
-  console.log(`loading`, loading);
+  const { item, isLoaded, isItemsFailed } = useNewsItem();
 
   return (
     <Grid container>
       {
-        loading ? <Loader /> :
+        !isLoaded ? <Loader /> :
           isItemsFailed ? <Error /> : (
             <>
               <Grid item xs={12}>
@@ -65,7 +63,7 @@ function SingleNewsItem(){
                   </CardActions>
                 </Card>
               </Grid>
-              {/* <Comments /> */}
+              <Comments />
             </>)
       }
     </Grid>);

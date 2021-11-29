@@ -2,8 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { LOAD_COMMENT_FAIL, LOAD_COMMENT_SUCCESS } from "../../redux/actions/actionTypes";
-import { baseURL, buildTree, getCommentsByIds } from "../../utils/utils";
+import { LOAD_COMMENT_FAILURE, LOAD_COMMENT_SUCCESS } from "../../redux/actions/types";
+import { baseURL } from "../../shared/requests/api";
+import { buildTree, getCommentsByIds } from "../../shared/utils/comments/comments";
 
 export default () => {
 
@@ -34,12 +35,12 @@ export default () => {
         
       }).catch (() => {
         setLoading(false);
-        dispatch({ type: LOAD_COMMENT_FAIL });
+        dispatch({ type: LOAD_COMMENT_FAILURE });
       });
 
     } catch {
       setLoading(false);
-      dispatch({ type: LOAD_COMMENT_FAIL });
+      dispatch({ type: LOAD_COMMENT_FAILURE });
     }
   
   };
