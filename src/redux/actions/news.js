@@ -1,20 +1,20 @@
-import axios from "axios";
-import { baseURL } from "../../utils/utils";
-import { LOAD_NEWS_FAIL, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "./actionTypes";
+import { getItem } from "../../shared/requests/item";
+import { getNews } from '../../shared/requests/news';
+import { LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from './types';
 
-export const loadNews = (newsIds) => async (dispatch) => {
+export const loadNews = () => async (dispatch) => {
   const promises = [];
   dispatch({ type: LOAD_NEWS_START });
+  
+  const newsIds = await getNews();
+  newsIds.forEach(newsId => promises.push(getItem(newsId)));
 
-  newsIds.forEach(newsId => promises.push(axios.get(`${baseURL}/item/${newsId}.json`)));
   Promise.all(promises).then(data => {
-    return Promise.all(data.map( result => result.data ));
+    return Promise.all(data.map( result => result ));
   }).then(data => {
     dispatch({ type: LOAD_NEWS_SUCCESS, payload: data });
   });
-  
-};
 
-export const loadNewsFail = () => async (dispatch) => {
-  dispatch({ type: LOAD_NEWS_FAIL });
+  // dispatch({ type: LOAD_NEWS_FAILURE });
+  
 };

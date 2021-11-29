@@ -1,4 +1,4 @@
-import { LOAD_COMMENT_FAIL, LOAD_COMMENT_SUCCESS, LOAD_NEWS_ITEM_FAIL, LOAD_NEWS_ITEM_SUCCESS } from "../actions/actionTypes";
+import { LOAD_COMMENT_SUCCESS, LOAD_NEWS_ITEM_FAILURE, LOAD_COMMENT_FAILURE, LOAD_NEWS_ITEM_SUCCESS } from "../actions/types";
 
 const initialState = {
   newsItems: {},
@@ -23,7 +23,7 @@ const newsItemReducer = (state = initialState, action) => {
       },
     };
 
-  case LOAD_NEWS_ITEM_FAIL:
+  case LOAD_NEWS_ITEM_FAILURE:
     return {
       ...state,
       isItemsFailed: true,
@@ -39,7 +39,7 @@ const newsItemReducer = (state = initialState, action) => {
       },
     };
   
-  case LOAD_COMMENT_FAIL:
+  case LOAD_COMMENT_FAILURE:
     return {
       ...state,
       isCommentsFailed: true,

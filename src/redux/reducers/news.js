@@ -1,4 +1,4 @@
-import { LOAD_NEWS_FAIL, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "../actions/actionTypes";
+import { LOAD_NEWS_FAILURE, LOAD_NEWS_START, LOAD_NEWS_SUCCESS } from "../actions/types";
 
 const initialState = {
   news: {},
@@ -30,7 +30,7 @@ const newsReducer = (state = initialState, action) => {
     };
   }
   
-  case LOAD_NEWS_FAIL:
+  case LOAD_NEWS_FAILURE:
     return {
       ...state,
       loading: false,

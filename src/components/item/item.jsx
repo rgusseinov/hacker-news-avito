@@ -10,7 +10,7 @@ import {  Button,
   Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import PersonIcon from '@material-ui/icons/Person';
-import { getLocalDateFormat } from '../../utils/utils';
+import { getLocalDateFormat } from '../../shared/utils/utils';
 import classes from './news-item.module.css';
 
 function Item({ item }){

@@ -4,9 +4,9 @@ import { Container } from '@material-ui/core';
 import Header from './components/header/header';
 import ItemList from './components/item-list/item-list';
 import Title from './components/title/title';
-import useNews from './hooks/useNews';
 import SingleNewsItem from './components/single-news-item/single-news-item';
 import classes from './App.module.css';
+import useNews from './hooks/use-news';
 
 function App() {
   const handleRefreshNews = useNews();

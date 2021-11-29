@@ -1,2 +1,7 @@
+import axios from "axios";
+import { baseURL } from "./api";
 
-export const baseURL = 'https://hacker-news.firebaseio.com/v0';
+export const getItem = async (newsId) => {
+  const response = await axios.get(`${baseURL}/item/${newsId}.json`);
+  return response.data;
+};

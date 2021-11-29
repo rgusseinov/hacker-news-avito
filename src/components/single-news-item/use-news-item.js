@@ -1,9 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { LOAD_NEWS_ITEM_FAIL, LOAD_NEWS_ITEM_SUCCESS } from "../../redux/actions/actionTypes";
-import { newsItemSelector } from "../../redux/selectors/reselectors";
+import { loadSingleNews } from "../../redux/actions/single-news";
+import { newsItemSelector } from "../../redux/selectors/news-selector";
 
 export default () => {
   const { id } = useParams();
@@ -19,27 +18,17 @@ export default () => {
     requestSingleNews();
   }, [singleItem]);
 
-  const requestSingleNews = () => {
+  const requestSingleNews = async () => {
     try {
-
-    } catch {
-
+      setLoading(true);
+      dispatch(loadSingleNews(id));
+      setLoading(false);
+    } catch(e) {
+      console.error(`Что-то пошло не так: ${e}`);
     }
-  }
+  };
 
-/*   try {
-    setLoading(true);
-    const singleNewsItem = await axios.get(`${baseURL}/item/${id}.json`);
-    dispatch({
-      type: LOAD_NEWS_ITEM_SUCCESS, 
-      payload: singleNewsItem.data
-    });
-    setLoading(false);
-  } catch {
-    setLoading(false);
-    dispatch({ type: LOAD_NEWS_ITEM_FAIL });
-  } */
-
+  
 
   return { item, loading, isItemsFailed };
 };

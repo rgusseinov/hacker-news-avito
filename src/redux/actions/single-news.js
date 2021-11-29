@@ -1,14 +1,10 @@
-const requestSingleNews = async () => {
-  try {
-   
-    const singleNewsItem = await axios.get(`${baseURL}/item/${id}.json`);
-    dispatch({
-      type: LOAD_NEWS_ITEM_SUCCESS, 
-      payload: singleNewsItem.data
-    });
+import { getItem } from '../../shared/requests/item';
+import { LOAD_NEWS_ITEM_SUCCESS } from './types';
 
-  } catch {
-   
-    // dispatch({ type: LOAD_NEWS_ITEM_FAIL });
-  }
+export const loadSingleNews = (id) => async (dispatch) => {
+  const singleNewsItem = await getItem(id);
+  dispatch({
+    type: LOAD_NEWS_ITEM_SUCCESS, 
+    payload: singleNewsItem
+  });
 };

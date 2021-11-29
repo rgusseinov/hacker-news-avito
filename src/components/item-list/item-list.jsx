@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import useItemList from './useItemList';
 import Item from '../item/item';
 import Loader from '../loader/loader';
 import Error from '../error/error';
+import useItemList from './use-item-list';
 
 function ItemList(){
   const { newsArray, loading, isFail } = useItemList();
