@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
+import { newsSelector } from "../../redux/selectors/news-selector";
 
 const useItemList = () => {
-  const { news, loading, isFail } = useSelector(state => state.newsReducer);
+  const { news, loading, isFail } = useSelector(newsSelector);
     
   const newsArray = Object.values(news);
   return { newsArray, loading, isFail };

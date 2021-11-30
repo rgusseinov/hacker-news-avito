@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { loadNews } from "../redux/actions/news";
+import { loadNewsFailure, loadNewsStart, loadNewsSuccess } from "../redux/actions/news";
 import { TIME_INTERVAL } from "../shared/constants";
+import { getItem } from "../shared/requests/item";
+import { getNews } from "../shared/requests/news";
 
 const useNews = () => {
   const dispatch = useDispatch();
@@ -13,11 +15,20 @@ const useNews = () => {
     return () => clearInterval(timerRef.current);
   }, []);
 
-  const requestNews = () => {
+  const requestNews = async () => {
     try {
-      dispatch(loadNews());
-    } catch (e) {
-      console.error(`Что-то пошло не так: ${e}`);
+      const promises = [];
+      dispatch(loadNewsStart());
+
+      const newsIds = await getNews();
+      newsIds.forEach(newsId => promises.push(getItem(newsId)));
+
+      Promise.all(promises)
+        .then(data => Promise.all(data.map(result => result)))
+        .then(data => dispatch(loadNewsSuccess(data)));
+
+    } catch {
+      dispatch(loadNewsFailure());
     }
   };
 

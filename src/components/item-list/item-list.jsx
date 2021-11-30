@@ -5,9 +5,8 @@ import Loader from '../loader/loader';
 import Error from '../error/error';
 import useItemList from './use-item-list';
 
-function ItemList(){
+const ItemList = () => {
   const { newsArray, loading, isFail } = useItemList();
-    
   return (
     <Grid container spacing={3}>
       {
@@ -21,6 +20,6 @@ function ItemList(){
       }
     </Grid>
   );
-}
+};
 
 export default ItemList;

@@ -22,9 +22,7 @@ export const buildCommentTree = (comment, commentsById) => {
 };
 
 export const getCommentsByIds = async (kids) => {
- 
   const arrayOfKids = kids.map((kid) => getItem(kid));
-
   return Promise.all(arrayOfKids)
     .then((allResults) => {
       return Promise.all(allResults.map(result => result));
@@ -36,7 +34,7 @@ export const getCommentsByIds = async (kids) => {
         allKidsIds = allKidsIds.concat(item?.kids || []);
       });
       
-      if (allKidsIds.length === 0) return res;
+      if (!allKidsIds.length) return res;
 
       return getCommentsByIds(allKidsIds).then((children) => {
         return children.concat(res);

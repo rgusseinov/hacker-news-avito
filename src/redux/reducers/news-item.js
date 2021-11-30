@@ -9,9 +9,7 @@ const initialState = {
 };
 
 const newsItemReducer = (state = initialState, action) => {
-
   switch (action.type){
-
   case LOAD_NEWS_ITEM_SUCCESS:
     return {
       ...state,

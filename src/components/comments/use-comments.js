@@ -43,6 +43,5 @@ export default () => {
   const commentsCount = item?.length;
   const tree = buildTree(item, id);
   
-  console.log(`loading`, loading);
   return { tree, loading, isCommentsFailed, commentsCount, handleRefreshComments };
 };

@@ -5,7 +5,7 @@ import { Button,
 import RefreshIcon from '@material-ui/icons/Refresh';
 import classes from './title.module.css';
 
-function Title({ title, handleRefreshNews }){
+const Title = ({ title, handleRefreshNews }) => {
   return(
     <div className={classes.title}>
       <Grid container spacing={3}>
@@ -23,7 +23,7 @@ function Title({ title, handleRefreshNews }){
       </Grid>
     </div>
   );
-}
+};
 
 export default Title;
 

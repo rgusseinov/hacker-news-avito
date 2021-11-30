@@ -5,7 +5,7 @@ import { AppBar,
   IconButton } from '@material-ui/core';
 import classes from './header.module.css';
 
-function Header(){
+const Header = () => {
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -19,7 +19,7 @@ function Header(){
       </Grid>
     </Grid>
   );
-}
+};
 
 export default Header;
 

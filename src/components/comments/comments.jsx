@@ -13,7 +13,7 @@ import Loader from '../loader/loader';
 import Error from '../error/error';
 import classes from './comments.module.css';
 
-function Comments(){
+const Comments = () => {
   const { tree, loading, isCommentsFailed, commentsCount, handleRefreshComments  } = useComments();
 
   const renderComments = (nodes) => {
@@ -81,6 +81,6 @@ function Comments(){
       }
     </Grid>
   );
-}
+};
 
 export default Comments;

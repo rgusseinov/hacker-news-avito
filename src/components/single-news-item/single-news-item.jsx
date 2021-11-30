@@ -16,9 +16,8 @@ import useNewsItem from './use-news-item';
 import Loader from '../loader/loader';
 import Error from '../error/error';
  
-function SingleNewsItem(){
+const SingleNewsItem = () => {
   const { item, loading, isItemsFailed } = useNewsItem();
-
   return (
     <Grid container>
       {
@@ -66,6 +65,6 @@ function SingleNewsItem(){
             </>)
       }
     </Grid>);
-}
+};
 
 export default SingleNewsItem;

@@ -8,9 +8,8 @@ import SingleNewsItem from './components/single-news-item/single-news-item';
 import classes from './App.module.css';
 import useNews from './hooks/use-news';
 
-function App() {
+const App = () => {
   const handleRefreshNews = useNews();
-  
   return (
     <Container maxWidth="md">
       <div className={classes.wrapper}>
@@ -25,6 +24,6 @@ function App() {
       </div>
     </Container>
   );
-}
+};
 
 export default App;

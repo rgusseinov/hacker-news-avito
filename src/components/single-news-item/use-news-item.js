@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { addNewsItemSuccess, addNewsItemFailure } from "../../redux/actions/single-news";
+import { newsItemSelector } from "../../redux/selectors/news-item-selector";
 import { getItem } from "../../shared/requests/item";
 
 export default () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  
+
   const [loading, setLoading] = useState(false);
-  const { newsItems, isItemsFailed } = useSelector(state => state.newsItemReducer);
+  const { newsItems, isItemsFailed } = useSelector(newsItemSelector);
   const singleItem = newsItems[id];
   const { item } = singleItem || {};
  

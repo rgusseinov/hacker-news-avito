@@ -7,7 +7,6 @@ const initialState = {
 };
 
 const newsReducer = (state = initialState, action) => {
-
   switch (action.type) {
   case LOAD_NEWS_START:
     return {
@@ -15,7 +14,6 @@ const newsReducer = (state = initialState, action) => {
       loading: true,
       isFail: false
     };
-
   case LOAD_NEWS_SUCCESS: {
     const itemsObject = {};
     for (let i = 0; i < action.payload.length; i++) {

@@ -13,7 +13,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import { getLocalDateFormat } from '../../shared/utils/utils';
 import classes from './news-item.module.css';
 
-function Item({ item }){
+const Item = ({ item }) => {
   const newsItemPostTime = getLocalDateFormat(item.time);
   return(
     <Grid item xs={12}>
@@ -39,6 +39,6 @@ function Item({ item }){
       </Card>
     </Grid>
   );
-}
+};
 
 export default Item;

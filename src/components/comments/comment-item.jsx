@@ -2,10 +2,9 @@ import React from 'react';
 import { Avatar, Grid, Paper } from '@material-ui/core';
 import { getLocalDateFormat, textParser } from '../../utils/utils';
 
-function CommentItem({ item }){
+const CommentItem = ({ item }) => {
   const parsedText = textParser(item.text);
   const commentPostTime = getLocalDateFormat(item.time);
-
   return (
     <Paper>
       <Grid container wrap="nowrap" spacing={2}>
@@ -20,6 +19,6 @@ function CommentItem({ item }){
       </Grid>
     </Paper>
   );
-}
+};
 
 export default CommentItem;
