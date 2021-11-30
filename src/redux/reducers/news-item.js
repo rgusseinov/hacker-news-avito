@@ -1,13 +1,5 @@
 import { LOAD_COMMENT_SUCCESS, LOAD_NEWS_ITEM_FAILURE, LOAD_COMMENT_FAILURE, LOAD_NEWS_ITEM_SUCCESS } from "../actions/types";
 
-/*
-
-  newsItems: {
-    1: { item: {}, isLoaded: true }
-  }
-
-*/
-
 const initialState = {
   newsItems: {},
   comments: {},

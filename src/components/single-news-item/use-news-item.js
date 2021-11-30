@@ -10,22 +10,13 @@ export default () => {
   const { newsItems, isItemsFailed } = useSelector(state => state.newsItemReducer);
   const singleItem = newsItems[id];
   const { item, isLoaded } = singleItem || {};
-
-  console.log(`isLoaded`, isLoaded);
-
-  
+  console.log(`isLoaded`, isLoaded); 
+ 
   useEffect(() => {
     if (singleItem) return;
-    requestSingleNews();
+    dispatch(loadSingleNews(id));
   }, [singleItem]);
 
-  const requestSingleNews = async () => {
-    try {
-      dispatch(loadSingleNews(id));
-    } catch(e) {
-      console.error(`Что-то пошло не так: ${e}`);
-    }
-  };  
 
   return { item, isLoaded, isItemsFailed };
 };
