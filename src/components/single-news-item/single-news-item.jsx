@@ -17,12 +17,12 @@ import Loader from '../loader/loader';
 import Error from '../error/error';
  
 function SingleNewsItem(){
-  const { item, isLoaded, isItemsFailed } = useNewsItem();
+  const { item, loading, isItemsFailed } = useNewsItem();
 
   return (
     <Grid container>
       {
-        !isLoaded ? <Loader /> :
+        loading ? <Loader /> :
           isItemsFailed ? <Error /> : (
             <>
               <Grid item xs={12}>
@@ -37,7 +37,6 @@ function SingleNewsItem(){
                   </Grid>
                 </Grid>       
               </Grid>
-
               <Grid item xs={12}>
                 <Card>
                   <CardHeader

@@ -20,7 +20,7 @@ const newsItemReducer = (state = initialState, action) => {
       newsItems:{
         ...state.newsItems,
         [action.payload.id]: {
-          item: action.payload, isLoaded: true
+          item: action.payload
         },
       },
     };

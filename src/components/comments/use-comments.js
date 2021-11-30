@@ -1,13 +1,11 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { LOAD_COMMENT_FAILURE, LOAD_COMMENT_SUCCESS } from "../../redux/actions/types";
-import { baseURL } from "../../shared/requests/api";
+import { addCommentsFailure, addCommentsSuccess } from "../../redux/actions/comments";
+import { getItem } from "../../shared/requests/item";
 import { buildTree, getCommentsByIds } from "../../shared/utils/comments/comments";
 
 export default () => {
-
   const { id } = useParams();
   const dispatch = useDispatch();
   
@@ -18,37 +16,33 @@ export default () => {
   
   useEffect(() => {
     if (singleComment) return;
-    loadComments();
+    requestComments();
   }, [singleComment]);
 
-  const loadComments = async () => {
+  const requestComments = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${baseURL}/item/${id}.json`);
-      if (!response.data.kids) return [];
-      const commentList = getCommentsByIds(response.data.kids);
-
-      commentList.then(comments => {
-         
-        dispatch({ type: LOAD_COMMENT_SUCCESS, payload: { id, item: comments } });
-        setLoading(false);
-        
-      }).catch (() => {
-        setLoading(false);
-        dispatch({ type: LOAD_COMMENT_FAILURE });
-      });
-
-    } catch {
+      const response = await getItem(id);
+      if (!response.kids) return [];
+      
+      try {
+        const commentList = await getCommentsByIds(response.kids);
+        const payload = { id, item: commentList };  
+        dispatch(addCommentsSuccess(payload));
+      } catch {
+        dispatch(addCommentsFailure());
+      }
       setLoading(false);
-      dispatch({ type: LOAD_COMMENT_FAILURE });
+    } catch {
+      dispatch(addCommentsFailure());
     }
-  
+    
   };
 
-
-  const handleRefreshComments = () => loadComments();
+  const handleRefreshComments = () => requestComments();
   const commentsCount = item?.length;
   const tree = buildTree(item, id);
   
+  console.log(`loading`, loading);
   return { tree, loading, isCommentsFailed, commentsCount, handleRefreshComments };
 };

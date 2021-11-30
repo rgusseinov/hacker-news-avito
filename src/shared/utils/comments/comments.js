@@ -1,16 +1,13 @@
-import { baseURL } from "../../requests/api";
+import { getItem } from "../../requests/item";
 
 export const buildTree = (comments, postId) => {
   const commentsById = {};
-  
   comments.forEach((comment) => {
     commentsById[comment.id] = comment;
-  });
-  
+  });  
   const rootComments = comments.filter((comment) => {
     return comment?.parent?.toString() === postId;
   });
-
   return rootComments.map((item) => buildCommentTree(item, commentsById));
 };
 
@@ -24,13 +21,13 @@ export const buildCommentTree = (comment, commentsById) => {
   return result;
 };
 
-export function getCommentsByIds(kids) {
-  
-  const arrayOfKids = kids.map((kid) => fetch(`${baseURL}/item/${kid}.json`));
+export const getCommentsByIds = async (kids) => {
+ 
+  const arrayOfKids = kids.map((kid) => getItem(kid));
 
   return Promise.all(arrayOfKids)
     .then((allResults) => {
-      return Promise.all(allResults.map((result) => result.json()));
+      return Promise.all(allResults.map(result => result));
     })
     .then((res) => {
       
@@ -48,4 +45,5 @@ export function getCommentsByIds(kids) {
     }).catch((err) => {
       console.error(`Что-то пошло не так: `, err);
     });
-}
+};
+
