@@ -9,15 +9,13 @@ const ItemList = () => {
   const { newsArray, loading, isFail } = useItemList();
   return (
     <Grid container spacing={3}>
-      {
-        loading ? <Loader /> :
-          isFail ? <Error /> : (
-            newsArray.map(item =>
-              <Item
-                key={item.id}
-                item={item}
-              />))
-      }
+      {loading ? (
+        <Loader />
+      ) : isFail ? (
+        <Error />
+      ) : (
+        newsArray.map((item) => <Item key={item.id} item={item} />)
+      )}
     </Grid>
   );
 };

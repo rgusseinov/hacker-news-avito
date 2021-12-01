@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
-import { addNewsItemSuccess, addNewsItemFailure } from "../../redux/actions/single-news";
-import { newsItemSelector } from "../../redux/selectors/news-item-selector";
-import { getItem } from "../../shared/requests/item";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
+import {
+  addNewsItemSuccess,
+  addNewsItemFailure
+} from '../../redux/actions/single-news';
+import { newsItemSelector } from '../../redux/selectors/news-item-selector';
+import { getItem } from '../../shared/requests/item';
 
 export default () => {
   const { id } = useParams();
@@ -13,7 +16,7 @@ export default () => {
   const { newsItems, isItemsFailed } = useSelector(newsItemSelector);
   const singleItem = newsItems[id];
   const { item } = singleItem || {};
- 
+
   useEffect(() => {
     if (singleItem) return;
     requestSignleNews();

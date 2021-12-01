@@ -20,7 +20,7 @@ const App = () => {
             <ItemList />
           </Route>
           <Route path="/item/:id" component={SingleNewsItem} />
-        </Switch>          
+        </Switch>
       </div>
     </Container>
   );

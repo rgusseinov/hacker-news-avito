@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, 
-  Grid, 
-  IconButton } from '@material-ui/core';
+import { AppBar, Grid, IconButton } from '@material-ui/core';
 import classes from './header.module.css';
 
 const Header = () => {
@@ -22,4 +20,3 @@ const Header = () => {
 };
 
 export default Header;
-

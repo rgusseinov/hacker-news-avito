@@ -1,12 +1,10 @@
 import React from 'react';
-import { Button, 
-  Grid, 
-  Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import classes from './title.module.css';
 
 const Title = ({ title, handleRefreshNews }) => {
-  return(
+  return (
     <div className={classes.title}>
       <Grid container spacing={3}>
         <Grid item xs={10}>
@@ -18,7 +16,10 @@ const Title = ({ title, handleRefreshNews }) => {
             color="primary"
             startIcon={<RefreshIcon />}
             onClick={handleRefreshNews}
-          > Refresh </Button>
+          >
+            {' '}
+            Refresh{' '}
+          </Button>
         </Grid>
       </Grid>
     </div>
@@ -26,4 +27,3 @@ const Title = ({ title, handleRefreshNews }) => {
 };
 
 export default Title;
-

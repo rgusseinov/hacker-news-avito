@@ -4,7 +4,7 @@ export const loadNewsStart = () => ({
   type: LOAD_NEWS_START
 });
 
-export const loadNewsSuccess = news => ({
+export const loadNewsSuccess = (news) => ({
   type: LOAD_NEWS_SUCCESS,
   payload: news
 });

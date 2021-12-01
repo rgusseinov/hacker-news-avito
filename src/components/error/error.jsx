@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
 const Error = () => {
-  return(
+  return (
     <Grid item xs={12}>
       <Alert severity="error">Something went wrong. Please refresh page</Alert>
     </Grid>
