@@ -3,14 +3,13 @@ import { Route, Switch } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import Header from './components/header/header';
 import ItemList from './components/item-list/item-list';
-import useNews from './useNews';
 import Title from './components/title/title';
 import SingleNewsItem from './components/single-news-item/single-news-item';
+import useNews from './hooks/use-news';
 import classes from './App.module.css';
 
-function App() {
+const App = () => {
   const handleRefreshNews = useNews();
-  
   return (
     <Container maxWidth="md">
       <div className={classes.wrapper}>
@@ -21,10 +20,10 @@ function App() {
             <ItemList />
           </Route>
           <Route path="/item/:id" component={SingleNewsItem} />
-        </Switch>          
+        </Switch>
       </div>
     </Container>
   );
-}
+};
 
 export default App;

@@ -1,20 +1,18 @@
 .boxWrapper {
-  margin: 30px 0 20px 0;
+  margin: 30px 20px;
 }
 .commentWrap {
-  margin: 20px 0 0 0;
+  margin-top: 20px;
 };
 .commentTitleButtonWrap {
   display: flex,
 };
-
 .commentBy {
   font-size: 16px;
   font-weight: normal;
   color: #d1d1d1;
   margin: 0;
 };
-
 .comment {
   font-size: 14px;
   font-weight: normal;
@@ -22,21 +20,18 @@
   opacity: 0.7;
   margin: 0;
 };
-
 .comment p{
   margin: 0;
 }
 .comment p a{
   color: #3e53b1;
 }
-
 .commentTitle {
   font-size: 22px;
   font-weight: normal;
   color: #d1d1d1;
   margin-right: 20px;
 };
-
 .backButton {
   border-color: #d1d1d1;
   color: #d1d1d1;
