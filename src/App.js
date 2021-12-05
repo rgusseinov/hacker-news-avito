@@ -6,13 +6,13 @@ import ItemList from './components/item-list/item-list';
 import Title from './components/title/title';
 import SingleNewsItem from './components/single-news-item/single-news-item';
 import useNews from './hooks/use-news';
-import classes from './App.module.css';
+import './scss/app.sass';
 
 const App = () => {
   const handleRefreshNews = useNews();
   return (
     <Container maxWidth="md">
-      <div className={classes.wrapper}>
+      <div className="wrapper">
         <Header />
         <Switch>
           <Route path="/" exact>
