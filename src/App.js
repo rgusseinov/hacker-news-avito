@@ -11,17 +11,15 @@ import './scss/app.sass';
 const App = () => {
   const handleRefreshNews = useNews();
   return (
-    <Container maxWidth="md">
-      <div className="wrapper">
-        <Header />
-        <Switch>
-          <Route path="/" exact>
-            <Title title="Latest News" handleRefreshNews={handleRefreshNews} />
-            <ItemList />
-          </Route>
-          <Route path="/item/:id" component={SingleNewsItem} />
-        </Switch>
-      </div>
+    <Container maxWidth="lg">
+      <Header />
+      <Switch>
+        <Route path="/" exact>
+          <Title title="Latest News" handleRefreshNews={handleRefreshNews} />
+          <ItemList />
+        </Route>
+        <Route path="/item/:id" component={SingleNewsItem} />
+      </Switch>
     </Container>
   );
 };
