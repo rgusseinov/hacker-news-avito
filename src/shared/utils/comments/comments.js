@@ -1,4 +1,4 @@
-import { getItem } from '../../requests/item';
+import { getNewsItem } from '../../requests/item';
 
 export const buildTree = (comments, postId) => {
   const commentsById = {};
@@ -24,7 +24,7 @@ export const buildCommentTree = (comment, commentsById) => {
 };
 
 export const getCommentsByIds = async (kids) => {
-  const arrayOfKids = kids.map((kid) => getItem(kid));
+  const arrayOfKids = kids.map((kid) => getNewsItem(kid));
   return Promise.all(arrayOfKids)
     .then((allResults) => {
       return Promise.all(allResults.map((result) => result));

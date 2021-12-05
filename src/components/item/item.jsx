@@ -30,10 +30,7 @@ const Item = ({ item }) => {
         />
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            <Button href={`/item/${item.id}`} variant="contained">
-              {' '}
-              Read more{' '}
-            </Button>
+            <Button href={`/item/${item.id}`} variant="contained">Read more</Button>
           </Typography>
         </CardContent>
         <CardActions>

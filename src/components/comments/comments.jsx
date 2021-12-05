@@ -5,7 +5,7 @@ import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import useComments from './use-comments';
+import useComments from '../../hooks/use-comments';
 import { textParser } from '../../shared/utils/utils';
 import Loader from '../loader/loader';
 import Error from '../error/error';
@@ -63,8 +63,7 @@ const Comments = () => {
                 startIcon={<RefreshIcon />}
                 onClick={handleRefreshComments}
               >
-                {' '}
-                Refresh{' '}
+                Refresh
               </Button>
             </Grid>
           </Grid>

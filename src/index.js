@@ -20,3 +20,10 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+/*
+  - Если нет комментариев, то идет бесконечный loading comments
+  
+*/
+
+// https://dribbble.com/shots/15996268-Hacker-News-Redesign-Concept
