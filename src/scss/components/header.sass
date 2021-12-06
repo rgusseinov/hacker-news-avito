@@ -1,7 +1,26 @@
-.header div
-  background-color: #ed702d;
-  color: #fff
+.header
+  .appBar
+    background-color: #ed702d
+  .toolbar
+    display: flex
+    justify-content: space-between
+  .logo
+    display: flex
+  img
+    margin-right: 15px
+  .title
+    font-family: 'Roboto', sans-serif
+    font-size: 28px
 
-.logoContainer
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px
+.menu
+  display: flex
+  justify-content: space-between
+  .menu-item
+    color: #1B1B1B
+    padding: 10px 20px
+    &.active
+      color: #fff
+      border-radius: 30px
+      background-color: #1B1B1B
+      padding: 10px 20px
+      box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.27)
