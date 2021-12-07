@@ -1,27 +1,21 @@
 import React from 'react';
-import { Button, Grid, Typography } from '@material-ui/core';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import classes from './title.module.css';
+import { Container, Grid, Typography } from '@material-ui/core';
 
 const Title = ({ title, handleRefreshNews }) => {
   return (
-    <div className={classes.title}>
-      <Grid container spacing={3}>
+    <div className={""}>
+      <Container>
         <Grid item xs={10}>
           <Typography variant="h4">{title}</Typography>
         </Grid>
         <Grid item xs={2}>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<RefreshIcon />}
-            onClick={handleRefreshNews}
-          >
-            {' '}
-            Refresh{' '}
-          </Button>
+          <button 
+            className="button"
+            onClick={handleRefreshNews}>
+              Refresh
+          </button>
         </Grid>
-      </Grid>
+      </Container>
     </div>
   );
 };

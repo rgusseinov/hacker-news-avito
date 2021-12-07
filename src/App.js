@@ -1,68 +1,34 @@
-import { Box, Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
+import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 import Header from './components/header/header';
+import ItemList from './components/item-list/item-list';
+import Title from './components/title/title';
+import SingleNewsItem from './components/single-news-item/single-news-item';
+import useNews from './hooks/use-news';
+
 import './scss/app.sass';
+import './scss/components/news-item.sass';
 
 const App = () => {
+  const handleRefreshNews = useNews();
+
   return (
     <Box className="wrapper">
       <Header />
-      <br/><br/><br/><br/>
 
-      <Container maxWidth="lg">
-        <Box className="news-item">
-          <div className="news-item__box-rating">
-            <div className="rating up">1</div>
-          </div>
-          <div className="news-item__box-content">
-            <h2>PostgreSQL extension for Oracle DBMS_JOB compatibility</h2>
-            <div className="news-item__box-footer">
-              <ul>
-                <li>32 points</li>
-                <li>Author</li>
-                <li>140 comments</li>
-                <li>9 hours ago</li>
-              </ul>
-            </div>
-          </div>          
-        </Box>
+      <br />
+      <br />
+      <br />
+      <br />
 
-        <Box className="news-item">
-          <div className="news-item__box-rating">
-            <div className="rating up">1</div>
-          </div>
-          <div className="news-item__box-content">
-            <h2>PostgreSQL extension for Oracle DBMS_JOB compatibility</h2>
-            <div className="news-item__box-footer">
-              <ul>
-                <li>32 points</li>
-                <li>Author</li>
-                <li>140 comments</li>
-                <li>9 hours ago</li>
-              </ul>
-            </div>
-          </div>          
-        </Box>
-
-
-        <Box className="news-item">
-          <div className="news-item__box-rating">
-            <div className="rating up">1</div>
-          </div>
-          <div className="news-item__box-content">
-            <h2>PostgreSQL extension for Oracle DBMS_JOB compatibility</h2>
-            <div className="news-item__box-footer">
-              <ul>
-                <li>32 points</li>
-                <li>Author</li>
-                <li>140 comments</li>
-                <li>9 hours ago</li>
-              </ul>
-            </div>
-          </div>          
-        </Box>
-
-      </Container>
+      <Switch>
+        <Route path="/" exact>
+          <Title title="Latest News" handleRefreshNews={handleRefreshNews} />
+          <ItemList />
+        </Route>
+        <Route path="/item/:id" component={SingleNewsItem} />
+      </Switch>
     </Box>
   );
 };
