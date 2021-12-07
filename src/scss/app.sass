@@ -1,5 +1,42 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 body
   font-family: 'Roboto', sans-serif
-  font-size: 20px
+  background-color: #1B1B1B
+  
+.news-item
+  display: flex
+  background-color: #3A3A3A
+  border-radius: 10px
+  margin-bottom: 10px
+  
+  &__box-rating
+    display: flex
+    flex-basis: 100px
+    align-items: center
+    color: #ed702d
+    padding-left: 20px
+
+    div
+      &:after
+      background-image: url(../assets/news-item/arrow-up.png); 
+      background-repeat: no-repeat;
+      width: 20px
+      padding-left: 30px
+      
+  &__box-content
+    flex-basis: 600px 
+    h2
+      font-size: 20px
+      font-weight: 300;
+      color: #fff
+      
+  &__box-footer
+    ul
+      list-style: none
+      display: flex
+      font-size: 16px
+      color: #fff
+      li
+        padding-left: 10px
+        
