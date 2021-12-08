@@ -1,27 +1,28 @@
 import React from 'react';
-import { AppBar, Box, Container, Link, Toolbar, Typography } from '@material-ui/core';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../../assets/logo.png';
 import '../../scss/components/header.sass';
 
 const Header = () => {
   return (
     <header className="header">
-      <AppBar title={<img src={Logo} />} className="appBar">
-        <Container maxWidth="lg">
-            <Toolbar className="toolbar">
-              <Box className="logo">
-                <img src={Logo} alt="Logo" />
-                <Typography className="title"> Hacker News </Typography>
-              </Box>
-              <nav className="menu">
-                <Link variant="button" className="menu-item" href="#"> News </Link>
-                <Link variant="button" className="menu-item" href="#"> Pasts </Link>
-                <Link variant="button" className="menu-item" href="#"> Comments </Link>
-                <Link variant="button" className="menu-item active" href="#"> Log In </Link>            
-              </nav>
-            </Toolbar>
-        </Container>
-      </AppBar>
+      <div className="container">
+        <div className="row header-row">
+          <div className="logo">
+            <Link to="/" className="logo-link">
+              <img src={Logo} alt="Logo" className="logo-img" />
+              <span className="logo-text"> Hacker News </span>
+            </Link>
+          </div>
+          <nav className="menu">
+            <NavLink activeClassName="active" className="menu-item" to="/news">News</NavLink>
+            <NavLink activeClassName="active" className="menu-item" to="/pasts">Pasts</NavLink>
+            <NavLink activeClassName="active" className="menu-item" to="/comments">Comments</NavLink>
+            <div className="menu-burger"></div>
+            {/* <Link variant="button" className="menu-item active" href="#"> Log In </Link>*/}
+          </nav>  
+        </div>
+      </div>
     </header>
   );
 };
