@@ -1,20 +1,20 @@
+import { Container } from '@material-ui/core';
 import React from 'react';
-import { Container, Grid, Typography } from '@material-ui/core';
 
 const Title = ({ title, handleRefreshNews }) => {
   return (
-    <div className={""}>
-      <Container>
-        <Grid item xs={10}>
-          <Typography variant="h4">{title}</Typography>
-        </Grid>
-        <Grid item xs={2}>
+    <div className="title-block">
+      <Container maxWidth="lg" className="container">
+        <div className="title">
+          <h4>{title}</h4>
+        </div>
+        <div className="actions">
           <button 
             className="button"
             onClick={handleRefreshNews}>
               Refresh
           </button>
-        </Grid>
+        </div>
       </Container>
     </div>
   );

@@ -4,6 +4,7 @@ import {
   Box
 } from '@material-ui/core';
 import { getLocalDateFormat } from '../../shared/utils/utils';
+import '../../scss/components/news-item.sass';
 
 
 const Item = ({ item }) => {
@@ -15,11 +16,9 @@ const Item = ({ item }) => {
         <span>Points</span>
       </div>
       <div className="news-item__box-content">
-        <h2>
-          <Link to={`/item/${item.id}`} className={""}>
-              {item.title}
-          </Link>
-        </h2>
+        <Link to={`/item/${item.id}`}>
+          <h2> {item.title} </h2>
+        </Link>
         <div className="news-item__box-footer">
           <ul>
             <li>
@@ -27,18 +26,20 @@ const Item = ({ item }) => {
               <span> {item.by} </span>
             </li>
             <li>
-              <i className="icon icon-comment"></i>
-              <span> 12 Comments </span>
+              <Link to={`/item/${item.id}`}>
+                <i className="icon icon-comment"></i>
+                <span> {item.descendants} Comments </span>
+              </Link>
             </li>
             <li>
               <i className="icon icon-time"></i>
-              <span> {newsItemPostTime} hours ago </span>
+              <span> {newsItemPostTime} </span>
             </li>
           </ul>
         </div>
       </div>
       <div className="news-item__box-action">
-        <a href={`/item/${item.id}`} className="button"> Open link </a>
+        <Link to={`/item/${item.id}`}>Open link</Link>
       </div>
     </Box>
   );
