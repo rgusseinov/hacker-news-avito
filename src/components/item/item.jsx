@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { getLocalDateFormat } from '../../shared/utils/utils';
 import '../../scss/components/news-item.sass';
 
-
 const Item = ({ item }) => {
   const newsItemPostTime = getLocalDateFormat(item.time);
   return (
@@ -13,9 +12,9 @@ const Item = ({ item }) => {
         <span>Points</span>
       </div>
       <div className="news-item__box-content">
-        <Link to={`/item/${item.id}`}>
+        <a href={`${item.url}`} target="_blank" rel="noreferrer">
           <h2> {item.title} </h2>
-        </Link>
+        </a>
         <div className="news-item__box-footer">
           <ul>
             <li>
@@ -36,7 +35,9 @@ const Item = ({ item }) => {
         </div>
       </div>
       <div className="news-item__box-action">
-        <Link to={`/item/${item.id}`}>Open link</Link>
+        <a href={`${item.url}`} target="_blank" rel="noreferrer">
+          Open link
+        </a>
       </div>
     </div>
   );
