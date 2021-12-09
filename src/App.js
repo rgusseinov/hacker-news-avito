@@ -1,11 +1,11 @@
 import React from 'react';
+import { Route, Switch } from 'react-router';
 import Header from './components/header/header';
 import ItemList from './components/item-list/item-list';
 import Title from './components/title/title';
 import SingleNewsItem from './components/single-news-item/single-news-item';
 import useNews from './hooks/use-news';
 import './scss/app.sass';
-import { Route, Switch } from 'react-router';
 
 const App = () => {
   const handleRefreshNews = useNews();
