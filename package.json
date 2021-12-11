@@ -30,7 +30,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.jsx' --write"
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.(jsx|js)' --write"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
     "node-sass": "^6.0.1",
     "prettier": "^2.5.0"

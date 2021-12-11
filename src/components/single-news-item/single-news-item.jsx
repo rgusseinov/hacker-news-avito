@@ -1,10 +1,10 @@
 import React from 'react';
-import Comments from '../comments/comments';
-import useNewsItem from '../../hooks/use-news-item';
 import Loader from '../loader/loader';
 import Error from '../error/error';
-import '../../scss/components/single-news.sass';
+import Comments from '../comments/comments';
+import useNewsItem from '../../hooks/use-news-item';
 import { getNewsPostTime } from '../../shared/utils/time';
+import '../../scss/components/single-news.sass';
 
 const SingleNewsItem = () => {
   const { item, loading, isItemsFailed } = useNewsItem();
@@ -20,7 +20,7 @@ const SingleNewsItem = () => {
           <div className="single-news">
             <div className="single-news__header">
               <div className="row">
-                <a href="#">
+                <a href={item?.url}>
                   <h1 className="title">{item?.title}</h1>
                 </a>
               </div>
