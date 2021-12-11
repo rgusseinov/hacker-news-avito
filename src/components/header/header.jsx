@@ -15,12 +15,22 @@ const Header = () => {
             </Link>
           </div>
           <nav className="menu">
-            <NavLink activeClassName="active" className="menu-item" to="/news">News</NavLink>
-            <NavLink activeClassName="active" className="menu-item" to="/pasts">Pasts</NavLink>
-            <NavLink activeClassName="active" className="menu-item" to="/comments">Comments</NavLink>
+            <NavLink activeClassName="active" className="menu-item" to="/news">
+              News
+            </NavLink>
+            <NavLink activeClassName="active" className="menu-item" to="/pasts">
+              Pasts
+            </NavLink>
+            <NavLink
+              activeClassName="active"
+              className="menu-item"
+              to="/comments"
+            >
+              Comments
+            </NavLink>
             <div className="menu-burger"></div>
             {/* <Link variant="button" className="menu-item active" href="#"> Log In </Link>*/}
-          </nav>  
+          </nav>
         </div>
       </div>
     </header>

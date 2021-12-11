@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getLocalDateFormat } from '../../shared/utils/utils';
 import '../../scss/components/news-item.sass';
+import { getNewsPostTime } from '../../shared/utils/time';
 
 const Item = ({ item }) => {
-  const newsItemPostTime = getLocalDateFormat(item.time);
+  const postTime = getNewsPostTime(item.time);
   return (
     <div className="news-item">
       <div className="news-item__box-rating">
@@ -29,7 +29,7 @@ const Item = ({ item }) => {
             </li>
             <li>
               <i className="icon icon-time"></i>
-              <span> {newsItemPostTime} </span>
+              <span> {postTime} </span>
             </li>
           </ul>
         </div>

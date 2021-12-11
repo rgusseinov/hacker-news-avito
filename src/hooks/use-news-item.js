@@ -12,7 +12,7 @@ export default () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { newsItems, isItemsFailed } = useSelector(newsItemSelector);
   const singleItem = newsItems[id];
   const { item } = singleItem || {};
@@ -24,13 +24,12 @@ export default () => {
 
   const requestSignleNews = async () => {
     try {
-      setLoading(true);
       const item = await getNewsItem(id);
       dispatch(addNewsItemSuccess(item));
-      setLoading(false);
     } catch {
-      setLoading(false);
       dispatch(addNewsItemFailure());
+    } finally {
+      setLoading(false);
     }
   };
 

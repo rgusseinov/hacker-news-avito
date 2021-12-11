@@ -20,6 +20,8 @@ export default () => {
   const singleComment = comments[id];
   const item = singleComment || [];
 
+  console.log(`isCommentsFailed`, isCommentsFailed);
+
   useEffect(() => {
     if (singleComment) return;
     requestComments();
@@ -54,7 +56,6 @@ export default () => {
   return {
     tree,
     loading,
-    isCommentsFailed,
     commentsCount,
     handleRefreshComments
   };
