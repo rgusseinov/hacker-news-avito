@@ -1,7 +1,7 @@
 import {
-  LOAD_COMMENT_SUCCESS,
+  LOAD_COMMENTS_SUCCESS,
   LOAD_NEWS_ITEM_FAILURE,
-  LOAD_COMMENT_FAILURE,
+  LOAD_COMMENTS_FAILURE,
   LOAD_NEWS_ITEM_SUCCESS
 } from '../actions/types';
 
@@ -34,7 +34,7 @@ const newsItemReducer = (state = initialState, action) => {
         isItemsFailed: true
       };
 
-    case LOAD_COMMENT_SUCCESS:
+    case LOAD_COMMENTS_SUCCESS:
       return {
         ...state,
         isCommentsFailed: false,
@@ -44,7 +44,7 @@ const newsItemReducer = (state = initialState, action) => {
         }
       };
 
-    case LOAD_COMMENT_FAILURE:
+    case LOAD_COMMENTS_FAILURE:
       return {
         ...state,
         isCommentsFailed: true

@@ -1,22 +1,18 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import {
   addCommentsFailure,
   addCommentsSuccess
-} from '../../redux/actions/comments';
-import { TIME_INTERVAL } from '../../shared/constants';
-import { getItem } from '../../shared/requests/item';
-import {
-  buildTree,
-  getCommentsByIds
-} from '../../shared/utils/comments/comments';
+} from '../redux/actions/comments';
+import { getNewsItem } from '../shared/requests/item';
+import { buildTree, getCommentsByIds } from '../shared/utils/comments/comments';
 
 export default () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const timerRef = useRef();
+  // const timerRef = useRef();
   const [loading, setLoading] = useState(false);
   const { comments, isCommentsFailed } = useSelector(
     (state) => state.newsItemReducer
@@ -24,18 +20,20 @@ export default () => {
   const singleComment = comments[id];
   const item = singleComment || [];
 
+  console.log(`isCommentsFailed`, isCommentsFailed);
+
   useEffect(() => {
     if (singleComment) return;
     requestComments();
 
-    timerRef.current = setInterval(() => requestComments(), TIME_INTERVAL);
-    () => clearInterval(timerRef);
+    // timerRef.current = setInterval(() => requestComments(), TIME_INTERVAL);
+    // () => clearInterval(timerRef);
   }, [singleComment]);
 
   const requestComments = async () => {
     try {
       setLoading(true);
-      const response = await getItem(id);
+      const response = await getNewsItem(id);
       if (!response.kids) return [];
 
       try {
@@ -58,7 +56,6 @@ export default () => {
   return {
     tree,
     loading,
-    isCommentsFailed,
     commentsCount,
     handleRefreshComments
   };

@@ -1,6 +1,6 @@
 export const getLocalDateFormat = (time) => {
   if (!time) return;
-  return new Date(time * 1000).toLocaleString();
+  return new Date(time * 1000).toLocaleDateString();
 };
 
 export const textParser = (text) => {

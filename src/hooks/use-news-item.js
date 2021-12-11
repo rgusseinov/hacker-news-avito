@@ -4,15 +4,15 @@ import { useParams } from 'react-router';
 import {
   addNewsItemSuccess,
   addNewsItemFailure
-} from '../../redux/actions/single-news';
-import { newsItemSelector } from '../../redux/selectors/news-item-selector';
-import { getItem } from '../../shared/requests/item';
+} from '../redux/actions/single-news';
+import { newsItemSelector } from '../redux/selectors/news-item-selector';
+import { getNewsItem } from '../shared/requests/item';
 
 export default () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { newsItems, isItemsFailed } = useSelector(newsItemSelector);
   const singleItem = newsItems[id];
   const { item } = singleItem || {};
@@ -24,13 +24,12 @@ export default () => {
 
   const requestSignleNews = async () => {
     try {
-      setLoading(true);
-      const item = await getItem(id);
+      const item = await getNewsItem(id);
       dispatch(addNewsItemSuccess(item));
-      setLoading(false);
     } catch {
-      setLoading(false);
       dispatch(addNewsItemFailure());
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -1,15 +1,14 @@
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import React from 'react';
-import RefreshIcon from '@material-ui/icons/Refresh';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import useComments from './use-comments';
-import { textParser } from '../../shared/utils/utils';
+import useComments from '../../hooks/use-comments';
+// import { textParser } from '../../shared/utils/utils';
 import Loader from '../loader/loader';
 import Error from '../error/error';
-import classes from './comments.module.css';
+import '../../scss/components/comments.sass';
 
 const Comments = () => {
   const {
@@ -24,17 +23,19 @@ const Comments = () => {
     if (!nodes) return null;
 
     return (
-      <div>
+      <div className="comments-row">
         {nodes.map((node) => {
-          const parsedText = textParser(node.text);
+          // const parsedText = textParser(node.text);
           return (
             <TreeItem
               key={node.id}
               nodeId={String(node.id)}
               label={
-                <div className={classes.commentWrap}>
-                  <p className={classes.commentBy}>{node.by}</p>
-                  <p className={classes.comment}>{parsedText}</p>
+                <div className="comments-inner">
+                  <p>
+                    By <span>{node.by}</span>
+                  </p>
+                  <p dangerouslySetInnerHTML={{ __html: node.text }}></p>
                 </div>
               }
             >
@@ -52,38 +53,32 @@ const Comments = () => {
         <Loader />
       ) : (
         <>
-          <Grid container className={classes.boxWrapper}>
-            <Grid item xs={10}>
-              <Typography variant="h5"> Comments {commentsCount} </Typography>
-            </Grid>
-            <Grid item xs={2}>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<RefreshIcon />}
-                onClick={handleRefreshComments}
-              >
+          <div className="comments-header">
+            <div>
+              <h2>{commentsCount} Comments</h2>
+            </div>
+            <div>
+              <button className="button" onClick={handleRefreshComments}>
                 {' '}
-                Refresh{' '}
-              </Button>
-            </Grid>
-          </Grid>
+                Refresh
+              </button>
+            </div>
+          </div>
           {isCommentsFailed ? (
             <Error />
           ) : (
-            <Grid container className={classes.boxWrapper}>
-              <Grid item xs={12}>
+            <div className="comments-body">
+              <div className="comments-row">
                 <TreeView
                   defaultCollapseIcon={<ExpandMoreIcon />}
                   defaultExpandIcon={<ChevronRightIcon />}
                   defaultExpanded={['root']}
-                  className={classes.root}
                   multiSelect
                 >
                   {renderComments(tree)}
                 </TreeView>
-              </Grid>
-            </Grid>
+              </div>
+            </div>
           )}
         </>
       )}

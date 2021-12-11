@@ -1,35 +1,32 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   loadNewsFailure,
   loadNewsStart,
   loadNewsSuccess
 } from '../redux/actions/news';
-import { TIME_INTERVAL } from '../shared/constants';
-import { getItem } from '../shared/requests/item';
-import { getNews } from '../shared/requests/news';
+import { NEWS_LIMIT } from '../shared/constants';
+import { getNewsItem } from '../shared/requests/item';
+import { getTopNews } from '../shared/requests/news';
 
 const useNews = () => {
   const dispatch = useDispatch();
-  const timerRef = useRef();
+  // const timerRef = useRef();
 
   useEffect(() => {
     requestNews();
-    timerRef.current = setInterval(() => requestNews(), TIME_INTERVAL);
-    return () => clearInterval(timerRef.current);
+    // timerRef.current = setInterval(() => requestNews(), TIME_INTERVAL);
+    // return () => clearInterval(timerRef.current);
   }, []);
 
   const requestNews = async () => {
     try {
-      const promises = [];
+      let topNewsList = [];
       dispatch(loadNewsStart());
 
-      const newsIds = await getNews();
-      newsIds.forEach((newsId) => promises.push(getItem(newsId)));
-
-      Promise.all(promises)
-        .then((data) => Promise.all(data.map((result) => result)))
-        .then((data) => dispatch(loadNewsSuccess(data)));
+      const newsIds = await getTopNews(NEWS_LIMIT);
+      topNewsList = newsIds.map((item) => getNewsItem(item));
+      Promise.all(topNewsList).then((data) => dispatch(loadNewsSuccess(data)));
     } catch {
       dispatch(loadNewsFailure());
     }

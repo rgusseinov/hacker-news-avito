@@ -1,57 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  Grid,
-  IconButton,
-  Typography
-} from '@material-ui/core';
-import StarIcon from '@material-ui/icons/Star';
-import PersonIcon from '@material-ui/icons/Person';
-import { getLocalDateFormat } from '../../shared/utils/utils';
-import classes from './news-item.module.css';
+import '../../scss/components/news-item.sass';
+import { getNewsPostTime } from '../../shared/utils/time';
 
 const Item = ({ item }) => {
-  const newsItemPostTime = getLocalDateFormat(item.time);
+  const postTime = getNewsPostTime(item.time);
   return (
-    <Grid item xs={12}>
-      <Card>
-        <CardHeader
-          title={
-            <Link to={`/item/${item.id}`} className={classes.titleLink}>
-              {item.title}
-            </Link>
-          }
-          subheader={`Date: ${newsItemPostTime}`}
-        />
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            <Button href={`/item/${item.id}`} variant="contained">
-              {' '}
-              Read more{' '}
-            </Button>
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <IconButton>
-            <StarIcon />
-            <Typography color="textSecondary" component="p">
-              &nbsp;{item.score}
-            </Typography>
-          </IconButton>
-          <IconButton>
-            <PersonIcon />
-            <Typography color="textSecondary" component="p">
-              &nbsp;{item.by}
-            </Typography>
-          </IconButton>
-        </CardActions>
-      </Card>
-    </Grid>
+    <div className="news-item">
+      <div className="news-item__box-rating">
+        <div className="rating up">{item.score}</div>
+        <span>Points</span>
+      </div>
+      <div className="news-item__box-content">
+        <a href={`${item.url}`} target="_blank" rel="noreferrer">
+          <h2> {item.title} </h2>
+        </a>
+        <div className="news-item__box-footer">
+          <ul>
+            <li>
+              <i className="icon icon-user"></i>
+              <span> {item.by} </span>
+            </li>
+            <li>
+              <Link to={`/item/${item.id}`}>
+                <i className="icon icon-comment"></i>
+                <span> {item.descendants} Comments </span>
+              </Link>
+            </li>
+            <li>
+              <i className="icon icon-time"></i>
+              <span> {postTime} </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="news-item__box-action">
+        <a href={`${item.url}`} target="_blank" rel="noreferrer">
+          Open link
+        </a>
+      </div>
+    </div>
   );
 };
 

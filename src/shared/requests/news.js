@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { ITEMS_LIMIT } from '../constants';
-import { baseURL } from './api';
+import { baseURL } from '../constants';
 
-export const getNews = async () => {
+export const getTopNews = async (newsLimit) => {
   const result = await axios.get(`${baseURL}/topstories.json`);
-  const newsIds = result.data.slice(0, ITEMS_LIMIT) || [];
+  const newsIds = result.data.slice(0, newsLimit) || [];
   return newsIds;
 };

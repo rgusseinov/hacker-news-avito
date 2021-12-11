@@ -1,19 +1,19 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Container } from '@material-ui/core';
+import { Route, Switch } from 'react-router';
 import Header from './components/header/header';
 import ItemList from './components/item-list/item-list';
 import Title from './components/title/title';
 import SingleNewsItem from './components/single-news-item/single-news-item';
 import useNews from './hooks/use-news';
-import classes from './App.module.css';
+import './scss/app.sass';
 
 const App = () => {
   const handleRefreshNews = useNews();
+
   return (
-    <Container maxWidth="md">
-      <div className={classes.wrapper}>
-        <Header />
+    <div className="wrapper">
+      <Header />
+      <div className="container">
         <Switch>
           <Route path="/" exact>
             <Title title="Latest News" handleRefreshNews={handleRefreshNews} />
@@ -22,7 +22,7 @@ const App = () => {
           <Route path="/item/:id" component={SingleNewsItem} />
         </Switch>
       </div>
-    </Container>
+    </div>
   );
 };
 
