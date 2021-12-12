@@ -1,9 +1,9 @@
 import { Grid } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';/* 
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'; */
 import useComments from '../../hooks/use-comments';
 import Loader from '../loader/loader';
 import Error from '../error/error';
@@ -18,29 +18,41 @@ const Comments = () => {
     handleRefreshComments
   } = useComments();
 
-  const renderComments = (nodes) => {
-    if (!nodes) return null;
+
+  function renderComments(tree) {
+    return (
+      <div className="comments-body">
+        <div className="comments-row">
+          {tree.map(comment => renderCommentItem(comment))}
+        </div>
+      </div>
+    );
+  }
+
+  const renderCommentItem = (comment) => {
+    if (!comment) return null;
+
+    const [kidsShowed, setKidsShowed] = useState(false);
+
+    const toggleComments = () => {
+      setKidsShowed(!kidsShowed);
+    };
 
     return (
       <div className="comments-row">
-        {nodes.map((node) => {
-          return (
-            <TreeItem
-              key={node.id}
-              nodeId={String(node.id)}
-              label={
-                <div className="comments-inner">
-                  <p>
-                    By <span>{node.by}</span>
-                  </p>
-                  <p dangerouslySetInnerHTML={{ __html: node.text }}></p>
-                </div>
-              }
-            >
-              {renderComments(node.children)}
-            </TreeItem>
-          );
-        })}
+        <div className="comments-inner">
+          <p>
+            By <span>{comment.by}</span>
+          </p>
+          <p dangerouslySetInnerHTML={{ __html: comment.text }}></p>
+          <hr />
+          <a onClick={toggleComments}>
+            <strong> Show more </strong>
+          </a>
+          {comment.children && kidsShowed && comment.children.map(child => {
+            return renderCommentItem(child);
+          })}
+        </div>
       </div>
     );
   };
@@ -63,20 +75,21 @@ const Comments = () => {
           </div>
           {isCommentsFailed ? (
             <Error />
-          ) : (
-            <div className="comments-body">
-              <div className="comments-row">
-                <TreeView
-                  defaultCollapseIcon={<ExpandMoreIcon />}
-                  defaultExpandIcon={<ChevronRightIcon />}
-                  defaultExpanded={['root']}
-                  multiSelect
-                >
-                  {renderComments(tree)}
-                </TreeView>
-              </div>
-            </div>
-          )}
+          ) : renderComments(tree)
+            // (
+            //   <div className="comments-body">
+            //     <div className="comments-row">
+            //       {/* {renderComments(tree)} */}
+
+            //       {
+            //         tree.map(comment => {
+            //           return <CommentItem comment={comment} key={comment.id} />;
+            //         })
+            //       }
+            //     </div>
+            //   </div>
+            // )}
+          }
         </>
       )}
     </Grid>

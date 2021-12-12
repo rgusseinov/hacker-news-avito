@@ -28,6 +28,10 @@ const SingleNewsItem = () => {
                 <div className="news-item__box-footer">
                   <ul>
                     <li>
+                      <i className="icon icon-rating"></i>
+                      <span>{item?.score} points </span>
+                    </li>
+                    <li>
                       <i className="icon icon-user"></i>
                       <span>{item?.by}</span>
                     </li>
