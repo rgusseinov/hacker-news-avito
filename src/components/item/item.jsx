@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../scss/components/news-item.sass';
 import { getNewsPostTime } from '../../shared/utils/time';
+import '../../scss/components/news-item.sass';
 
 const Item = ({ item }) => {
   const postTime = getNewsPostTime(item.time);
+
   return (
     <div className="news-item">
       <div className="news-item__box-rating">
@@ -35,9 +36,7 @@ const Item = ({ item }) => {
         </div>
       </div>
       <div className="news-item__box-action">
-        <a href={`${item.url}`} target="_blank" rel="noreferrer">
-          Open link
-        </a>
+        <a href={`${item.url}`} target="_blank" rel="noreferrer">Open link</a>
       </div>
     </div>
   );

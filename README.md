@@ -11,6 +11,5 @@
 
 ## Источник с тестовым заданием: [Здесь](https://github.com/avito-tech/sx-frontend-trainee-assignment)
 
-
 ## Демо
 [Посмотреть приложение](https://rgusseinov.github.io/hacker-news-avito/)

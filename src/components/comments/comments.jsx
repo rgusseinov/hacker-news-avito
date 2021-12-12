@@ -5,7 +5,6 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import useComments from '../../hooks/use-comments';
-// import { textParser } from '../../shared/utils/utils';
 import Loader from '../loader/loader';
 import Error from '../error/error';
 import '../../scss/components/comments.sass';
@@ -25,7 +24,6 @@ const Comments = () => {
     return (
       <div className="comments-row">
         {nodes.map((node) => {
-          // const parsedText = textParser(node.text);
           return (
             <TreeItem
               key={node.id}
@@ -59,7 +57,6 @@ const Comments = () => {
             </div>
             <div>
               <button className="button" onClick={handleRefreshComments}>
-                {' '}
                 Refresh
               </button>
             </div>
