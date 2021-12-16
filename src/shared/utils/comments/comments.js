@@ -16,6 +16,7 @@ export const buildCommentTree = (comment, commentsById) => {
     id: comment.id.toString(),
     text: comment.text,
     by: comment.by,
+    time: comment.time,
     children: comment.kids?.map((kidId) =>
       buildCommentTree(commentsById[kidId], commentsById)
     )

@@ -51,10 +51,11 @@ export default () => {
 
   const handleRefreshComments = () => requestComments();
   const commentsCount = item?.length;
-  const tree = buildTree(item, id);
+
+  const commentList = buildTree(item, id);
 
   return {
-    tree,
+    commentList,
     loading,
     commentsCount,
     handleRefreshComments
