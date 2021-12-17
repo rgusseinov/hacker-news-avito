@@ -3,8 +3,8 @@ import Error from '../error/error';
 import Comments from '../comments/comments';
 import useNewsItem from '../../hooks/use-news-item';
 import { getNewsPostTime } from '../../shared/utils/time';
-import '../../scss/components/single-news.sass';
 import ContentLoader from '../loader/content-loader';
+import '../../scss/components/single-news.sass';
 
 const SingleNewsItem = () => {
   const { item, loading, isItemsFailed } = useNewsItem();

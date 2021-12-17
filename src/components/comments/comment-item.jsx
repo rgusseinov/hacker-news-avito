@@ -33,8 +33,6 @@ const CommentItem = ({ comment }) => {
       />
     }
   </div>;
-
-
 };
 
 export default CommentItem;
