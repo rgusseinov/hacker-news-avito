@@ -1,10 +1,9 @@
-import { Grid } from '@material-ui/core';
 import React from 'react';
 import useComments from '../../hooks/use-comments';
-import Loader from '../loader/loader';
 import Error from '../error/error';
 import '../../scss/components/comments.sass';
 import CommentList from './comment-list';
+import ContentLoader from '../loader/content-loader';
 
 const Comments = () => {
   const {
@@ -16,9 +15,9 @@ const Comments = () => {
   } = useComments();
 
   return (
-    <Grid item xs={12}>
+    <div>
       {loading ? (
-        <Loader />
+        <ContentLoader />
       ) : (
         <>
           <div className="comments-header">
@@ -40,7 +39,7 @@ const Comments = () => {
           )}
         </>
       )}
-    </Grid>
+    </div>
   );
 };
 

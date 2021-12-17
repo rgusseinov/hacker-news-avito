@@ -1,10 +1,10 @@
 import React from 'react';
-import Loader from '../loader/loader';
 import Error from '../error/error';
 import Comments from '../comments/comments';
 import useNewsItem from '../../hooks/use-news-item';
 import { getNewsPostTime } from '../../shared/utils/time';
 import '../../scss/components/single-news.sass';
+import ContentLoader from '../loader/content-loader';
 
 const SingleNewsItem = () => {
   const { item, loading, isItemsFailed } = useNewsItem();
@@ -12,7 +12,7 @@ const SingleNewsItem = () => {
   return (
     <div>
       {loading ? (
-        <Loader />
+        <ContentLoader />
       ) : isItemsFailed ? (
         <Error />
       ) : (
@@ -26,7 +26,7 @@ const SingleNewsItem = () => {
               </div>
               <div className="row">
                 <div className="news-item__box-footer">
-                  <ul>
+                  <ul className="news-meta">
                     <li>
                       <i className="icon icon-rating"></i>
                       <span>{item?.score} points </span>
