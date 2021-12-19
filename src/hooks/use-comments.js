@@ -5,15 +5,15 @@ import {
   addCommentsFailure,
   addCommentsSuccess
 } from '../redux/actions/comments';
-// import { TIME_INTERVAL } from '../shared/constants';
+import { TIME_INTERVAL } from '../shared/constants';
 import { getNewsItem } from '../shared/requests/item';
 import { buildTree, getCommentsByIds } from '../shared/utils/comments/comments';
 
 export default () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
   const timerRef = useRef();
+ 
   const [loading, setLoading] = useState(false);
   const { comments, isCommentsFailed } = useSelector(
     (state) => state.newsItemReducer
@@ -23,16 +23,17 @@ export default () => {
 
   useEffect(() => {
     if (singleComment) return;
-    requestComments();
-
-    
-    timerRef.current = setInterval(() => {
-      console.log('setInterval');
-      requestComments();
-    }, 60000);
-
+    loadCommentsPerMinute();
     return () => clearInterval(timerRef);
   }, [singleComment]);
+
+  async function loadCommentsPerMinute() {
+    await requestComments();
+
+    timerRef.current = setInterval(() => {
+      requestComments();
+    }, TIME_INTERVAL);
+  }
 
   const requestComments = async () => {
     try {
@@ -54,7 +55,12 @@ export default () => {
     }
   };
 
-  const handleRefreshComments = () => requestComments();
+  const handleRefreshComments = async () => {
+    clearInterval(timerRef.current);
+
+    await loadCommentsPerMinute();
+  };
+
   const commentsCount = item?.length;
 
   const commentList = buildTree(item, id);

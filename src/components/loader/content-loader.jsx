@@ -10,7 +10,6 @@ const ContentLoader = () => {
         color="#ed702d"
         height={55}
         width={55}
-        timeout={3000}
       />
     </div>
   );

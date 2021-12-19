@@ -13,7 +13,6 @@ const Comments = () => {
     commentsCount,
     handleRefreshComments
   } = useComments();
-
   return (
     <div>
       {loading ? (
