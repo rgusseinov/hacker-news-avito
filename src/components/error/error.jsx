@@ -1,12 +1,18 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { Link } from 'react-router-dom';
+import '../../scss/components/error.sass';
 
 const Error = () => {
   return (
-    <Grid item xs={12}>
-      <Alert severity="error">Something went wrong. Please refresh page</Alert>
-    </Grid>
+    <div className="error">
+      <div className="container">
+        <h1 className="error-title">
+          <span>404</span> <br /> Ooops! Page not found
+        </h1>
+        <p className="error-text">This page does not exist or it is not unavailable</p>
+        <Link to="/" className="error-link">Go back to main page</Link>
+      </div>
+    </div>
   );
 };
 

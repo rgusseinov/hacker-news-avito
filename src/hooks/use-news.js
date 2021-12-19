@@ -1,23 +1,32 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   loadNewsFailure,
   loadNewsStart,
   loadNewsSuccess
 } from '../redux/actions/news';
-import { NEWS_LIMIT } from '../shared/constants';
+import { NEWS_LIMIT, TIME_INTERVAL } from '../shared/constants';
 import { getNewsItem } from '../shared/requests/item';
 import { getTopNews } from '../shared/requests/news';
 
 const useNews = () => {
   const dispatch = useDispatch();
-  // const timerRef = useRef();
+  const timerRef = useRef();
 
   useEffect(() => {
     requestNews();
-    // timerRef.current = setInterval(() => requestNews(), TIME_INTERVAL);
-    // return () => clearInterval(timerRef.current);
+    loadNewsPerMinute();
+
+    return () => clearInterval(timerRef.current);
   }, []);
+
+  async function loadNewsPerMinute() {
+    await requestNews();
+
+    timerRef.current = setInterval(() => {
+      requestNews();
+    }, TIME_INTERVAL);
+  }
 
   const requestNews = async () => {
     try {
@@ -32,7 +41,11 @@ const useNews = () => {
     }
   };
 
-  const handleRefreshNews = () => requestNews();
+  const handleRefreshNews = async () => {
+    clearInterval(timerRef.current);
+    await loadNewsPerMinute();
+  };
+
   return handleRefreshNews;
 };
 

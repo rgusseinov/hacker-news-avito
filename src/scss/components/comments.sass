@@ -11,9 +11,39 @@ button
     font-size: 18px
     font-weight: 400
 
-.comments-body
-  padding-top: 15px
+.comment
+  margin: 10px 0
+  border-bottom: 1px solid #ffbf94
 
-.comments-inner
-  p span
-    color: #ed702d
+.comment-text
+  padding: 5px 0
+
+.comment-toggle
+  display: block
+  margin: 10px 0
+  &.open
+    display: block
+    background-color: #fffbf2
+  &.close
+    display: inline-block
+    background-color: #ffeabb
+
+.comment-author
+  padding-bottom: 5px
+  color: #A0A0A0
+  .name
+    text-decoration: underline
+  .time
+    margin-left: 10px
+
+.MuiGrid-root > .comments-wrap > .comment
+  margin-left: 0
+
+.comments-wrap > .comment
+  margin-left: 30px
+
+.comments-wrap > .comment:first-child
+  border-bottom: 1px solid #f7721a
+
+.comments-wrap > .comment:last-child
+  border-bottom: none

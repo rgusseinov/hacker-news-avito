@@ -1,9 +1,9 @@
 import React from 'react';
-import Loader from '../loader/loader';
 import Error from '../error/error';
 import Comments from '../comments/comments';
 import useNewsItem from '../../hooks/use-news-item';
 import { getNewsPostTime } from '../../shared/utils/time';
+import ContentLoader from '../loader/content-loader';
 import '../../scss/components/single-news.sass';
 
 const SingleNewsItem = () => {
@@ -12,7 +12,7 @@ const SingleNewsItem = () => {
   return (
     <div>
       {loading ? (
-        <Loader />
+        <ContentLoader />
       ) : isItemsFailed ? (
         <Error />
       ) : (
@@ -26,7 +26,11 @@ const SingleNewsItem = () => {
               </div>
               <div className="row">
                 <div className="news-item__box-footer">
-                  <ul>
+                  <ul className="news-meta">
+                    <li>
+                      <i className="icon icon-rating"></i>
+                      <span>{item?.score} points </span>
+                    </li>
                     <li>
                       <i className="icon icon-user"></i>
                       <span>{item?.by}</span>

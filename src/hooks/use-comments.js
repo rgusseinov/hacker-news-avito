@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import {
   addCommentsFailure,
   addCommentsSuccess
 } from '../redux/actions/comments';
+import { TIME_INTERVAL } from '../shared/constants';
 import { getNewsItem } from '../shared/requests/item';
 import { buildTree, getCommentsByIds } from '../shared/utils/comments/comments';
 
 export default () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
-  // const timerRef = useRef();
+  const timerRef = useRef();
+ 
   const [loading, setLoading] = useState(false);
   const { comments, isCommentsFailed } = useSelector(
     (state) => state.newsItemReducer
@@ -20,15 +21,19 @@ export default () => {
   const singleComment = comments[id];
   const item = singleComment || [];
 
-  console.log(`isCommentsFailed`, isCommentsFailed);
-
   useEffect(() => {
     if (singleComment) return;
-    requestComments();
-
-    // timerRef.current = setInterval(() => requestComments(), TIME_INTERVAL);
-    // () => clearInterval(timerRef);
+    loadCommentsPerMinute();
+    return () => clearInterval(timerRef);
   }, [singleComment]);
+
+  async function loadCommentsPerMinute() {
+    await requestComments();
+
+    timerRef.current = setInterval(() => {
+      requestComments();
+    }, TIME_INTERVAL);
+  }
 
   const requestComments = async () => {
     try {
@@ -43,19 +48,27 @@ export default () => {
       } catch {
         dispatch(addCommentsFailure());
       }
-      setLoading(false);
     } catch {
       dispatch(addCommentsFailure());
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleRefreshComments = () => requestComments();
+  const handleRefreshComments = async () => {
+    clearInterval(timerRef.current);
+
+    await loadCommentsPerMinute();
+  };
+
   const commentsCount = item?.length;
-  const tree = buildTree(item, id);
+
+  const commentList = buildTree(item, id);
 
   return {
-    tree,
+    commentList,
     loading,
+    isCommentsFailed,
     commentsCount,
     handleRefreshComments
   };

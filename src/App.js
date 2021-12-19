@@ -16,7 +16,7 @@ const App = () => {
       <div className="container">
         <Switch>
           <Route path="/" exact>
-            <Title title="Latest News" handleRefreshNews={handleRefreshNews} />
+            <Title title="Top News" handleRefreshNews={handleRefreshNews} />
             <ItemList />
           </Route>
           <Route path="/item/:id" component={SingleNewsItem} />

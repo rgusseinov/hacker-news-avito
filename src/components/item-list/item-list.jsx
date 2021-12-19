@@ -1,15 +1,15 @@
 import React from 'react';
 import Item from '../item/item';
-import Loader from '../loader/loader';
 import Error from '../error/error';
 import useItemList from '../../hooks/use-item-list';
+import ContentLoader from '../loader/content-loader';
 
 const ItemList = () => {
   const { newsArray, loading, isFail } = useItemList();
   return (
     <div className="item-list">
       {loading ? (
-        <Loader />
+        <ContentLoader />
       ) : isFail ? (
         <Error />
       ) : (
