@@ -24,7 +24,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test.jest": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
@@ -49,10 +49,13 @@
     ]
   },
   "devDependencies": {
+    "babel-jest": "27.4.5",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.24.0",
+    "jest": "27.4.5",
     "node-sass": "^6.0.1",
-    "prettier": "^2.5.0"
+    "prettier": "^2.5.0",
+    "react-test-renderer": "17.0.2"
   }
 }
