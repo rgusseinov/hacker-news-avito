@@ -1,13 +1,15 @@
 import React from "react";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from 'history';
 import renderer from "react-test-renderer";
 import Item from "./item";
 
 describe('item component', () => {
-  
+  const history = createMemoryHistory();
   const item = {
     id: 1,
     score: 0,
-    url: 'some url here',
+    url: 'http://abc.com',
     title: 'Here the name of article',
     by: 'Ruslan',
     descendants: 50
@@ -15,9 +17,11 @@ describe('item component', () => {
 
   it(`<Item /> should render`, () => {
     const tree = renderer
-    .create(<Item
-      item={item}
-    />)
+      .create(<Router history={history}>
+        <Item
+          item={item}
+        />
+      </Router>)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
