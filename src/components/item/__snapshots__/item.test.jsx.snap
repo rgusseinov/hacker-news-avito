@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`item component <Item /> should render 1`] = `
+<div
+  className="news-item"
+>
+  <div
+    className="news-item__box-rating"
+  >
+    <div
+      className="rating up"
+    >
+      0
+    </div>
+    <span>
+      Points
+    </span>
+  </div>
+  <div
+    className="news-item__box-content"
+  >
+    <a
+      href="http://abc.com"
+      rel="noreferrer"
+      target="_blank"
+    >
+      <h2>
+         
+        Here the name of article
+         
+      </h2>
+    </a>
+    <div
+      className="news-item__box-footer"
+    >
+      <ul>
+        <li>
+          <i
+            className="icon icon-user"
+          />
+          <span>
+             
+            Ruslan
+             
+          </span>
+        </li>
+        <li>
+          <a
+            href="/item/1"
+            onClick={[Function]}
+          >
+            <i
+              className="icon icon-comment"
+            />
+            <span>
+               
+              50
+               Comments 
+            </span>
+          </a>
+        </li>
+        <li>
+          <i
+            className="icon icon-time"
+          />
+          <span>
+             
+            0 days
+             
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    className="news-item__box-action"
+  >
+    <a
+      href="http://abc.com"
+      rel="noreferrer"
+      target="_blank"
+    >
+      Open link
+    </a>
+  </div>
+</div>
+`;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getNewsPostTime } from '../../shared/utils/time';
-import '../../scss/components/news-item.sass';
+import '../../scss/components/item.sass';
 
 const Item = ({ item }) => {
   const postTime = getNewsPostTime(item.time);
