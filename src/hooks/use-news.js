@@ -35,7 +35,11 @@ const useNews = () => {
 
       const newsIds = await getTopNews(NEWS_LIMIT);
       topNewsList = newsIds.map((item) => getNewsItem(item));
-      Promise.all(topNewsList).then((data) => dispatch(loadNewsSuccess(data)));
+
+      Promise.all(topNewsList).then((data) => {
+        console.log(`data`, data);
+        dispatch(loadNewsSuccess(data));
+      });
     } catch {
       dispatch(loadNewsFailure());
     }

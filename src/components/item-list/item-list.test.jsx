@@ -1,26 +1,14 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import ItemList from "./item-list";
+import { renderHook } from '@testing-library/react-hooks';
+import useItemList from "../../hooks/use-item-list";
 
-describe('item component', () => {
-	const item = {
-		id: 1,
-		score: 0,
-		url: 'http://abc.com',
-		title: 'Here the name of article',
-		by: 'Ruslan',
-		descendants: 50
-	};
 
-	it(`<ItemList /> should render`, () => {
+describe('useItemList should render', () => {
 
-		const tree = renderer
-			.create(<ItemList
-				item={item}
-			/>)
-			.toJSON();
-		expect(tree).toMatchSnapshot();
-	});
+  /* Case 1:  */
+  test('The `add` could correct change `count`', () => {
+    const { newsArray } = renderHook(() => useItemList());
+    expect(newsArray.count).toBe(3);
+  });
+
 
 });
-
