@@ -7,13 +7,13 @@ import {
 } from '../redux/actions/comments';
 import { TIME_INTERVAL } from '../shared/constants';
 import { getNewsItem } from '../shared/requests/item';
-import { buildTree, getCommentsByIds } from '../shared/utils/comments/comments';
+import { buildTree, getCommentsByIds } from '../shared/utils/comments';
 
 export default () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const timerRef = useRef();
- 
+
   const [loading, setLoading] = useState(false);
   const { comments, isCommentsFailed } = useSelector(
     (state) => state.newsItemReducer
@@ -57,7 +57,6 @@ export default () => {
 
   const handleRefreshComments = async () => {
     clearInterval(timerRef.current);
-
     await loadCommentsPerMinute();
   };
 

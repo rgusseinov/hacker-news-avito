@@ -25,18 +25,25 @@ const Item = ({ item }) => {
             <li>
               <Link to={`/item/${item.id}`}>
                 <i className="icon icon-comment"></i>
-                <span> {item.descendants} Comments </span>
+                <span>
+                  {' '}
+                  {item.descendants
+                    ? `${item.descendants} Comments`
+                    : `No comments yet`}{' '}
+                </span>
               </Link>
             </li>
             <li>
               <i className="icon icon-time"></i>
-              <span> {postTime} </span>
+              <span> {postTime} ago</span>
             </li>
           </ul>
         </div>
       </div>
       <div className="news-item__box-action">
-        <a href={`${item.url}`} target="_blank" rel="noreferrer">Open link</a>
+        <a href={`${item.url}`} target="_blank" rel="noreferrer">
+          Open link
+        </a>
       </div>
     </div>
   );

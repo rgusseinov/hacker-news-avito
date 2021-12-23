@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../scss/components/title.sass';
 
 const Title = ({ title, handleRefreshNews }) => {
   return (
