@@ -37,7 +37,6 @@ const useNews = () => {
       topNewsList = newsIds.map((item) => getNewsItem(item));
 
       Promise.all(topNewsList).then((data) => {
-        console.log(`data`, data);
         dispatch(loadNewsSuccess(data));
       });
     } catch {
