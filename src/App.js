@@ -5,8 +5,8 @@ import ItemList from './components/item-list/item-list';
 import Title from './components/title/title';
 import SingleNewsItem from './components/single-news-item/single-news-item';
 import useNews from './hooks/use-news';
-import './scss/app.sass';
 import Error from './components/error/error';
+import './scss/app.sass';
 
 const App = () => {
   const handleRefreshNews = useNews();

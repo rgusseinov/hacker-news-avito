@@ -1,4 +1,4 @@
-import { getNewsItem } from "../requests/item";
+import { getNewsItem } from '../requests/item';
 
 export const buildTree = (comments, postId) => {
   const commentsById = {};
@@ -37,10 +37,8 @@ export const getCommentsByIds = async (kids) => {
 
     if (!allKidsIds.length) return res;
     const data = await getCommentsByIds(allKidsIds);
-    return data.concat(res);  
-
+    return data.concat(res);
   } catch (err) {
     console.error(`Что-то пошло не так: `, err);
-  }    
-
+  }
 };

@@ -14,8 +14,7 @@ const Header = () => {
               <span className="logo-text"> Hacker News </span>
             </Link>
           </div>
-          <nav className="menu">
-          </nav>
+          <nav className="menu"></nav>
         </div>
       </div>
     </header>

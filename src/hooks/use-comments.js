@@ -13,7 +13,7 @@ export default () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const timerRef = useRef();
- 
+
   const [loading, setLoading] = useState(false);
   const { comments, isCommentsFailed } = useSelector(
     (state) => state.newsItemReducer

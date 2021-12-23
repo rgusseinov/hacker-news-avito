@@ -38,7 +38,6 @@ const useNews = () => {
 
       const topNewsList = await Promise.all(newsList);
       dispatch(loadNewsSuccess(topNewsList));
-            
     } catch {
       dispatch(loadNewsFailure());
     }

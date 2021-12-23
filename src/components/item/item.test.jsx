@@ -1,8 +1,8 @@
-import React from "react";
-import { Router } from "react-router-dom";
+import React from 'react';
+import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import renderer from "react-test-renderer";
-import Item from "./item";
+import renderer from 'react-test-renderer';
+import Item from './item';
 
 describe('item component', () => {
   const history = createMemoryHistory();
@@ -17,14 +17,12 @@ describe('item component', () => {
 
   it(`<Item /> should render`, () => {
     const tree = renderer
-      .create(<Router history={history}>
-        <Item
-          item={item}
-        />
-      </Router>)
+      .create(
+        <Router history={history}>
+          <Item item={item} />
+        </Router>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
-
 });
-

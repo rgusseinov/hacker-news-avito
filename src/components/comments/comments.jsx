@@ -21,7 +21,11 @@ const Comments = () => {
         <>
           <div className="comments-header">
             <div>
-              <h2>{commentsCount ? `${commentsCount} Comments` : `No comments yet`}</h2>
+              <h2>
+                {commentsCount
+                  ? `${commentsCount} Comments`
+                  : `No comments yet`}
+              </h2>
             </div>
             <div>
               <button className="button" onClick={handleRefreshComments}>
@@ -32,9 +36,7 @@ const Comments = () => {
           {isCommentsFailed ? (
             <Error />
           ) : (
-            <CommentList
-              commentList={commentList}
-            />
+            <CommentList commentList={commentList} />
           )}
         </>
       )}
