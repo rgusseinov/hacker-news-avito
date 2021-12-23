@@ -7,6 +7,7 @@ import {
 } from '../redux/actions/single-news';
 import { newsItemSelector } from '../redux/selectors/news-item-selector';
 import { getNewsItem } from '../shared/requests/item';
+import { getNewsPostTime } from '../shared/utils/time';
 
 export default () => {
   const { id } = useParams();
@@ -33,5 +34,7 @@ export default () => {
     }
   };
 
-  return { item, loading, isItemsFailed };
+  const postTime = getNewsPostTime(item?.time);
+
+  return { item, postTime, loading, isItemsFailed };
 };

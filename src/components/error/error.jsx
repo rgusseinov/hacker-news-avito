@@ -9,8 +9,12 @@ const Error = () => {
         <h1 className="error-title">
           <span>404</span> <br /> Ooops! Page not found
         </h1>
-        <p className="error-text">This page does not exist or it is not unavailable</p>
-        <Link to="/" className="error-link">Go back to main page</Link>
+        <p className="error-text">
+          This page does not exist or it is not unavailable
+        </p>
+        <Link to="/" className="error-link">
+          Go back to main page
+        </Link>
       </div>
     </div>
   );

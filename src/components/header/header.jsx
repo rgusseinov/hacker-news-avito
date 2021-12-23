@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/logo.png';
 import '../../scss/components/header.sass';
+import Logo from '../../assets/logo.png';
 
 const Header = () => {
   return (
@@ -14,8 +14,7 @@ const Header = () => {
               <span className="logo-text"> Hacker News </span>
             </Link>
           </div>
-          <nav className="menu">
-          </nav>
+          <nav className="menu"></nav>
         </div>
       </div>
     </header>
