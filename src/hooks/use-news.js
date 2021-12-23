@@ -30,15 +30,15 @@ const useNews = () => {
 
   const requestNews = async () => {
     try {
-      let topNewsList = [];
+      let newsList = [];
       dispatch(loadNewsStart());
 
-      const newsIds = await getTopNews(NEWS_LIMIT);
-      topNewsList = newsIds.map((item) => getNewsItem(item));
+      const topNewsIds = await getTopNews(NEWS_LIMIT);
+      newsList = topNewsIds.map((item) => getNewsItem(item));
 
-      Promise.all(topNewsList).then((data) => {
-        dispatch(loadNewsSuccess(data));
-      });
+      const topNewsList = await Promise.all(newsList);
+      dispatch(loadNewsSuccess(topNewsList));
+            
     } catch {
       dispatch(loadNewsFailure());
     }

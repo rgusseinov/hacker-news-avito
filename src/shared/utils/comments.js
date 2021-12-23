@@ -1,4 +1,4 @@
-import { getNewsItem } from '../../requests/item';
+import { getNewsItem } from "../requests/item";
 
 export const buildTree = (comments, postId) => {
   const commentsById = {};
@@ -26,23 +26,21 @@ export const buildCommentTree = (comment, commentsById) => {
 
 export const getCommentsByIds = async (kids) => {
   const arrayOfKids = kids.map((kid) => getNewsItem(kid));
-  return Promise.all(arrayOfKids)
-    .then((allResults) => {
-      return Promise.all(allResults.map((result) => result));
-    })
-    .then((res) => {
-      let allKidsIds = [];
-      res.forEach((item) => {
-        allKidsIds = allKidsIds.concat(item?.kids || []);
-      });
+  const kidsPromise = await Promise.all(arrayOfKids);
+  const res = await Promise.all(kidsPromise.map((result) => result));
 
-      if (!allKidsIds.length) return res;
-
-      return getCommentsByIds(allKidsIds).then((children) => {
-        return children.concat(res);
-      });
-    })
-    .catch((err) => {
-      console.error(`Что-то пошло не так: `, err);
+  try {
+    let allKidsIds = [];
+    res.forEach((item) => {
+      allKidsIds = allKidsIds.concat(item?.kids || []);
     });
+
+    if (!allKidsIds.length) return res;
+    const data = await getCommentsByIds(allKidsIds);
+    return data.concat(res);  
+
+  } catch (err) {
+    console.error(`Что-то пошло не так: `, err);
+  }    
+
 };

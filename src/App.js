@@ -6,6 +6,7 @@ import Title from './components/title/title';
 import SingleNewsItem from './components/single-news-item/single-news-item';
 import useNews from './hooks/use-news';
 import './scss/app.sass';
+import Error from './components/error/error';
 
 const App = () => {
   const handleRefreshNews = useNews();
@@ -20,6 +21,7 @@ const App = () => {
             <ItemList />
           </Route>
           <Route path="/item/:id" component={SingleNewsItem} />
+          <Error />
         </Switch>
       </div>
     </div>

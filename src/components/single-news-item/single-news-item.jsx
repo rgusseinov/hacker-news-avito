@@ -2,13 +2,12 @@ import React from 'react';
 import Error from '../error/error';
 import Comments from '../comments/comments';
 import useNewsItem from '../../hooks/use-news-item';
-import { getNewsPostTime } from '../../shared/utils/time';
 import ContentLoader from '../loader/content-loader';
 import '../../scss/components/single-news.sass';
 
 const SingleNewsItem = () => {
-  const { item, loading, isItemsFailed } = useNewsItem();
-  const postTime = getNewsPostTime(item?.time);
+  const { item, postTime, loading, isItemsFailed } = useNewsItem();
+
   return (
     <div>
       {loading ? (

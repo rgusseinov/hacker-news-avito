@@ -7,7 +7,7 @@ import {
 } from '../redux/actions/comments';
 import { TIME_INTERVAL } from '../shared/constants';
 import { getNewsItem } from '../shared/requests/item';
-import { buildTree, getCommentsByIds } from '../shared/utils/comments/comments';
+import { buildTree, getCommentsByIds } from '../shared/utils/comments';
 
 export default () => {
   const { id } = useParams();
@@ -57,7 +57,6 @@ export default () => {
 
   const handleRefreshComments = async () => {
     clearInterval(timerRef.current);
-
     await loadCommentsPerMinute();
   };
 

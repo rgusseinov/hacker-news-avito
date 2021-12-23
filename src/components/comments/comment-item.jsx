@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { getNewsPostTime } from '../../shared/utils/time';
 import CommentList from './comment-list';
+import { getNewsPostTime } from '../../shared/utils/time';
 
 const CommentItem = ({ comment }) => {
   const commentPostTime = getNewsPostTime(comment.time);

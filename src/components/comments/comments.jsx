@@ -1,9 +1,9 @@
 import React from 'react';
 import useComments from '../../hooks/use-comments';
 import Error from '../error/error';
-import '../../scss/components/comments.sass';
 import CommentList from './comment-list';
 import ContentLoader from '../loader/content-loader';
+import '../../scss/components/comments.sass';
 
 const Comments = () => {
   const {
@@ -21,7 +21,7 @@ const Comments = () => {
         <>
           <div className="comments-header">
             <div>
-              <h2>{commentsCount} Comments</h2>
+              <h2>{commentsCount ? `${commentsCount} Comments` : `No comments yet`}</h2>
             </div>
             <div>
               <button className="button" onClick={handleRefreshComments}>
