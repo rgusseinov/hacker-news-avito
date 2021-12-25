@@ -13,32 +13,28 @@ const Comments = () => {
     commentsCount,
     handleRefreshComments
   } = useComments();
+
   return (
     <div>
-      {loading ? (
-        <ContentLoader />
-      ) : (
-        <>
-          <div className="comments-header">
-            <div>
-              <h2>
-                {commentsCount
-                  ? `${commentsCount} Comments`
-                  : `No comments yet`}
-              </h2>
-            </div>
-            <div>
-              <button className="button" onClick={handleRefreshComments}>
-                Refresh
-              </button>
-            </div>
+      <div className="comments-header">
+        <div className="section">
+          <div className="title">
+            {commentsCount
+              ? `${commentsCount} Comments`
+              : `No comments yet`}
           </div>
-          {isCommentsFailed ? (
-            <Error />
-          ) : (
-            <CommentList commentList={commentList} />
-          )}
-        </>
+          {loading && <ContentLoader />}
+        </div>
+        <div>
+          <button className="button" onClick={handleRefreshComments}>
+            Refresh
+          </button>
+        </div>
+      </div>
+      {isCommentsFailed ? (
+        <Error />
+      ) : (
+        <CommentList commentList={commentList} />
       )}
     </div>
   );
