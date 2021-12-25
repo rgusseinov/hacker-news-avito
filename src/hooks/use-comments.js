@@ -24,14 +24,15 @@ export default () => {
   useEffect(() => {
     if (singleComment) return;
     loadCommentsPerMinute();
-    return () => clearInterval(timerRef);
+
+    return () => clearTimeout(timerRef);
   }, [singleComment]);
 
   async function loadCommentsPerMinute() {
     await requestComments();
 
-    timerRef.current = setInterval(() => {
-      requestComments();
+    timerRef.current = setTimeout(() => {
+      loadCommentsPerMinute();
     }, TIME_INTERVAL);
   }
 
@@ -56,14 +57,13 @@ export default () => {
   };
 
   const handleRefreshComments = async () => {
-    clearInterval(timerRef.current);
+    clearTimeout(timerRef.current);
     await loadCommentsPerMinute();
   };
 
   const commentsCount = item?.length;
-
   const commentList = buildTree(item, id);
-
+  
   return {
     commentList,
     loading,

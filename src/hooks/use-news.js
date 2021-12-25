@@ -5,7 +5,7 @@ import {
   loadNewsStart,
   loadNewsSuccess
 } from '../redux/actions/news';
-import { NEWS_LIMIT, TIME_INTERVAL } from '../shared/constants';
+import { NEWS_LIMIT } from '../shared/constants';
 import { getNewsItem } from '../shared/requests/item';
 import { getTopNews } from '../shared/requests/news';
 
@@ -14,18 +14,18 @@ const useNews = () => {
   const timerRef = useRef();
 
   useEffect(() => {
-    requestNews();
     loadNewsPerMinute();
 
-    return () => clearInterval(timerRef.current);
+    return () => clearTimeout(timerRef.current);
   }, []);
 
   async function loadNewsPerMinute() {
     await requestNews();
 
-    timerRef.current = setInterval(() => {
-      requestNews();
-    }, TIME_INTERVAL);
+    /* timerRef.current = setTimeout(() => {
+      loadNewsPerMinute();
+    }, TIME_INTERVAL); */
+
   }
 
   const requestNews = async () => {
@@ -44,7 +44,7 @@ const useNews = () => {
   };
 
   const handleRefreshNews = async () => {
-    clearInterval(timerRef.current);
+    clearTimeout(timerRef.current);
     await loadNewsPerMinute();
   };
 
