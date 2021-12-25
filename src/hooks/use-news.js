@@ -5,7 +5,7 @@ import {
   loadNewsStart,
   loadNewsSuccess
 } from '../redux/actions/news';
-import { NEWS_LIMIT } from '../shared/constants';
+import { NEWS_LIMIT, TIME_INTERVAL } from '../shared/constants';
 import { getNewsItem } from '../shared/requests/item';
 import { getTopNews } from '../shared/requests/news';
 
@@ -22,9 +22,9 @@ const useNews = () => {
   async function loadNewsPerMinute() {
     await requestNews();
 
-    /* timerRef.current = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       loadNewsPerMinute();
-    }, TIME_INTERVAL); */
+    }, TIME_INTERVAL);
 
   }
 
