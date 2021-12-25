@@ -16,7 +16,7 @@ const App = () => {
       <Header />
       <div className="container">
         <Switch>
-          <Route path="/" exact>
+          <Route path="/hacker-news-avito" exact>
             <Title title="Top News" handleRefreshNews={handleRefreshNews} />
             <ItemList />
           </Route>
