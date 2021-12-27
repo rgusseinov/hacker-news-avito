@@ -5,7 +5,7 @@ import useItemList from '../../hooks/use-item-list';
 import ContentLoader from '../loader/content-loader';
 
 const ItemList = () => {
-  const { newsArray, loading, isFail } = useItemList();
+  const { sortedItems, loading, isFail } = useItemList();
   return (
     <div className="item-list">
       {loading ? (
@@ -13,7 +13,7 @@ const ItemList = () => {
       ) : isFail ? (
         <Error />
       ) : (
-        newsArray.map((item) => <Item key={item.id} item={item} />)
+        sortedItems.map((item) => <Item key={item.id} item={item} />)
       )}
     </div>
   );

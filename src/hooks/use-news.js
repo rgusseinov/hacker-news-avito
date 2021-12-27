@@ -30,11 +30,10 @@ const useNews = () => {
 
   const requestNews = async () => {
     try {
-      let newsList = [];
       dispatch(loadNewsStart());
 
       const topNewsIds = await getTopNews(NEWS_LIMIT);
-      newsList = topNewsIds.map((item) => getNewsItem(item));
+      const newsList = topNewsIds.map((item) => getNewsItem(item));
 
       const topNewsList = await Promise.all(newsList);
       dispatch(loadNewsSuccess(topNewsList));
