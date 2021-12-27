@@ -5,7 +5,7 @@ import {
   loadNewsStart,
   loadNewsSuccess
 } from '../redux/actions/news';
-import { NEWS_LIMIT } from '../shared/constants';
+import { NEWS_LIMIT, TIME_INTERVAL } from '../shared/constants';
 import { getNewsItem } from '../shared/requests/item';
 import { getTopNews } from '../shared/requests/news';
 
@@ -22,19 +22,18 @@ const useNews = () => {
   async function loadNewsPerMinute() {
     await requestNews();
 
-    /* timerRef.current = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       loadNewsPerMinute();
-    }, TIME_INTERVAL); */
+    }, TIME_INTERVAL);
 
   }
 
   const requestNews = async () => {
     try {
-      let newsList = [];
       dispatch(loadNewsStart());
 
       const topNewsIds = await getTopNews(NEWS_LIMIT);
-      newsList = topNewsIds.map((item) => getNewsItem(item));
+      const newsList = topNewsIds.map((item) => getNewsItem(item));
 
       const topNewsList = await Promise.all(newsList);
       dispatch(loadNewsSuccess(topNewsList));
